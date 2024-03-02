@@ -71,6 +71,7 @@ fun FirstRunScreen(navController: NavController) {
                 .padding(bottom = 80.dp)
         )
 
+
         Spacer(modifier = Modifier.height(60.dp))
 
         Text(
