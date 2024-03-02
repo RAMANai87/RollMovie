@@ -29,6 +29,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.raman.RollMovie.R
 import com.raman.RollMovie.ui.features.user.signUp.MainTextField
 import com.raman.RollMovie.ui.features.user.signUp.PasswordTextField
@@ -41,6 +42,9 @@ import com.raman.RollMovie.utils.AppScreens
 
 @Composable
 fun SignInScreen(signInViewModel :SignInViewModel, navController: NavController) {
+
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(primaryColor)
 
     Box(
         modifier = Modifier

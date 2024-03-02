@@ -59,6 +59,9 @@ import com.raman.RollMovie.utils.AppScreens
 @Composable
 fun SignUpScreen(signUpViewModel: SignUpViewModel, navControl: NavController) {
 
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(primaryColor)
+
     Box(
         modifier = Modifier
             .fillMaxSize()

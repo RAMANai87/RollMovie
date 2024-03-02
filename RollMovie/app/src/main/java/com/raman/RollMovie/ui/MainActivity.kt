@@ -21,6 +21,7 @@ import com.raman.RollMovie.ui.features.search.SearchScreen
 import com.raman.RollMovie.ui.features.setting.SettingScreen
 import com.raman.RollMovie.ui.features.user.signIn.SignInScreen
 import com.raman.RollMovie.ui.features.user.signIn.SignInViewModel
+import com.raman.RollMovie.ui.features.user.signUp.FirstRunScreen
 import com.raman.RollMovie.ui.features.user.signUp.SignUpScreen
 import com.raman.RollMovie.ui.features.user.signUp.SignUpViewModel
 import com.raman.RollMovie.ui.theme.RollMovieTheme
@@ -50,7 +51,7 @@ class MainActivity : ComponentActivity() {
             composable(
                 route = AppScreens.MainScreen.route
             ) {
-                SignUpScreen(signUpViewModel, myNavController)
+                FirstRunScreen(myNavController)
             }
 
             composable(
