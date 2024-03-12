@@ -24,13 +24,13 @@ object AppModules {
 
     @Provides
     @Singleton
-    fun provideApiService() :ApiService {
+    fun provideApiService(): ApiService {
         return createApiService()
     }
 
     @Provides
     @Singleton
-    fun provideFirebase() :FirebaseAuth {
+    fun provideFirebase(): FirebaseAuth {
         return FirebaseAuth.getInstance()
     }
 

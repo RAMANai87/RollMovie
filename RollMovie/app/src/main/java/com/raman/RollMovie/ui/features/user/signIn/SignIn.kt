@@ -1,5 +1,6 @@
 package com.raman.RollMovie.ui.features.user.signIn
 
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -13,14 +14,21 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -31,17 +39,19 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.raman.RollMovie.R
+import com.raman.RollMovie.model.data.Resource
 import com.raman.RollMovie.ui.features.user.signUp.MainTextField
 import com.raman.RollMovie.ui.features.user.signUp.PasswordTextField
 import com.raman.RollMovie.ui.features.user.signUp.SignUpIcon
 import com.raman.RollMovie.ui.features.user.signUp.TitleTextField
+import com.raman.RollMovie.ui.features.user.signUp.UserViewModel
 import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.mainFont
 import com.raman.RollMovie.ui.theme.primaryColor
 import com.raman.RollMovie.utils.AppScreens
 
 @Composable
-fun SignInScreen(signInViewModel :SignInViewModel, navController: NavController) {
+fun SignInScreen(useViewModel: UserViewModel, navController: NavController) {
 
     val systemUiController = rememberSystemUiController()
     systemUiController.setStatusBarColor(primaryColor)
@@ -91,7 +101,7 @@ fun SignInScreen(signInViewModel :SignInViewModel, navController: NavController)
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            SignInPart(signInViewModel, navController)
+            SignInPart(useViewModel, navController)
         }
 
     }
@@ -99,10 +109,14 @@ fun SignInScreen(signInViewModel :SignInViewModel, navController: NavController)
 }
 
 @Composable
-fun SignInPart(signInViewModel: SignInViewModel, navController: NavController) {
+fun SignInPart(userViewModel: UserViewModel, navController: NavController) {
 
-    val email = signInViewModel.email.value
-    val password = signInViewModel.password.value
+    val context = LocalContext.current
+
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+
+    val loginFlow = userViewModel.signInFlow.collectAsState()
 
     Card(
         modifier = Modifier
@@ -128,7 +142,7 @@ fun SignInPart(signInViewModel: SignInViewModel, navController: NavController) {
                 "Email",
                 R.drawable.ic_email
             ) {
-                signInViewModel.email.value = it
+                email = it
             }
 
             TitleTextField("Password :")
@@ -137,7 +151,7 @@ fun SignInPart(signInViewModel: SignInViewModel, navController: NavController) {
                 hint = "password",
                 icon = R.drawable.ic_password
             ) {
-                signInViewModel.password.value = it
+                password = it
             }
 
             Row(
@@ -160,11 +174,13 @@ fun SignInPart(signInViewModel: SignInViewModel, navController: NavController) {
                         .padding(end = 1.dp)
                 )
 
-                TextButton(onClick = {navController.navigate(AppScreens.SignUpScreen.route) {
-                    popUpTo(AppScreens.SignInScreen.route){
-                        inclusive = true
+                TextButton(onClick = {
+                    navController.navigate(AppScreens.SignUpScreen.route) {
+                        popUpTo(AppScreens.SignInScreen.route) {
+                            inclusive = true
+                        }
                     }
-                }}) {
+                }) {
 
                     Text(
                         text = "Sign Up",
@@ -181,7 +197,33 @@ fun SignInPart(signInViewModel: SignInViewModel, navController: NavController) {
             }
 
             Button(
-                onClick = {},
+                onClick = {
+                    if (email.isNotEmpty()) {
+                        if (email.contains("@gmail.com")) {
+                            if (password.length >= 8) {
+
+                                // sign in user
+                                userViewModel.signIn(email, password)
+
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    "your password has more than 7 parameter",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        } else {
+                            Toast.makeText(
+                                context,
+                                "your email is not valid",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    } else {
+                        Toast.makeText(context, "please insert your email", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                },
                 modifier = Modifier
                     .fillMaxWidth(0.8f)
                     .padding(top = 6.dp)
@@ -195,6 +237,24 @@ fun SignInPart(signInViewModel: SignInViewModel, navController: NavController) {
 
             }
 
+        }
+
+    }
+
+    loginFlow.value?.let {
+
+        when(it) {
+            is Resource.Failure -> Toast.makeText(
+                context,
+                "Sign in you hit an error",
+                Toast.LENGTH_SHORT
+            ).show()
+            Resource.Loading -> {
+                LinearProgressIndicator( modifier = Modifier.fillMaxWidth(), color = Color.White)
+            }
+            is Resource.Success -> navController.navigate(AppScreens.MainScreen.route) {
+                popUpTo(AppScreens.MainScreen.route) { inclusive = true }
+            }
         }
 
     }

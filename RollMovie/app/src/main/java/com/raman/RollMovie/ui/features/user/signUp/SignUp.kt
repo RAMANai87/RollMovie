@@ -1,5 +1,6 @@
 package com.raman.RollMovie.ui.features.user.signUp
 
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -24,18 +25,23 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CardElevation
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -50,6 +56,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.raman.RollMovie.R
+import com.raman.RollMovie.model.data.Resource
 import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.backgroundCard
 import com.raman.RollMovie.ui.theme.mainFont
@@ -57,7 +64,7 @@ import com.raman.RollMovie.ui.theme.primaryColor
 import com.raman.RollMovie.utils.AppScreens
 
 @Composable
-fun SignUpScreen(signUpViewModel: SignUpViewModel, navControl: NavController) {
+fun SignUpScreen(userViewModel: UserViewModel, navControl: NavController) {
 
     val systemUiController = rememberSystemUiController()
     systemUiController.setStatusBarColor(primaryColor)
@@ -107,7 +114,7 @@ fun SignUpScreen(signUpViewModel: SignUpViewModel, navControl: NavController) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            SignUpPart(signUpViewModel, navControl)
+            SignUpPart(userViewModel, navControl)
         }
 
     }
@@ -115,12 +122,16 @@ fun SignUpScreen(signUpViewModel: SignUpViewModel, navControl: NavController) {
 }
 
 @Composable
-fun SignUpPart(signUpViewModel: SignUpViewModel, navControl: NavController) {
+fun SignUpPart(userViewModel: UserViewModel, navControl: NavController) {
 
-    val name = signUpViewModel.name.value
-    val email = signUpViewModel.email.value
-    val password = signUpViewModel.password.value
-    val confirmPassword = signUpViewModel.confirmPassword.value
+    val context = LocalContext.current
+
+    var name by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+    var confirmPassword by remember { mutableStateOf("") }
+
+    val signUpFlow = userViewModel.signUpFlow.collectAsState()
 
     Card(
         modifier = Modifier
@@ -146,7 +157,7 @@ fun SignUpPart(signUpViewModel: SignUpViewModel, navControl: NavController) {
                 "Name",
                 R.drawable.ic_person
             ) {
-                signUpViewModel.name.value = it
+                name = it
             }
 
             TitleTextField("Email :")
@@ -155,7 +166,7 @@ fun SignUpPart(signUpViewModel: SignUpViewModel, navControl: NavController) {
                 "Email",
                 R.drawable.ic_email
             ) {
-                signUpViewModel.email.value = it
+                email = it
             }
 
             TitleTextField("Password :")
@@ -164,7 +175,7 @@ fun SignUpPart(signUpViewModel: SignUpViewModel, navControl: NavController) {
                 hint = "password",
                 icon = R.drawable.ic_password
             ) {
-                signUpViewModel.password.value = it
+                password = it
             }
 
             TitleTextField("Confirm Your Password :")
@@ -173,7 +184,7 @@ fun SignUpPart(signUpViewModel: SignUpViewModel, navControl: NavController) {
                 hint = "confirm password",
                 icon = R.drawable.ic_password
             ) {
-                signUpViewModel.confirmPassword.value = it
+                confirmPassword = it
             }
 
             Row(
@@ -196,11 +207,13 @@ fun SignUpPart(signUpViewModel: SignUpViewModel, navControl: NavController) {
                         .padding(end = 1.dp)
                 )
 
-                TextButton(onClick = { navControl.navigate(AppScreens.SignInScreen.route) {
-                    popUpTo(AppScreens.SignUpScreen.route){
-                        inclusive = true
+                TextButton(onClick = {
+                    navControl.navigate(AppScreens.SignInScreen.route) {
+                        popUpTo(AppScreens.SignUpScreen.route) {
+                            inclusive = true
+                        }
                     }
-                } }) {
+                }) {
 
                     Text(
                         text = "Log In",
@@ -217,7 +230,49 @@ fun SignUpPart(signUpViewModel: SignUpViewModel, navControl: NavController) {
             }
 
             Button(
-                onClick = {},
+                onClick = {
+
+                    if (name.isNotEmpty()) {
+                        if (email.isNotEmpty()) {
+                            if (email.contains("@gmail.com")) {
+                                if (password.length >= 8) {
+                                    if (password == confirmPassword) {
+
+                                        // sign up user
+                                        userViewModel.signUp(name, email, password)
+
+                                    } else {
+                                        Toast.makeText(
+                                            context,
+                                            "your password not equal with confirm password",
+                                            Toast.LENGTH_SHORT
+                                        )
+                                            .show()
+                                    }
+                                } else {
+                                    Toast.makeText(
+                                        context,
+                                        "should your password more than 8 parameter",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    "your email is not valid",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        } else {
+                            Toast.makeText(context, "please insert your email", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    } else {
+                        Toast.makeText(context, "please insert your name", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+
+                },
                 modifier = Modifier
                     .fillMaxWidth(0.8f)
                     .padding(top = 6.dp)
@@ -234,6 +289,25 @@ fun SignUpPart(signUpViewModel: SignUpViewModel, navControl: NavController) {
         }
 
     }
+
+    signUpFlow.value?.let {
+
+        when(it) {
+            is Resource.Failure -> Toast.makeText(
+                context,
+                "Sign up you hit an error",
+                Toast.LENGTH_SHORT
+            ).show()
+            Resource.Loading -> {
+                LinearProgressIndicator( modifier = Modifier.fillMaxWidth(), color = Color.White)
+            }
+            is Resource.Success -> navControl.navigate(AppScreens.MainScreen.route) {
+                popUpTo(AppScreens.MainScreen.route) { inclusive = true }
+            }
+        }
+
+    }
+
 }
 
 @Composable
