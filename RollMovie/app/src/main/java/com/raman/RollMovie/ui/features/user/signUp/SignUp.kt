@@ -295,14 +295,17 @@ fun SignUpPart(userViewModel: UserViewModel, navControl: NavController) {
         when(it) {
             is Resource.Failure -> Toast.makeText(
                 context,
-                "Sign up you hit an error",
+                "Sign up you hit an error + ${it.exception}",
                 Toast.LENGTH_SHORT
             ).show()
             Resource.Loading -> {
                 LinearProgressIndicator( modifier = Modifier.fillMaxWidth(), color = Color.White)
             }
-            is Resource.Success -> navControl.navigate(AppScreens.MainScreen.route) {
-                popUpTo(AppScreens.MainScreen.route) { inclusive = true }
+            is Resource.Success -> {
+                navControl.navigate(AppScreens.HomeScreen.route) {
+                popUpTo(AppScreens.HomeScreen.route) { inclusive = true }
+                }
+                Toast.makeText(context, "Sign up was successful", Toast.LENGTH_LONG).show()
             }
         }
 

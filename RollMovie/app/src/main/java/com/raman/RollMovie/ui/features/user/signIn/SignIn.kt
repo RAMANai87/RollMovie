@@ -252,8 +252,8 @@ fun SignInPart(userViewModel: UserViewModel, navController: NavController) {
             Resource.Loading -> {
                 LinearProgressIndicator( modifier = Modifier.fillMaxWidth(), color = Color.White)
             }
-            is Resource.Success -> navController.navigate(AppScreens.MainScreen.route) {
-                popUpTo(AppScreens.MainScreen.route) { inclusive = true }
+            is Resource.Success -> navController.navigate(AppScreens.HomeScreen.route) {
+                popUpTo(AppScreens.HomeScreen.route) { inclusive = true }
             }
         }
 

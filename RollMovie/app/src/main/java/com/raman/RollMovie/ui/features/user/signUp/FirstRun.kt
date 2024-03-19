@@ -98,7 +98,13 @@ fun FirstRunScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(40.dp))
 
         Button(
-            onClick = {},
+            onClick = {
+                navController.navigate(AppScreens.SignUpScreen.route) {
+                    popUpTo(AppScreens.SignUpScreen.route) {
+                        inclusive = true
+                    }
+                }
+            },
             modifier = Modifier
                 .fillMaxWidth(0.9f)
                 .padding(top = 6.dp)
@@ -114,7 +120,13 @@ fun FirstRunScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.height(6.dp))
 
-        TextButton(onClick = { navController.navigate(AppScreens.SignInScreen.route) }) {
+        TextButton(onClick = {
+            navController.navigate(AppScreens.SignInScreen.route) {
+                popUpTo(AppScreens.SignInScreen.route) {
+                    inclusive = true
+                }
+            }
+        }) {
 
             Text(
                 text = "Log In",
