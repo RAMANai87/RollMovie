@@ -34,8 +34,8 @@ class MainActivity : ComponentActivity() {
     // initialize ViewModels
     private val userViewModel :UserViewModel by viewModels()
     // initialize necessaries
-    private val sharedPref = getSharedPreferences("first_run", Context.MODE_PRIVATE)
-    private val firebaseUser = FirebaseAuth.getInstance()
+//    private val sharedPref = getSharedPreferences("first_run", Context.MODE_PRIVATE)
+//    private val firebaseUser = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,16 +56,17 @@ class MainActivity : ComponentActivity() {
             composable(
                 route = AppScreens.MainScreen.route
             ) {
-                if (sharedPref.getBoolean("first_run", true)) {
-                    FirstRunScreen(navController = myNavController)
-                    sharedPref.edit().putBoolean("first_run", false).apply()
-                } else {
-                    if (firebaseUser.currentUser != null) {
-                        HomeScreen()
-                    } else {
-                        SignUpScreen(userViewModel = userViewModel, navControl = myNavController)
-                    }
-                }
+//                if (sharedPref.getBoolean("first_run", true)) {
+//                    FirstRunScreen(navController = myNavController)
+//                    sharedPref.edit().putBoolean("first_run", false).apply()
+//                } else {
+//                    if (firebaseUser.currentUser != null) {
+//                        HomeScreen()
+//                    } else {
+//                        SignUpScreen(userViewModel = userViewModel, navControl = myNavController)
+//                    }
+//                }
+                FirstRunScreen(navController = myNavController)
             }
 
             composable(
@@ -114,6 +115,12 @@ class MainActivity : ComponentActivity() {
                 route = AppScreens.SignInScreen.route
             ) {
                 SignInScreen(userViewModel, myNavController)
+            }
+
+            composable(
+                route = AppScreens.HomeScreen.route
+            ) {
+                HomeScreen()
             }
 
         }
