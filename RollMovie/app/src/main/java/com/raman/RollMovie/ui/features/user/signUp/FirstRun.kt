@@ -36,11 +36,14 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.raman.RollMovie.R
+import com.raman.RollMovie.ui.features.user.signIn.SignInScreen
 import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.mainFont
 import com.raman.RollMovie.ui.theme.primaryColor
@@ -61,7 +64,7 @@ fun FirstRunScreen(navController: NavController) {
     ) {
 
         Image(
-            painter = painterResource(id = R.drawable.first_run),
+            painter = painterResource(id = R.drawable.first_run_pic3),
             contentDescription = null,
             modifier = Modifier
                 .fillMaxWidth(0.86f)
@@ -69,7 +72,7 @@ fun FirstRunScreen(navController: NavController) {
                 .padding(bottom = 80.dp)
         )
 
-        Spacer(modifier = Modifier.height(60.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         Text(
             text = "Let`s start with RollMovie",
@@ -77,7 +80,7 @@ fun FirstRunScreen(navController: NavController) {
             style = TextStyle(
                 color = Color.Black,
                 fontFamily = FontFamily(Font(R.font.demoloviecloud)),
-                fontSize = 32.sp,
+                fontSize = 28.sp,
                 textAlign = TextAlign.Center
             )
         )
@@ -90,12 +93,12 @@ fun FirstRunScreen(navController: NavController) {
             style = TextStyle(
                 color = mainFont,
                 fontFamily = FontFamily(Font(R.font.demoloviecloud)),
-                fontSize = 24.sp,
+                fontSize = 20.sp,
                 textAlign = TextAlign.Center
             )
         )
 
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         Button(
             onClick = {
@@ -140,6 +143,14 @@ fun FirstRunScreen(navController: NavController) {
 
         }
 
+        Spacer(modifier = Modifier.height(50.dp))
+
     }
 
+}
+
+@Preview(showBackground = true)
+@Composable
+fun FirstRunPreview() {
+    FirstRunScreen(navController = rememberNavController())
 }
