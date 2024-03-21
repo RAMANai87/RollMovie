@@ -34,9 +34,11 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.raman.RollMovie.R
 import com.raman.RollMovie.model.data.Resource
@@ -45,13 +47,14 @@ import com.raman.RollMovie.ui.features.user.signUp.PasswordTextField
 import com.raman.RollMovie.ui.features.user.signUp.SignUpIcon
 import com.raman.RollMovie.ui.features.user.signUp.TitleTextField
 import com.raman.RollMovie.ui.features.user.signUp.UserViewModel
+import com.raman.RollMovie.ui.theme.RollMovieTheme
 import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.mainFont
 import com.raman.RollMovie.ui.theme.primaryColor
 import com.raman.RollMovie.utils.AppScreens
 
 @Composable
-fun SignInScreen(useViewModel: UserViewModel, navController: NavController) {
+fun SignInScreen(useViewModel: UserViewModel?, navController: NavController) {
 
     val systemUiController = rememberSystemUiController()
     systemUiController.setStatusBarColor(primaryColor)
@@ -59,7 +62,6 @@ fun SignInScreen(useViewModel: UserViewModel, navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
     ) {
         Surface(
             color = primaryColor,
@@ -109,14 +111,14 @@ fun SignInScreen(useViewModel: UserViewModel, navController: NavController) {
 }
 
 @Composable
-fun SignInPart(userViewModel: UserViewModel, navController: NavController) {
+fun SignInPart(userViewModel: UserViewModel?, navController: NavController) {
 
     val context = LocalContext.current
 
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
-    val loginFlow = userViewModel.signInFlow.collectAsState()
+    val loginFlow = userViewModel?.signInFlow?.collectAsState()
 
     Card(
         modifier = Modifier
@@ -203,7 +205,7 @@ fun SignInPart(userViewModel: UserViewModel, navController: NavController) {
                             if (password.length >= 8) {
 
                                 // sign in user
-                                userViewModel.signIn(email, password)
+                                userViewModel?.signIn(email, password)
 
                             } else {
                                 Toast.makeText(
@@ -241,7 +243,7 @@ fun SignInPart(userViewModel: UserViewModel, navController: NavController) {
 
     }
 
-    loginFlow.value?.let {
+    loginFlow?.value?.let {
 
         when(it) {
             is Resource.Failure -> Toast.makeText(
@@ -259,5 +261,11 @@ fun SignInPart(userViewModel: UserViewModel, navController: NavController) {
 
     }
 
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SignInPreview() {
+    SignInScreen(null, rememberNavController())
 }
 

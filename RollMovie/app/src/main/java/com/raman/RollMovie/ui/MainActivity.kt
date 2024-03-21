@@ -1,7 +1,5 @@
 package com.raman.RollMovie.ui
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,9 +9,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.raman.RollMovie.ui.features.detail.DetailScreen
 import com.raman.RollMovie.ui.features.favorite.FavoriteScreen
 import com.raman.RollMovie.ui.features.mainScreen.HomeScreen

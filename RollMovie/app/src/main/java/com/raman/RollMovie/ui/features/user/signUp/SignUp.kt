@@ -51,12 +51,15 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.raman.RollMovie.R
 import com.raman.RollMovie.model.data.Resource
+import com.raman.RollMovie.ui.features.user.signIn.SignInScreen
 import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.backgroundCard
 import com.raman.RollMovie.ui.theme.mainFont
@@ -64,7 +67,7 @@ import com.raman.RollMovie.ui.theme.primaryColor
 import com.raman.RollMovie.utils.AppScreens
 
 @Composable
-fun SignUpScreen(userViewModel: UserViewModel, navControl: NavController) {
+fun SignUpScreen(userViewModel: UserViewModel?, navControl: NavController) {
 
     val systemUiController = rememberSystemUiController()
     systemUiController.setStatusBarColor(primaryColor)
@@ -122,7 +125,7 @@ fun SignUpScreen(userViewModel: UserViewModel, navControl: NavController) {
 }
 
 @Composable
-fun SignUpPart(userViewModel: UserViewModel, navControl: NavController) {
+fun SignUpPart(userViewModel: UserViewModel?, navControl: NavController) {
 
     val context = LocalContext.current
 
@@ -131,7 +134,7 @@ fun SignUpPart(userViewModel: UserViewModel, navControl: NavController) {
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
 
-    val signUpFlow = userViewModel.signUpFlow.collectAsState()
+    val signUpFlow = userViewModel?.signUpFlow?.collectAsState()
 
     Card(
         modifier = Modifier
@@ -239,7 +242,7 @@ fun SignUpPart(userViewModel: UserViewModel, navControl: NavController) {
                                     if (password == confirmPassword) {
 
                                         // sign up user
-                                        userViewModel.signUp(name, email, password)
+                                        userViewModel?.signUp(name, email, password)
 
                                     } else {
                                         Toast.makeText(
@@ -290,7 +293,7 @@ fun SignUpPart(userViewModel: UserViewModel, navControl: NavController) {
 
     }
 
-    signUpFlow.value?.let {
+    signUpFlow?.value?.let {
 
         when(it) {
             is Resource.Failure -> Toast.makeText(
@@ -395,5 +398,11 @@ fun PasswordTextField(edtValue: String, hint: String, icon: Int, onValueChange: 
         }
     )
 
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SignUpPreview() {
+    SignUpScreen(userViewModel = null, navControl = rememberNavController())
 }
 
