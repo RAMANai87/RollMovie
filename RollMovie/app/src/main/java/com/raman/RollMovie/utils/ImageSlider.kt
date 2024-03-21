@@ -34,9 +34,9 @@ import kotlinx.coroutines.launch
 fun SliderImages() {
 
     val images = listOf(
-        R.drawable.first_run_pic1,
-        R.drawable.first_run_pic2,
-        R.drawable.first_run_pic3
+        R.drawable.ic_email,
+        R.drawable.ic_password,
+        R.drawable.ic_person
     )
 
     ImageSlider(images = images)
