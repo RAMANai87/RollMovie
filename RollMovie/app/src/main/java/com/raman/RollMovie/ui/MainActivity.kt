@@ -1,5 +1,6 @@
 package com.raman.RollMovie.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -9,6 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.raman.RollMovie.model.data.Resource
 import com.raman.RollMovie.ui.features.detail.DetailScreen
 import com.raman.RollMovie.ui.features.favorite.FavoriteScreen
 import com.raman.RollMovie.ui.features.mainScreen.HomeScreen
@@ -28,9 +30,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     // initialize ViewModels
     private val userViewModel :UserViewModel by viewModels()
-    // initialize necessaries
-//    private val sharedPref = getSharedPreferences("first_run", Context.MODE_PRIVATE)
-//    private val firebaseUser = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,17 +50,11 @@ class MainActivity : ComponentActivity() {
             composable(
                 route = AppScreens.MainScreen.route
             ) {
-//                if (sharedPref.getBoolean("first_run", true)) {
-//                    FirstRunScreen(navController = myNavController)
-//                    sharedPref.edit().putBoolean("first_run", false).apply()
-//                } else {
-//                    if (firebaseUser.currentUser != null) {
-//                        HomeScreen()
-//                    } else {
-//                        SignUpScreen(userViewModel = userViewModel, navControl = myNavController)
-//                    }
-//                }
-                FirstRunScreen(navController = myNavController)
+                if (userViewModel.currentUser != null) {
+                    HomeScreen()
+                } else {
+                    FirstRunScreen(navController = myNavController)
+                }
             }
 
             composable(

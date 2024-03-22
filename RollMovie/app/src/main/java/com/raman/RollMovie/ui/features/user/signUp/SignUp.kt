@@ -138,7 +138,7 @@ fun SignUpPart(userViewModel: UserViewModel?, navControl: NavController) {
 
     Card(
         modifier = Modifier
-            .fillMaxHeight(0.88f)
+            .height(720.dp)
             .fillMaxWidth(0.85f)
             .padding(top = 20.dp)
             .clip(Shapes.large),
@@ -298,12 +298,12 @@ fun SignUpPart(userViewModel: UserViewModel?, navControl: NavController) {
         when(it) {
             is Resource.Failure -> Toast.makeText(
                 context,
-                "Sign up you hit an error + ${it.exception}",
+                "Sign up you hit an error ",
                 Toast.LENGTH_SHORT
             ).show()
-            Resource.Loading -> {
-                LinearProgressIndicator( modifier = Modifier.fillMaxWidth(), color = Color.White)
-            }
+
+            Resource.Loading -> {}
+
             is Resource.Success -> {
                 navControl.navigate(AppScreens.HomeScreen.route) {
                 popUpTo(AppScreens.HomeScreen.route) { inclusive = true }

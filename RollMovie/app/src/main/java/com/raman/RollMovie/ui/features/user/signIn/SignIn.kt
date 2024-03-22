@@ -10,10 +10,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -122,7 +124,7 @@ fun SignInPart(userViewModel: UserViewModel?, navController: NavController) {
 
     Card(
         modifier = Modifier
-            .fillMaxHeight(0.66f)
+            .height(540.dp)
             .fillMaxWidth(0.85f)
             .padding(top = 20.dp)
             .clip(Shapes.large),
@@ -245,17 +247,20 @@ fun SignInPart(userViewModel: UserViewModel?, navController: NavController) {
 
     loginFlow?.value?.let {
 
-        when(it) {
+        when (it) {
             is Resource.Failure -> Toast.makeText(
                 context,
                 "Sign in you hit an error",
                 Toast.LENGTH_SHORT
             ).show()
-            Resource.Loading -> {
-                LinearProgressIndicator( modifier = Modifier.fillMaxWidth(), color = Color.White)
-            }
-            is Resource.Success -> navController.navigate(AppScreens.HomeScreen.route) {
-                popUpTo(AppScreens.HomeScreen.route) { inclusive = true }
+
+            Resource.Loading -> {}
+
+            is Resource.Success -> {
+                navController.navigate(AppScreens.HomeScreen.route) {
+                    popUpTo(AppScreens.HomeScreen.route) { inclusive = true }
+                }
+                Toast.makeText(context, "Sign in was successful", Toast.LENGTH_LONG).show()
             }
         }
 
