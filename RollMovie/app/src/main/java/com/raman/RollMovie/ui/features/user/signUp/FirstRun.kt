@@ -48,6 +48,7 @@ import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.mainFont
 import com.raman.RollMovie.ui.theme.primaryColor
 import com.raman.RollMovie.utils.AppScreens
+import com.raman.RollMovie.utils.SliderImages
 
 @Composable
 fun FirstRunScreen(navController: NavController) {
@@ -60,90 +61,86 @@ fun FirstRunScreen(navController: NavController) {
             .fillMaxSize()
             .background(Color.White),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Bottom
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
 
-        Image(
-            painter = painterResource(id = R.drawable.first_run_pic3),
-            contentDescription = null,
+        SliderImages()
+
+        Column(
             modifier = Modifier
-                .fillMaxWidth(0.86f)
-                .height(400.dp)
-                .padding(bottom = 80.dp)
-        )
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        Text(
-            text = "Let`s start with RollMovie",
-            modifier = Modifier.fillMaxWidth(),
-            style = TextStyle(
-                color = Color.Black,
-                fontFamily = FontFamily(Font(R.font.demoloviecloud)),
-                fontSize = 28.sp,
-                textAlign = TextAlign.Center
-            )
-        )
-
-        Spacer(modifier = Modifier.height(10.dp))
-
-        Text(
-            text = "find out any movie you want",
-            modifier = Modifier.fillMaxWidth(),
-            style = TextStyle(
-                color = mainFont,
-                fontFamily = FontFamily(Font(R.font.demoloviecloud)),
-                fontSize = 20.sp,
-                textAlign = TextAlign.Center
-            )
-        )
-
-        Spacer(modifier = Modifier.height(10.dp))
-
-        Button(
-            onClick = {
-                navController.navigate(AppScreens.SignUpScreen.route) {
-                    popUpTo(AppScreens.SignUpScreen.route) {
-                        inclusive = true
-                    }
-                }
-            },
-            modifier = Modifier
-                .fillMaxWidth(0.9f)
-                .padding(top = 6.dp)
+                .background(Color.White),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top
         ) {
-
             Text(
-                text = "Sign Up",
-                color = Color.White,
-                modifier = Modifier.padding(8.dp)
-            )
-
-        }
-
-        Spacer(modifier = Modifier.height(6.dp))
-
-        TextButton(onClick = {
-            navController.navigate(AppScreens.SignInScreen.route) {
-                popUpTo(AppScreens.SignInScreen.route) {
-                    inclusive = true
-                }
-            }
-        }) {
-
-            Text(
-                text = "Log In",
+                text = "Let`s start with RollMovie",
+                modifier = Modifier.fillMaxWidth(),
                 style = TextStyle(
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Normal,
-                    fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular)),
-                    color = primaryColor,
+                    color = Color.Black,
+                    fontFamily = FontFamily(Font(R.font.demoloviecloud)),
+                    fontSize = 28.sp,
+                    textAlign = TextAlign.Center
                 )
             )
 
-        }
+            Spacer(modifier = Modifier.height(10.dp))
 
-        Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = "find out any movie you want",
+                modifier = Modifier.fillMaxWidth(),
+                style = TextStyle(
+                    color = mainFont,
+                    fontFamily = FontFamily(Font(R.font.demoloviecloud)),
+                    fontSize = 20.sp,
+                    textAlign = TextAlign.Center
+                )
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Button(
+                onClick = {
+                    navController.navigate(AppScreens.SignUpScreen.route) {
+                        popUpTo(AppScreens.SignUpScreen.route) {
+                            inclusive = true
+                        }
+                    }
+                },
+                modifier = Modifier
+                    .fillMaxWidth(0.9f)
+                    .padding(top = 6.dp)
+            ) {
+
+                Text(
+                    text = "Sign Up",
+                    color = Color.White,
+                    modifier = Modifier.padding(8.dp)
+                )
+
+            }
+
+            Spacer(modifier = Modifier.height(2.dp))
+
+            TextButton(onClick = {
+                navController.navigate(AppScreens.SignInScreen.route) {
+                    popUpTo(AppScreens.SignInScreen.route) {
+                        inclusive = true
+                    }
+                }
+            }) {
+
+                Text(
+                    text = "Log In",
+                    style = TextStyle(
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Normal,
+                        fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular)),
+                        color = primaryColor,
+                    )
+                )
+
+            }
+        }
 
     }
 
