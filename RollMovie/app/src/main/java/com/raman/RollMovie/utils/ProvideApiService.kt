@@ -10,7 +10,7 @@ fun createApiService(): ApiService {
 
     val okHttpClient = OkHttpClient.Builder()
         .addInterceptor {
-            val request = it.request().newBuilder().addHeader("Authorization", "Bearer $API_KEY")
+            val request = it.request().newBuilder().addHeader("accept", "application/json").addHeader("Authorization", "Bearer $API_KEY")
             return@addInterceptor it.proceed(request.build())
         }.build()
 
