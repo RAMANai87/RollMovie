@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,8 +15,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -40,6 +47,11 @@ fun HomeScreen(navController: NavController) {
     val systemUiController = rememberSystemUiController()
     systemUiController.setStatusBarColor(Color.White)
 
+    val tabItems = listOf(
+        TabItems("Movies"),
+        TabItems("Tv Shows")
+    )
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -55,9 +67,39 @@ fun HomeScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.height(56.dp))
 
+        var selectedTabIndex by remember { mutableIntStateOf(0) }
+
+        TabRow(selectedTabIndex = selectedTabIndex, modifier = Modifier.padding(top = 56.dp)) {
+            tabItems.forEachIndexed { index, item ->
+                Tab(
+                    selected = selectedTabIndex == index,
+                    onClick = { selectedTabIndex = index },
+                    text = { Text(text = item.tabName) }
+                )
+            }
+        }
+
+        Surface(modifier = Modifier
+            .fillMaxSize()
+            .padding(top = 110.dp)) {
+            when(selectedTabIndex) {
+                0 -> {MovieScreen()}
+                1 -> {TvShowScreen()}
+            }
+        }
 
     }
 
+}
+
+@Composable
+fun MovieScreen() {
+    Text(text = "helllo")
+}
+
+@Composable
+fun TvShowScreen() {
+    Text(text = "hellll")
 }
 
 // App bar
@@ -132,6 +174,10 @@ private fun RollMovieAppBar(onSearchClicked: () -> Unit, onFavoriteClicked: () -
     }
 
 }
+
+data class TabItems (
+    val tabName :String
+)
 
 @Preview(showBackground = true)
 @Composable

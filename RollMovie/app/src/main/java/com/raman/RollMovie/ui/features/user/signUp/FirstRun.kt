@@ -72,29 +72,6 @@ fun FirstRunScreen(navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
-            Text(
-                text = "Let`s start with RollMovie",
-                modifier = Modifier.fillMaxWidth(),
-                style = TextStyle(
-                    color = Color.Black,
-                    fontFamily = FontFamily(Font(R.font.demoloviecloud)),
-                    fontSize = 28.sp,
-                    textAlign = TextAlign.Center
-                )
-            )
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            Text(
-                text = "find out any movie you want",
-                modifier = Modifier.fillMaxWidth(),
-                style = TextStyle(
-                    color = mainFont,
-                    fontFamily = FontFamily(Font(R.font.demoloviecloud)),
-                    fontSize = 20.sp,
-                    textAlign = TextAlign.Center
-                )
-            )
 
             Spacer(modifier = Modifier.height(10.dp))
 

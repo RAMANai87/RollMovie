@@ -83,7 +83,7 @@ private fun ImageItem(imageRes: Int, pageNum: Int) {
                     style = TextStyle(
                         color = Color.Black,
                         fontFamily = FontFamily(Font(R.font.demoloviecloud)),
-                        fontSize = 28.sp,
+                        fontSize = 22.sp,
                         textAlign = TextAlign.Center
                     )
                 )
@@ -96,7 +96,7 @@ private fun ImageItem(imageRes: Int, pageNum: Int) {
                     style = TextStyle(
                         color = mainFont,
                         fontFamily = FontFamily(Font(R.font.demoloviecloud)),
-                        fontSize = 20.sp,
+                        fontSize = 15.sp,
                         textAlign = TextAlign.Center
                     )
                 )
@@ -109,7 +109,7 @@ private fun ImageItem(imageRes: Int, pageNum: Int) {
                     style = TextStyle(
                         color = Color.Black,
                         fontFamily = FontFamily(Font(R.font.demoloviecloud)),
-                        fontSize = 28.sp,
+                        fontSize = 22.sp,
                         textAlign = TextAlign.Center
                     )
                 )
@@ -122,7 +122,7 @@ private fun ImageItem(imageRes: Int, pageNum: Int) {
                     style = TextStyle(
                         color = mainFont,
                         fontFamily = FontFamily(Font(R.font.demoloviecloud)),
-                        fontSize = 20.sp,
+                        fontSize = 16.sp,
                         textAlign = TextAlign.Center
                     )
                 )
@@ -135,7 +135,7 @@ private fun ImageItem(imageRes: Int, pageNum: Int) {
                     style = TextStyle(
                         color = Color.Black,
                         fontFamily = FontFamily(Font(R.font.demoloviecloud)),
-                        fontSize = 28.sp,
+                        fontSize = 22.sp,
                         textAlign = TextAlign.Center
                     )
                 )
@@ -148,7 +148,7 @@ private fun ImageItem(imageRes: Int, pageNum: Int) {
                     style = TextStyle(
                         color = mainFont,
                         fontFamily = FontFamily(Font(R.font.demoloviecloud)),
-                        fontSize = 20.sp,
+                        fontSize = 16.sp,
                         textAlign = TextAlign.Center
                     )
                 )
