@@ -22,10 +22,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.raman.RollMovie.R
+import com.raman.RollMovie.ui.features.user.signUp.SignUpScreen
 import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.barFontMain
 import com.raman.RollMovie.ui.theme.primaryColor
@@ -53,11 +56,11 @@ fun HomeScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(56.dp))
 
 
-
     }
 
 }
 
+// App bar
 @Composable
 private fun RollMovieAppBar(onSearchClicked: () -> Unit, onFavoriteClicked: () -> Unit) {
 
@@ -72,9 +75,29 @@ private fun RollMovieAppBar(onSearchClicked: () -> Unit, onFavoriteClicked: () -
             verticalAlignment = Alignment.CenterVertically
         ) {
             Spacer(modifier = Modifier.padding(start = 10.dp))
+
+            Image(
+                painter = painterResource(id = R.mipmap.app_icon),
+                contentDescription = null,
+                modifier = Modifier.size(24.dp, 24.dp)
+            )
+
+            Spacer(modifier = Modifier.width(16.dp))
+
+            Image(painter = painterResource(id = R.drawable.heart_ic),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(24.dp, 24.dp)
+                    .clickable { onFavoriteClicked.invoke() }
+            )
+
+            Spacer(modifier = Modifier.width(20.dp))
+
             Surface(
                 modifier = Modifier
-                    .size(300.dp, 40.dp)
+                    .fillMaxWidth()
+                    .height(46.dp)
+                    .padding(end = 10.dp)
                     .clip(Shapes.large)
                     .clickable { onSearchClicked.invoke() },
                 color = primaryColor
@@ -84,44 +107,34 @@ private fun RollMovieAppBar(onSearchClicked: () -> Unit, onFavoriteClicked: () -
                     modifier = Modifier
                         .fillMaxSize(),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.End
+                    horizontalArrangement = Arrangement.Start
                 ) {
+
+                    Image(
+                        modifier = Modifier.padding(start = 16.dp),
+                        painter = painterResource(id = R.drawable.ic_search),
+                        contentDescription = null
+                    )
 
                     Text(
                         text = "Ask me to tell you",
-                        modifier = Modifier.padding(start = 30.dp, end = 10.dp),
+                        modifier = Modifier.padding(start = 10.dp),
                         textAlign = TextAlign.Center,
                         color = barFontMain
-                    )
-
-                    Image(
-                        modifier = Modifier.padding(end = 16.dp),
-                        painter = painterResource(id = R.drawable.ic_search),
-                        contentDescription = null
                     )
 
                 }
 
             }
 
-            Spacer(modifier = Modifier.width(20.dp))
-
-            Image(painter = painterResource(id = R.drawable.heart_ic),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(24.dp, 24.dp)
-                    .clickable { onFavoriteClicked.invoke() })
-
-            Spacer(modifier = Modifier.width(16.dp))
-
-            Image(
-                painter = painterResource(id = R.mipmap.app_icon),
-                contentDescription = null,
-                modifier = Modifier.size(24.dp, 24.dp)
-            )
-
         }
 
     }
 
+}
+
+@Preview(showBackground = true)
+@Composable
+fun HomePreview() {
+    HomeScreen(rememberNavController())
 }
