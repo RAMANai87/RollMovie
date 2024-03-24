@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
                 route = AppScreens.MainScreen.route
             ) {
                 if (userViewModel.currentUser != null) {
-                    HomeScreen()
+                    HomeScreen(myNavController)
                 } else {
                     FirstRunScreen(navController = myNavController)
                 }
@@ -108,7 +108,7 @@ class MainActivity : ComponentActivity() {
             composable(
                 route = AppScreens.HomeScreen.route
             ) {
-                HomeScreen()
+                HomeScreen(myNavController)
             }
 
         }
