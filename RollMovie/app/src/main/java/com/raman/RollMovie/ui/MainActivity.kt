@@ -1,6 +1,5 @@
 package com.raman.RollMovie.ui
 
-import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,7 +9,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.raman.RollMovie.model.data.Resource
 import com.raman.RollMovie.ui.features.detail.DetailScreen
 import com.raman.RollMovie.ui.features.favorite.FavoriteScreen
 import com.raman.RollMovie.ui.features.mainScreen.HomeScreen
@@ -21,20 +19,23 @@ import com.raman.RollMovie.ui.features.setting.SettingScreen
 import com.raman.RollMovie.ui.features.user.signIn.SignInScreen
 import com.raman.RollMovie.ui.features.user.signUp.FirstRunScreen
 import com.raman.RollMovie.ui.features.user.signUp.SignUpScreen
-import com.raman.RollMovie.ui.features.user.signUp.UserViewModel
+import com.raman.RollMovie.viewmodel.user.UserViewModel
 import com.raman.RollMovie.ui.theme.RollMovieTheme
 import com.raman.RollMovie.utils.AppScreens
+import com.raman.RollMovie.viewmodel.app.MovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     // initialize ViewModels
-    private val userViewModel :UserViewModel by viewModels()
+    private val userViewModel : UserViewModel by viewModels()
+    private val movieViewModel : MovieViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             RollMovieTheme {
+                movieViewModel.getRemoteData()
                 RollMovieUi()
             }
         }
@@ -51,7 +52,7 @@ class MainActivity : ComponentActivity() {
                 route = AppScreens.MainScreen.route
             ) {
                 if (userViewModel.currentUser != null) {
-                    HomeScreen(myNavController)
+                    HomeScreen(movieViewModel ,myNavController)
                 } else {
                     FirstRunScreen(navController = myNavController)
                 }
@@ -108,7 +109,7 @@ class MainActivity : ComponentActivity() {
             composable(
                 route = AppScreens.HomeScreen.route
             ) {
-                HomeScreen(myNavController)
+                HomeScreen(movieViewModel ,myNavController)
             }
 
         }
