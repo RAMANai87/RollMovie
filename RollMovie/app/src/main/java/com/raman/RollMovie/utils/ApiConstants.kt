@@ -1,4 +1,31 @@
 package com.raman.RollMovie.utils
 
-const val API_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4Yzk3MTIyNjhhOGI4MGY3ODk1YjkxMjA0NDE0ZWFlMyIsInN1YiI6IjY1NjRmYjY3ZDk1NTRiMDEzYWYyZjkzYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cyHECSIuqc3brVDivHRZVJ9_Tt9P3RZoQMeB4QM1MRU"
-const val BASE_URL = "https://api.themoviedb.org/3/"
+internal object ApiConstants {
+
+    internal const val API_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4Yzk3MTIyNjhhOGI4MGY3ODk1YjkxMjA0NDE0ZWFlMyIsInN1YiI6IjY1NjRmYjY3ZDk1NTRiMDEzYWYyZjkzYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cyHECSIuqc3brVDivHRZVJ9_Tt9P3RZoQMeB4QM1MRU"
+    internal const val BASE_URL = "https://api.themoviedb.org/3/"
+    internal const val IMAGE_URL = "https://image.tmdb.org/t/p/w500"
+
+    internal const val UPCOMING_MOVIE = "movie/upcoming"
+    internal const val TOP_RATED_MOVIE = "movie/top_rated"
+    internal const val POPULAR_MOVIE = "movie/popular"
+    internal const val NOW_PLAYING_MOVIE = "movie/now_playing"
+    internal const val DISCOVER_MOVIE = "discover/movie"
+    internal const val TRENDING_MOVIE = "trending/movie/day"
+    internal const val DETAILS_MOVIE = "movie/{id}"
+    internal const val SEARCH_MOVIE = "search/movie"
+
+    internal const val TOP_RATED_TV_SHOW = "tv/top_rated"
+    internal const val POPULAR_TV_SHOW = "tv/popular"
+    internal const val ON_THE_AIR_TV_SHOW = "tv/on_the_air"
+    internal const val DISCOVER_TV_SHOW = "discover/tv"
+    internal const val TRENDING_TV_SHOW = "trending/tv/day"
+    internal const val DETAILS_TV_SHOW = "tv/{id}"
+    internal const val SEARCH_TV_SHOW = "search/tv"
+
+    internal const val PAGE = "page"
+    internal const val DEFAULT_PAGE = 1
+    internal const val ID = "id"
+    internal const val QUERY = "query"
+
+}
