@@ -1,5 +1,7 @@
 package com.raman.RollMovie.di
 
+import com.raman.RollMovie.model.repo.movie.MovieRepository
+import com.raman.RollMovie.model.repo.movie.MovieRepositoryImpl
 import com.raman.RollMovie.model.repo.user.UserRepository
 import com.raman.RollMovie.model.repo.user.UserRepositoryImpl
 import dagger.Binds
@@ -15,5 +17,9 @@ abstract class RepositoryModules {
     @Binds
     @Singleton
     abstract fun bindUserRepository(userRepositoryImpl: UserRepositoryImpl) :UserRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindMovieRepository(movieRepositoryImpl: MovieRepositoryImpl) :MovieRepository
 
 }
