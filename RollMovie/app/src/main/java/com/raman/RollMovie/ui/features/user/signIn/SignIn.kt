@@ -2,12 +2,10 @@ package com.raman.RollMovie.ui.features.user.signIn
 
 import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,8 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -43,13 +39,12 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.raman.RollMovie.R
-import com.raman.RollMovie.model.data.Resource
+import com.raman.RollMovie.model.data.HttpResult
 import com.raman.RollMovie.ui.features.user.signUp.MainTextField
 import com.raman.RollMovie.ui.features.user.signUp.PasswordTextField
 import com.raman.RollMovie.ui.features.user.signUp.SignUpIcon
 import com.raman.RollMovie.ui.features.user.signUp.TitleTextField
-import com.raman.RollMovie.ui.features.user.signUp.UserViewModel
-import com.raman.RollMovie.ui.theme.RollMovieTheme
+import com.raman.RollMovie.viewmodel.user.UserViewModel
 import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.mainFont
 import com.raman.RollMovie.ui.theme.primaryColor
@@ -248,15 +243,15 @@ fun SignInPart(userViewModel: UserViewModel?, navController: NavController) {
     loginFlow?.value?.let {
 
         when (it) {
-            is Resource.Failure -> Toast.makeText(
+            is HttpResult.Failure -> Toast.makeText(
                 context,
                 "Sign in you hit an error",
                 Toast.LENGTH_SHORT
             ).show()
 
-            Resource.Loading -> {}
+            HttpResult.Loading -> {}
 
-            is Resource.Success -> {
+            is HttpResult.Success -> {
                 navController.navigate(AppScreens.HomeScreen.route) {
                     popUpTo(AppScreens.HomeScreen.route) { inclusive = true }
                 }

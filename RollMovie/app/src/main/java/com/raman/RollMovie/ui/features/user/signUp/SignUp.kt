@@ -9,23 +9,16 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -40,7 +33,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -58,13 +50,12 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.raman.RollMovie.R
-import com.raman.RollMovie.model.data.Resource
-import com.raman.RollMovie.ui.features.user.signIn.SignInScreen
+import com.raman.RollMovie.model.data.HttpResult
 import com.raman.RollMovie.ui.theme.Shapes
-import com.raman.RollMovie.ui.theme.backgroundCard
 import com.raman.RollMovie.ui.theme.mainFont
 import com.raman.RollMovie.ui.theme.primaryColor
 import com.raman.RollMovie.utils.AppScreens
+import com.raman.RollMovie.viewmodel.user.UserViewModel
 
 @Composable
 fun SignUpScreen(userViewModel: UserViewModel?, navControl: NavController) {
@@ -296,15 +287,15 @@ fun SignUpPart(userViewModel: UserViewModel?, navControl: NavController) {
     signUpFlow?.value?.let {
 
         when(it) {
-            is Resource.Failure -> Toast.makeText(
+            is HttpResult.Failure -> Toast.makeText(
                 context,
                 "Sign up you hit an error ",
                 Toast.LENGTH_SHORT
             ).show()
 
-            Resource.Loading -> {}
+            HttpResult.Loading -> {}
 
-            is Resource.Success -> {
+            is HttpResult.Success -> {
                 navControl.navigate(AppScreens.HomeScreen.route) {
                 popUpTo(AppScreens.HomeScreen.route) { inclusive = true }
                 }
