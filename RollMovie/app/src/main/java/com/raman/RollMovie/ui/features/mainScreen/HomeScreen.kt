@@ -1,5 +1,6 @@
 package com.raman.RollMovie.ui.features.mainScreen
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -14,11 +15,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -33,19 +36,30 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.raman.RollMovie.R
-import com.raman.RollMovie.ui.features.user.signUp.SignUpScreen
+import com.raman.RollMovie.ui.adapters.SliderImagesView
 import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.barFontMain
 import com.raman.RollMovie.ui.theme.primaryColor
 import com.raman.RollMovie.utils.AppScreens
+import com.raman.RollMovie.utils.MovieState
+import com.raman.RollMovie.viewmodel.app.MovieViewModel
+import kotlinx.coroutines.flow.collect
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(movieViewModel: MovieViewModel ,navController: NavController) {
 
     val systemUiController = rememberSystemUiController()
     systemUiController.setStatusBarColor(Color.White)
+
+    val composition by rememberLottieComposition(
+        LottieCompositionSpec.RawRes(R.raw.no_internet_anim)
+    )
 
     val tabItems = listOf(
         TabItems("Movies"),
@@ -79,12 +93,18 @@ fun HomeScreen(navController: NavController) {
             }
         }
 
-        Surface(modifier = Modifier
-            .fillMaxSize()
-            .padding(top = 110.dp)) {
-            when(selectedTabIndex) {
-                0 -> {MovieScreen()}
-                1 -> {TvShowScreen()}
+        Surface(
+            modifier = Modifier
+                .padding(top = 110.dp)
+        ) {
+            when (selectedTabIndex) {
+                0 -> {
+                    MovieScreen(movieViewModel) {navController.navigate(AppScreens.DetailScreen.route)}
+                }
+
+                1 -> {
+                    TvShowScreen()
+                }
             }
         }
 
@@ -93,13 +113,28 @@ fun HomeScreen(navController: NavController) {
 }
 
 @Composable
-fun MovieScreen() {
-    Text(text = "helllo")
+fun MovieScreen(movieViewModel: MovieViewModel, onItemClicked : () -> Unit) {
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        val dataPopular = movieViewModel.popularFlow.collectAsState()
+        Log.v("data1", dataPopular.value.toString())
+        dataPopular.value?.let {
+            SliderImagesView(it, "Popular Movie") {
+                onItemClicked.invoke()
+            }
+        }
+    }
+
 }
 
 @Composable
 fun TvShowScreen() {
-    Text(text = "hellll")
+    Text(text = "Tv show part")
 }
 
 // App bar
@@ -175,12 +210,6 @@ private fun RollMovieAppBar(onSearchClicked: () -> Unit, onFavoriteClicked: () -
 
 }
 
-data class TabItems (
-    val tabName :String
+data class TabItems(
+    val tabName: String
 )
-
-@Preview(showBackground = true)
-@Composable
-fun HomePreview() {
-    HomeScreen(rememberNavController())
-}
