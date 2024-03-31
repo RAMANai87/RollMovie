@@ -4,7 +4,7 @@ import android.content.SharedPreferences
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
-import com.raman.RollMovie.model.data.Resource
+import com.raman.RollMovie.model.data.HttpResult
 import com.raman.RollMovie.utils.await
 import javax.inject.Inject
 
@@ -19,7 +19,7 @@ class UserRepositoryImpl @Inject constructor(
         name: String,
         email: String,
         password: String
-    ): Resource<FirebaseUser> {
+    ): HttpResult<FirebaseUser> {
 
         return try {
             val result = firebase.createUserWithEmailAndPassword(email, password).await()
@@ -27,22 +27,22 @@ class UserRepositoryImpl @Inject constructor(
             result?.user?.updateProfile(
                 UserProfileChangeRequest.Builder().setDisplayName(name).build()
             )?.await()
-            Resource.Success(result.user!!)
+            HttpResult.Success(result.user!!)
         } catch (e: Exception) {
             e.printStackTrace()
-            Resource.Failure(e)
+            HttpResult.Failure(e)
         }
 
     }
 
-    override suspend fun signInUser(email: String, password: String): Resource<FirebaseUser> {
+    override suspend fun signInUser(email: String, password: String): HttpResult<FirebaseUser> {
 
         return try {
             val result = firebase.signInWithEmailAndPassword(email, password).await()
-            Resource.Success(result.user!!)
+            HttpResult.Success(result.user!!)
         } catch (e: Exception) {
             e.printStackTrace()
-            Resource.Failure(e)
+            HttpResult.Failure(e)
         }
 
     }
