@@ -1,4 +1,4 @@
-package com.raman.RollMovie.utils
+package com.raman.RollMovie.ui.component
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -204,7 +203,7 @@ private fun ImageSlider(images: List<Int>) {
                     .padding(5.dp)
                     .clip(CircleShape)
                     .background(color)
-                    .size(10.dp)
+                    .size(8.dp)
             )
 
         }
