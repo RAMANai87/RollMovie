@@ -1,9 +1,9 @@
-package com.raman.RollMovie.ui.features.user.signUp
+package com.raman.RollMovie.viewmodel.user
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseUser
-import com.raman.RollMovie.model.data.Resource
+import com.raman.RollMovie.model.data.HttpResult
 import com.raman.RollMovie.model.repo.user.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,11 +16,11 @@ class UserViewModel @Inject constructor(
     private val userRepository: UserRepository
 ) :ViewModel(){
 
-    private val _signUpFlow = MutableStateFlow<Resource<FirebaseUser>?>(null)
-    val signUpFlow :StateFlow<Resource<FirebaseUser>?> = _signUpFlow
+    private val _signUpFlow = MutableStateFlow<HttpResult<FirebaseUser>?>(null)
+    val signUpFlow :StateFlow<HttpResult<FirebaseUser>?> = _signUpFlow
 
-    private val _signInFlow = MutableStateFlow<Resource<FirebaseUser>?>(null)
-    val signInFlow : StateFlow<Resource<FirebaseUser>?> = _signInFlow
+    private val _signInFlow = MutableStateFlow<HttpResult<FirebaseUser>?>(null)
+    val signInFlow : StateFlow<HttpResult<FirebaseUser>?> = _signInFlow
 
     val currentUser :FirebaseUser?
         get() = userRepository.currentUser
@@ -28,14 +28,14 @@ class UserViewModel @Inject constructor(
     init {
 
         if (userRepository.currentUser != null) {
-            _signInFlow.value = Resource.Success(userRepository.currentUser!!)
+            _signInFlow.value = HttpResult.Success(userRepository.currentUser!!)
         }
 
     }
 
     fun signUp(name :String, email :String, password :String) {
         viewModelScope.launch {
-            _signUpFlow.value = Resource.Loading
+            _signUpFlow.value = HttpResult.Loading
             val result = userRepository.signUpUser(name, email, password)
             _signUpFlow.value = result
         }
@@ -43,7 +43,7 @@ class UserViewModel @Inject constructor(
 
     fun signIn(email :String, password: String) {
         viewModelScope.launch {
-            _signInFlow.value = Resource.Loading
+            _signInFlow.value = HttpResult.Loading
             val result = userRepository.signInUser(email, password)
             _signInFlow.value = result
         }
