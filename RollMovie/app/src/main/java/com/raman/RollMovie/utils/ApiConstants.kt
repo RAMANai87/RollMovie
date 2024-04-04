@@ -28,4 +28,10 @@ internal object ApiConstants {
     internal const val ID = "id"
     internal const val QUERY = "query"
 
+    internal object Utils {
+
+        internal const val IMAGE_URL_TEST = "https://upload.wikimedia.org/wikipedia/commons/3/36/Hopetoun_falls.jpg"
+
+    }
+
 }
