@@ -42,6 +42,7 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.raman.RollMovie.R
+import com.raman.RollMovie.ui.adapters.MinimalLazyRow
 import com.raman.RollMovie.ui.adapters.SliderImagesView
 import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.barFontMain
@@ -122,12 +123,22 @@ fun MovieScreen(movieViewModel: MovieViewModel, onItemClicked : () -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         val dataPopular = movieViewModel.popularFlow.collectAsState()
-        Log.v("data1", dataPopular.value.toString())
+        val dataTopRated = movieViewModel.topRatedFlow.collectAsState()
         dataPopular.value?.let {
             SliderImagesView(it, "Popular Movie") {
                 onItemClicked.invoke()
             }
         }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Log.v("data1", dataTopRated.toString())
+        dataTopRated.value?.let {
+            MinimalLazyRow("Top Rated Movie", it) {id ->
+                onItemClicked.invoke()
+            }
+        }
+
     }
 
 }
