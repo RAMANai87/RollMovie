@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -22,6 +23,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -48,6 +50,8 @@ fun SliderImagesView(data: List<MovieModel>, titleText: String, onItemClicked: (
         verticalArrangement = Arrangement.SpaceBetween
     ) {
 
+        Spacer(modifier = Modifier.height(6.dp))
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -56,7 +60,6 @@ fun SliderImagesView(data: List<MovieModel>, titleText: String, onItemClicked: (
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-
             Text(
                 text = titleText,
                 modifier = Modifier.padding(start = 12.dp),
@@ -76,12 +79,14 @@ fun SliderImagesView(data: List<MovieModel>, titleText: String, onItemClicked: (
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Bold,
                         fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular)),
-                        color = primaryColor
+                        color = Color.Black
                     )
                 )
             }
 
         }
+
+        Spacer(modifier = Modifier.height(6.dp))
 
         ImageSlider(data, onItemClicked)
 
