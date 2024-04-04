@@ -1,5 +1,6 @@
 package com.raman.RollMovie.ui.adapters
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,7 +20,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -29,13 +29,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.raman.RollMovie.R
-import com.raman.RollMovie.model.data.movie.Result
+import com.raman.RollMovie.model.data.MovieModel
+import com.raman.RollMovie.ui.component.MinimalLazyItem
 import com.raman.RollMovie.ui.theme.Shapes
+import com.raman.RollMovie.ui.theme.borderStrokeColor
 import com.raman.RollMovie.ui.theme.mainFont
-import com.raman.RollMovie.utils.buildImageUrl
+import com.raman.RollMovie.ui.theme.overviewColor
+import com.raman.RollMovie.utils.ApiConstants
 
 @Composable
-fun MinimalLazyRow(titleText: String, onItemClicked: (id: Int) -> Unit, data :List<Result>) {
+fun MinimalLazyRow(titleText: String, data :List<MovieModel>, onItemClicked: (id: Int) -> Unit) {
 
     Column {
 
@@ -78,7 +81,7 @@ fun MinimalLazyRow(titleText: String, onItemClicked: (id: Int) -> Unit, data :Li
         ) {
 
             items(10) {
-                LazyItem(data[it]) { uri ->
+                MinimalLazyItem(data[it]) { uri ->
                     onItemClicked(uri)
                 }
             }
@@ -89,47 +92,3 @@ fun MinimalLazyRow(titleText: String, onItemClicked: (id: Int) -> Unit, data :Li
 
 }
 
-@Composable
-private fun LazyItem(data :Result ,onItemClicked: (id: Int) -> Unit) {
-
-    Card(
-        modifier = Modifier
-            .padding(end = 12.dp)
-            .size(120.dp, 220.dp)
-            .clickable { onItemClicked.invoke(12) },
-        elevation = CardDefaults.cardElevation(
-            0.dp
-        ),
-        shape = Shapes.small,
-        colors = CardDefaults.cardColors(
-            Color.White
-        )
-    ) {
-
-        with(data) {
-
-            AsyncImage(
-                model = buildImageUrl(poster_path),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(Shapes.small)
-                    .height(150.dp),
-                contentScale = ContentScale.Crop,
-                contentDescription = null
-            )
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            Text(
-                text = original_title,
-                modifier = Modifier.fillMaxWidth(),
-                textAlign = TextAlign.Center,
-                style = TextStyle(fontSize = 12.sp, fontWeight = FontWeight.Bold),
-                maxLines = 3
-            )
-
-        }
-
-    }
-
-}
