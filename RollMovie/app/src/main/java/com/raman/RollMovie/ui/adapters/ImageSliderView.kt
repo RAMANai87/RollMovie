@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -71,18 +72,17 @@ fun SliderImagesView(data: List<MovieModel>, titleText: String, onItemClicked: (
                 )
             )
 
-            TextButton(onClick = {}) {
-                Text(
-                    text = "See all",
-                    modifier = Modifier.padding(end = 12.dp),
-                    style = TextStyle(
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.Bold,
-                        fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular)),
-                        color = Color.Black
-                    )
+            Text(
+                text = "See all",
+                modifier = Modifier.padding(end = 12.dp),
+                style = TextStyle(
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Bold,
+                    fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular)),
+                    color = Color.Black
                 )
-            }
+            )
+
 
         }
 
