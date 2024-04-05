@@ -58,55 +58,66 @@ fun HomeScreen(movieViewModel: MovieViewModel ,navController: NavController) {
     val systemUiController = rememberSystemUiController()
     systemUiController.setStatusBarColor(Color.White)
 
-    val composition by rememberLottieComposition(
-        LottieCompositionSpec.RawRes(R.raw.no_internet_anim)
-    )
+    if (movieViewModel.inProgress.value) {
 
-    val tabItems = listOf(
-        TabItems("Movies"),
-        TabItems("Tv Shows")
-    )
+        CircularProgressIndicator(
+            modifier = Modifier.padding(horizontal = 200.dp, vertical = 400.dp),
+            color = primaryColor
+        )
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White),
-        contentAlignment = Alignment.TopCenter
-    ) {
+    } else {
 
-        RollMovieAppBar(onSearchClicked = {
-            navController.navigate(AppScreens.SearchScreen.route)
-        }, onFavoriteClicked = {
-            navController.navigate(AppScreens.FavoriteScreen.route)
-        })
+        val composition by rememberLottieComposition(
+            LottieCompositionSpec.RawRes(R.raw.no_internet_anim)
+        )
 
-        Spacer(modifier = Modifier.height(56.dp))
+        val tabItems = listOf(
+            TabItems("Movies"),
+            TabItems("Tv Shows")
+        )
 
-        var selectedTabIndex by remember { mutableIntStateOf(0) }
-
-        TabRow(selectedTabIndex = selectedTabIndex, modifier = Modifier.padding(top = 56.dp)) {
-            tabItems.forEachIndexed { index, item ->
-                Tab(
-                    selected = selectedTabIndex == index,
-                    onClick = { selectedTabIndex = index },
-                    text = { Text(text = item.tabName) }
-                )
-            }
-        }
-
-        Surface(
+        Box(
             modifier = Modifier
-                .padding(top = 110.dp)
+                .fillMaxSize()
+                .background(Color.White),
+            contentAlignment = Alignment.TopCenter
         ) {
-            when (selectedTabIndex) {
-                0 -> {
-                    MovieScreen(movieViewModel) {navController.navigate(AppScreens.DetailScreen.route)}
-                }
 
-                1 -> {
-                    TvShowScreen()
+            RollMovieAppBar(onSearchClicked = {
+                navController.navigate(AppScreens.SearchScreen.route)
+            }, onFavoriteClicked = {
+                navController.navigate(AppScreens.FavoriteScreen.route)
+            })
+
+            Spacer(modifier = Modifier.height(56.dp))
+
+            var selectedTabIndex by remember { mutableIntStateOf(0) }
+
+            TabRow(selectedTabIndex = selectedTabIndex, modifier = Modifier.padding(top = 56.dp)) {
+                tabItems.forEachIndexed { index, item ->
+                    Tab(
+                        selected = selectedTabIndex == index,
+                        onClick = { selectedTabIndex = index },
+                        text = { Text(text = item.tabName) }
+                    )
                 }
             }
+
+            Surface(
+                modifier = Modifier
+                    .padding(top = 110.dp)
+            ) {
+                when (selectedTabIndex) {
+                    0 -> {
+                        MovieScreen(movieViewModel) {navController.navigate(AppScreens.DetailScreen.route)}
+                    }
+
+                    1 -> {
+                        TvShowScreen()
+                    }
+                }
+            }
+
         }
 
     }
