@@ -1,6 +1,7 @@
 package com.raman.RollMovie.viewmodel.app
 
 import android.util.Log
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.raman.RollMovie.model.data.MovieModel
@@ -19,7 +20,7 @@ class MovieViewModel @Inject constructor(
     private val movieRepository: MovieRepository
 ) : ViewModel() {
 
-    var movieState: MovieState? = null
+    val inProgress = mutableStateOf(false)
 
     // movies data flow ->
 
@@ -47,75 +48,60 @@ class MovieViewModel @Inject constructor(
 
     fun getRemoteData() {
         viewModelScope.launch {
-            movieState = MovieState.Loading
-            async {
-                movieRepository.getPopularMovie()
-                    .catch {
-                        movieState = MovieState.Failure
-                        Log.v("exception", it.message!!)
-                    }
-                    .collect {
-                        _popularFlow.value = it
-                        Log.v("data", it.toString())
-                    }
-            }.await()
+            inProgress.value = true
 
-            async {
-                movieRepository.getTopRatedMovie()
-                    .catch {
-                        movieState = MovieState.Failure
-                        Log.v("exception", it.message!!)
-                    }
-                    .collect {
-                        _topRatedFlow.value = it
-                    }
-            }.await()
+            movieRepository.getPopularMovie()
+                .catch {
+                    Log.v("exception", it.message!!)
+                }
+                .collect {
+                    _popularFlow.value = it
+                    Log.v("data", it.toString())
+                }
 
-            async {
-                movieRepository.getDiscoverMovie()
-                    .catch {
-                        movieState = MovieState.Failure
-                        Log.v("exception", it.message!!)
-                    }
-                    .collect {
-                        _discoverFlow.value = it
-                    }
-            }.await()
+            movieRepository.getTopRatedMovie()
+                .catch {
+                    Log.v("exception", it.message!!)
+                }
+                .collect {
+                    inProgress.value = false
+                    _topRatedFlow.value = it
+                }
 
-            async {
-                movieRepository.getTrendingMovie()
-                    .catch {
-                        movieState = MovieState.Failure
-                        Log.v("exception", it.message!!)
-                    }
-                    .collect {
-                        _trendingFlow.value = it
-                    }
-            }.await()
+            movieRepository.getDiscoverMovie()
+                .catch {
+                    Log.v("exception", it.message!!)
+                }
+                .collect {
+                    _discoverFlow.value = it
+                }
 
-            async {
-                movieRepository.getUpcomingMovie()
-                    .catch {
-                        movieState = MovieState.Failure
-                        Log.v("exception", it.message!!)
-                    }
-                    .collect {
-                        _upComingFlow.value = it
-                    }
-            }.await()
 
-            async {
-                movieRepository.getNowPlayingMovie()
-                    .catch {
-                        movieState = MovieState.Failure
-                        Log.v("exception", it.message!!)
-                    }
-                    .collect {
-                        _nowPlayingFlow.value = it
-                    }
-            }.await()
+            movieRepository.getTrendingMovie()
+                .catch {
+                    Log.v("exception", it.message!!)
+                }
+                .collect {
+                    _trendingFlow.value = it
+                }
 
-            movieState = MovieState.Success
+            movieRepository.getUpcomingMovie()
+                .catch {
+                    Log.v("exception", it.message!!)
+                }
+                .collect {
+                    _upComingFlow.value = it
+                }
+
+
+
+            movieRepository.getNowPlayingMovie()
+                .catch {
+                    Log.v("exception", it.message!!)
+                }
+                .collect {
+                    _nowPlayingFlow.value = it
+                }
 
         }
     }
