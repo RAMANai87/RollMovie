@@ -24,17 +24,18 @@ import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.mainFont
 import com.raman.RollMovie.ui.theme.overviewColor
 import com.raman.RollMovie.utils.ApiConstants
+import com.raman.RollMovie.utils.buildImageUrl
 
 @Composable
 fun MinimalLazyItem(data : MovieModel, onItemClicked: (id: Int) -> Unit) {
 
     Card(
         modifier = Modifier
-            .size(180.dp, 230.dp)
+            .size(170.dp, 230.dp)
             .padding(end = 12.dp)
             .clickable { onItemClicked.invoke(data.id) },
         elevation = CardDefaults.cardElevation(
-            4.dp
+            1.dp
         ),
         shape = Shapes.small,
         colors = CardDefaults.cardColors(
@@ -45,7 +46,7 @@ fun MinimalLazyItem(data : MovieModel, onItemClicked: (id: Int) -> Unit) {
         with(data) {
 
             AsyncImage(
-                model = ApiConstants.Utils.IMAGE_URL_TEST,
+                model = buildImageUrl(imageUrl),
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(150.dp),
@@ -67,7 +68,7 @@ fun MinimalLazyItem(data : MovieModel, onItemClicked: (id: Int) -> Unit) {
 
             Text(
                 text = "$overview...",
-                modifier = Modifier.fillMaxWidth().padding(start = 6.dp),
+                modifier = Modifier.fillMaxWidth().padding(start = 6.dp, end = 6.dp),
                 textAlign = TextAlign.Start,
                 style = TextStyle(fontSize = 10.sp, fontWeight = FontWeight.Medium, color = overviewColor),
                 maxLines = 2

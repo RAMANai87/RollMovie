@@ -40,7 +40,9 @@ import com.raman.RollMovie.utils.ApiConstants
 @Composable
 fun MinimalLazyRow(titleText: String, data :List<MovieModel>, onItemClicked: (id: Int) -> Unit) {
 
-    Column {
+    Column(
+        modifier = Modifier.padding(8.dp)
+    ) {
 
         Row(
             modifier = Modifier.fillMaxWidth().height(14.dp),
