@@ -45,7 +45,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-fun SliderImagesView(data: List<MovieModel>, titleText: String, onItemClicked: () -> Unit) {
+fun SliderImagesView(data: List<MovieModel>, titleText: String, onItemClicked: (id :Int) -> Unit) {
 
     Column(
         verticalArrangement = Arrangement.SpaceBetween
@@ -56,8 +56,7 @@ fun SliderImagesView(data: List<MovieModel>, titleText: String, onItemClicked: (
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(14.dp)
-                .padding(start = 10.dp, end = 10.dp),
+                .height(14.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -112,7 +111,7 @@ private fun ImageItem(imageUrl: String, onItemClicked: () -> Unit) {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun ImageSlider(data: List<MovieModel>, onItemClicked: () -> Unit) {
+private fun ImageSlider(data: List<MovieModel>, onItemClicked: (id :Int) -> Unit) {
 
     val pageCount = 10
     val pagerState = rememberPagerState(pageCount = {
@@ -138,7 +137,9 @@ private fun ImageSlider(data: List<MovieModel>, onItemClicked: () -> Unit) {
         ) { page ->
 
             for (index in data.indices) {
-                ImageItem(imageUrl = data[page].imageUrl, onItemClicked)
+                ImageItem(imageUrl = data[page].imageUrl) {
+                    onItemClicked.invoke(data[page].id)
+                }
             }
 
         }
