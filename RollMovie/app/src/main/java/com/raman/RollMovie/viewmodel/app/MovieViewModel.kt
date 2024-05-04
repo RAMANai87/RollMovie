@@ -6,9 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.raman.RollMovie.model.data.MovieModel
 import com.raman.RollMovie.model.repo.movie.MovieRepository
-import com.raman.RollMovie.utils.MovieState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
@@ -20,6 +19,7 @@ class MovieViewModel @Inject constructor(
     private val movieRepository: MovieRepository
 ) : ViewModel() {
 
+    val isHitError = mutableStateOf(false)
     val inProgress = mutableStateOf(false)
 
     // movies data flow ->
@@ -53,57 +53,87 @@ class MovieViewModel @Inject constructor(
             movieRepository.getPopularMovie()
                 .catch {
                     Log.v("exception", it.message!!)
+                    inProgress.value = false
+                    isHitError.value = true
                 }
                 .collect {
                     _popularFlow.value = it
-                    Log.v("data", it.toString())
                 }
+
+        }
+
+        viewModelScope.launch {
 
             movieRepository.getTopRatedMovie()
                 .catch {
                     Log.v("exception", it.message!!)
+                    inProgress.value = false
+                    isHitError.value = true
                 }
                 .collect {
-                    inProgress.value = false
                     _topRatedFlow.value = it
                 }
+
+        }
+
+        viewModelScope.launch {
 
             movieRepository.getDiscoverMovie()
                 .catch {
                     Log.v("exception", it.message!!)
+                    inProgress.value = false
+                    isHitError.value = true
                 }
                 .collect {
                     _discoverFlow.value = it
                 }
 
+        }
+
+        viewModelScope.launch {
 
             movieRepository.getTrendingMovie()
                 .catch {
                     Log.v("exception", it.message!!)
+                    inProgress.value = false
+                    isHitError.value = true
                 }
                 .collect {
                     _trendingFlow.value = it
                 }
 
+        }
+
+        viewModelScope.launch {
+
             movieRepository.getUpcomingMovie()
                 .catch {
                     Log.v("exception", it.message!!)
+                    inProgress.value = false
+                    isHitError.value = true
                 }
                 .collect {
                     _upComingFlow.value = it
                 }
 
+        }
 
+        viewModelScope.launch {
 
             movieRepository.getNowPlayingMovie()
                 .catch {
                     Log.v("exception", it.message!!)
+                    inProgress.value = false
+                    isHitError.value = true
                 }
                 .collect {
                     _nowPlayingFlow.value = it
+                    inProgress.value = false
+                    isHitError.value = false
                 }
 
         }
+
     }
 
 }

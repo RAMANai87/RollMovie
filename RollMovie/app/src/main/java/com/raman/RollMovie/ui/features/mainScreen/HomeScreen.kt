@@ -1,11 +1,8 @@
 package com.raman.RollMovie.ui.features.mainScreen
 
-import android.util.Log
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,6 +12,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
@@ -31,11 +33,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
@@ -48,24 +51,17 @@ import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.barFontMain
 import com.raman.RollMovie.ui.theme.primaryColor
 import com.raman.RollMovie.utils.AppScreens
-import com.raman.RollMovie.utils.MovieState
 import com.raman.RollMovie.viewmodel.app.MovieViewModel
-import kotlinx.coroutines.flow.collect
 
 @Composable
-fun HomeScreen(movieViewModel: MovieViewModel ,navController: NavController) {
+fun HomeScreen(movieViewModel: MovieViewModel, navController: NavController) {
 
-    val systemUiController = rememberSystemUiController()
-    systemUiController.setStatusBarColor(Color.White)
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
 
-    if (movieViewModel.inProgress.value) {
-
-        CircularProgressIndicator(
-            modifier = Modifier.padding(horizontal = 200.dp, vertical = 400.dp),
-            color = primaryColor
-        )
-
-    } else {
+        val systemUiController = rememberSystemUiController()
+        systemUiController.setStatusBarColor(Color.White)
 
         val composition by rememberLottieComposition(
             LottieCompositionSpec.RawRes(R.raw.no_internet_anim)
@@ -76,86 +72,156 @@ fun HomeScreen(movieViewModel: MovieViewModel ,navController: NavController) {
             TabItems("Tv Shows")
         )
 
-        Box(
+        RollMovieAppBar(onSearchClicked = {
+            navController.navigate(AppScreens.SearchScreen.route)
+        }, onFavoriteClicked = {
+            navController.navigate(AppScreens.FavoriteScreen.route)
+        })
+
+        Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.White),
-            contentAlignment = Alignment.TopCenter
+                .verticalScroll(rememberScrollState())
         ) {
-
-            RollMovieAppBar(onSearchClicked = {
-                navController.navigate(AppScreens.SearchScreen.route)
-            }, onFavoriteClicked = {
-                navController.navigate(AppScreens.FavoriteScreen.route)
-            })
-
-            Spacer(modifier = Modifier.height(56.dp))
-
             var selectedTabIndex by remember { mutableIntStateOf(0) }
 
-            TabRow(selectedTabIndex = selectedTabIndex, modifier = Modifier.padding(top = 56.dp)) {
+            TabRow(selectedTabIndex = selectedTabIndex) {
                 tabItems.forEachIndexed { index, item ->
                     Tab(
                         selected = selectedTabIndex == index,
                         onClick = { selectedTabIndex = index },
-                        text = { Text(text = item.tabName) }
+                        text = {
+                            Text(
+                                text = item.tabName,
+                                style = TextStyle(fontWeight = FontWeight.Bold)
+                            )
+                        }
                     )
                 }
             }
 
-            Surface(
-                modifier = Modifier
-                    .padding(top = 110.dp)
-            ) {
-                when (selectedTabIndex) {
-                    0 -> {
-                        MovieScreen(movieViewModel) {navController.navigate(AppScreens.DetailScreen.route)}
-                    }
+            when (selectedTabIndex) {
+                0 -> {
+                    if (movieViewModel.inProgress.value) {
+                        Column(
+                            modifier = Modifier.fillMaxSize(),
+                            verticalArrangement = Arrangement.SpaceAround,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
 
-                    1 -> {
-                        TvShowScreen()
+                            Spacer(modifier = Modifier.height(200.dp))
+
+                            CircularProgressIndicator(
+                                color = primaryColor,
+                                modifier = Modifier.padding(100.dp)
+                            )
+                        }
+                    } else if (movieViewModel.isHitError.value) {
+
+                        Column(
+                            modifier = Modifier.fillMaxSize(),
+                            verticalArrangement = Arrangement.SpaceEvenly,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+
+                            Spacer(modifier = Modifier.height(200.dp))
+
+                            LottieAnimation(
+                                composition = composition,
+                                iterations = LottieConstants.IterateForever,
+                                modifier = Modifier.size(240.dp)
+                            )
+
+                            Button(
+                                onClick = { movieViewModel.getRemoteData() },
+                                modifier = Modifier.fillMaxWidth(0.45f),
+                                colors = ButtonDefaults.buttonColors(containerColor = primaryColor)
+                            ) {
+                                Text(
+                                    text = "Try Again",
+                                    style = TextStyle(
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = 17.sp
+                                    ),
+                                    color = Color.White
+                                )
+                            }
+
+                        }
+
+                    } else {
+                        MovieScreen(movieViewModel = movieViewModel) {
+                            navController.navigate(AppScreens.DetailScreen.route)
+                        }
+                    }
+                }
+
+                1 -> {
+                    TvShowScreen()
+                }
+            }
+        }
+    }
+}
+
+//----------------------------------------------------------------------------------------
+@Composable
+private fun MovieScreen(movieViewModel: MovieViewModel, onItemClicked: () -> Unit) {
+
+    Column {
+
+        // get data from network
+        val dataPopular = movieViewModel.popularFlow.collectAsState()
+        val dataTopRated = movieViewModel.topRatedFlow.collectAsState()
+        val dataUpComing = movieViewModel.upComingFlow.collectAsState()
+        val dataTrending = movieViewModel.trendingFlow.collectAsState()
+        val dataDiscover = movieViewModel.discoverFlow.collectAsState()
+        val dataNowPlaying = movieViewModel.nowPlayingFlow.collectAsState()
+
+        if (dataPopular.value!!.isNotEmpty()) {
+            if (dataDiscover.value!!.isNotEmpty()) {
+                if (dataNowPlaying.value!!.isNotEmpty()) {
+                    if (dataTrending.value!!.isNotEmpty()) {
+                        if (dataTopRated.value!!.isNotEmpty()) {
+                            if (dataUpComing.value!!.isNotEmpty()) {
+                                // set data and show them
+                                SliderImagesView(titleText = "Popular Movie", data = dataPopular.value!!) {
+                                    onItemClicked.invoke()
+                                }
+
+                                MinimalLazyRow(titleText = "TopRated Movie", data = dataTopRated.value!!) {
+                                    onItemClicked.invoke()
+                                }
+
+                                MinimalLazyRow(titleText = "NowPlaying Movie", data = dataNowPlaying.value!!) {
+                                    onItemClicked.invoke()
+                                }
+
+                                MinimalLazyRow(titleText = "Discover Movie", data = dataDiscover.value!!) {
+                                    onItemClicked.invoke()
+                                }
+
+                                MinimalLazyRow(titleText = "Trending Movie", data = dataTrending.value!!) {
+                                    onItemClicked.invoke()
+                                }
+
+                                MinimalLazyRow(titleText = "UpComing Movie", data = dataUpComing.value!!) {
+                                    onItemClicked.invoke()
+                                }
+                            }
+                        }
                     }
                 }
             }
-
         }
 
     }
 
 }
 
+//--------------------------------------------------------------------------------
 @Composable
-fun MovieScreen(movieViewModel: MovieViewModel, onItemClicked : () -> Unit) {
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        val dataPopular = movieViewModel.popularFlow.collectAsState()
-        val dataTopRated = movieViewModel.topRatedFlow.collectAsState()
-        dataPopular.value?.let {
-            SliderImagesView(it, "Popular Movie") {
-                onItemClicked.invoke()
-            }
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Log.v("data1", dataTopRated.toString())
-        dataTopRated.value?.let {
-            MinimalLazyRow("Top Rated Movie", it) {id ->
-                onItemClicked.invoke()
-            }
-        }
-
-    }
-
-}
-
-@Composable
-fun TvShowScreen() {
+private fun TvShowScreen() {
     Text(text = "Tv show part")
 }
 
@@ -219,7 +285,8 @@ private fun RollMovieAppBar(onSearchClicked: () -> Unit, onFavoriteClicked: () -
                         text = "Ask me to tell you",
                         modifier = Modifier.padding(start = 10.dp),
                         textAlign = TextAlign.Center,
-                        color = barFontMain
+                        color = barFontMain,
+                        style = TextStyle(fontWeight = FontWeight.Bold)
                     )
 
                 }
