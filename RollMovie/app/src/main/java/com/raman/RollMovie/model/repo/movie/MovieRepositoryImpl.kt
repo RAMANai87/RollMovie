@@ -3,7 +3,7 @@ package com.raman.RollMovie.model.repo.movie
 import com.raman.RollMovie.model.data.MovieModel
 import com.raman.RollMovie.model.data.detail.movie.DetailResponse
 import com.raman.RollMovie.model.db.MovieDao
-import com.raman.RollMovie.utils.mapper.httpMapper
+import com.raman.RollMovie.utils.mapper.httpMapperMovie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -17,7 +17,7 @@ class MovieRepositoryImpl @Inject constructor(
         return movieRemoteDataSource.fetchPopularMovie
             .map { movieResult ->
                 movieResult.map {
-                    httpMapper(it)
+                    httpMapperMovie(it)
                 }
             }
             .onEach {
@@ -29,7 +29,7 @@ class MovieRepositoryImpl @Inject constructor(
         return movieRemoteDataSource.fetchTopRatedMovie
             .map { movieResult ->
                 movieResult.map {
-                    httpMapper(it)
+                    httpMapperMovie(it)
                 }
             }
             .onEach {
@@ -41,7 +41,7 @@ class MovieRepositoryImpl @Inject constructor(
         return movieRemoteDataSource.fetchTrendingMovie
             .map { movieResult ->
                 movieResult.map {
-                    httpMapper(it)
+                    httpMapperMovie(it)
                 }
             }
             .onEach {
@@ -53,7 +53,7 @@ class MovieRepositoryImpl @Inject constructor(
         return movieRemoteDataSource.fetchNowPlayingMovie
             .map { movieResult ->
                 movieResult.map {
-                    httpMapper(it)
+                    httpMapperMovie(it)
                 }
             }
             .onEach {
@@ -65,7 +65,7 @@ class MovieRepositoryImpl @Inject constructor(
         return movieRemoteDataSource.fetchUpComingMovie
             .map { movieResult ->
                 movieResult.map {
-                    httpMapper(it)
+                    httpMapperMovie(it)
                 }
             }
             .onEach {
@@ -77,7 +77,7 @@ class MovieRepositoryImpl @Inject constructor(
         return movieRemoteDataSource.fetchDiscoverMovie
             .map { movieResult ->
                 movieResult.map {
-                    httpMapper(it)
+                    httpMapperMovie(it)
                 }
             }
             .onEach {
@@ -93,7 +93,7 @@ class MovieRepositoryImpl @Inject constructor(
         return movieRemoteDataSource.searchMovie(title)
             .map { movieResult ->
                 movieResult.map {
-                    httpMapper(it)
+                    httpMapperMovie(it)
                 }
             }
             .onEach {
