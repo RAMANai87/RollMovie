@@ -1,6 +1,6 @@
 package com.raman.RollMovie.model.data.tv
 
-data class Result(
+data class ResultTvShow(
     val adult: Boolean,
     val backdrop_path: String,
     val first_air_date: String,
