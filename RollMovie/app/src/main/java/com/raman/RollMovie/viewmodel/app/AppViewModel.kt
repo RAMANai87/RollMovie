@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.raman.RollMovie.model.data.MovieModel
 import com.raman.RollMovie.model.repo.movie.MovieRepository
+import com.raman.RollMovie.model.repo.tv.TvShowRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
@@ -15,8 +15,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MovieViewModel @Inject constructor(
-    private val movieRepository: MovieRepository
+class AppViewModel @Inject constructor(
+    private val movieRepository: MovieRepository,
+    private val tvShowRepository: TvShowRepository
 ) : ViewModel() {
 
     val isHitError = mutableStateOf(false)
@@ -42,11 +43,28 @@ class MovieViewModel @Inject constructor(
     private val _upComingFlow = MutableStateFlow<List<MovieModel>?>(null)
     val upComingFlow: StateFlow<List<MovieModel>?> = _upComingFlow
 
+    // Tv Show data flow ->
+    private val _popularFlowTvShow = MutableStateFlow<List<MovieModel>?>(null)
+    val popularFlowTvShow: StateFlow<List<MovieModel>?> = _popularFlowTvShow
+
+    private val _topRatedFlowTvShow = MutableStateFlow<List<MovieModel>?>(null)
+    val topRatedFlowTvShow: StateFlow<List<MovieModel>?> = _topRatedFlowTvShow
+
+    private val _discoverFlowTvShow = MutableStateFlow<List<MovieModel>?>(null)
+    val discoverFlowTvShow: StateFlow<List<MovieModel>?> = _discoverFlowTvShow
+
+    private val _trendingFlowTvShow = MutableStateFlow<List<MovieModel>?>(null)
+    val trendingFlowTvShow: StateFlow<List<MovieModel>?> = _trendingFlowTvShow
+
+    private val _onTheAirTvShow = MutableStateFlow<List<MovieModel>?>(null)
+    val onTheAirTvShow: StateFlow<List<MovieModel>?> = _onTheAirTvShow
+
     init {
-        getRemoteData()
+        getRemoteDataMovie()
     }
 
-    fun getRemoteData() {
+    // receive movie data from repo ->
+    fun getRemoteDataMovie() {
         viewModelScope.launch {
             inProgress.value = true
 
@@ -128,6 +146,83 @@ class MovieViewModel @Inject constructor(
                 }
                 .collect {
                     _nowPlayingFlow.value = it
+                    inProgress.value = false
+                    isHitError.value = false
+                }
+
+        }
+
+    }
+
+    // receive TvShow data from repo ->
+    fun getRemoteDataTvShow() {
+        viewModelScope.launch {
+            inProgress.value = true
+
+            tvShowRepository.getPopularTvShow()
+                .catch {
+                    Log.v("exception", it.message!!)
+                    inProgress.value = false
+                    isHitError.value = true
+                }
+                .collect {
+                    _popularFlowTvShow.value = it
+                }
+
+        }
+
+        viewModelScope.launch {
+
+            tvShowRepository.getTopRatedTvShow()
+                .catch {
+                    Log.v("exception", it.message!!)
+                    inProgress.value = false
+                    isHitError.value = true
+                }
+                .collect {
+                    _topRatedFlowTvShow.value = it
+                }
+
+        }
+
+        viewModelScope.launch {
+
+            tvShowRepository.getDiscoverTvShow()
+                .catch {
+                    Log.v("exception", it.message!!)
+                    inProgress.value = false
+                    isHitError.value = true
+                }
+                .collect {
+                    _discoverFlowTvShow.value = it
+                }
+
+        }
+
+        viewModelScope.launch {
+
+            tvShowRepository.getTrendingTvShow()
+                .catch {
+                    Log.v("exception", it.message!!)
+                    inProgress.value = false
+                    isHitError.value = true
+                }
+                .collect {
+                    _trendingFlowTvShow.value = it
+                }
+
+        }
+
+        viewModelScope.launch {
+
+            tvShowRepository.getOnTheAirTvShow()
+                .catch {
+                    Log.v("exception", it.message!!)
+                    inProgress.value = false
+                    isHitError.value = true
+                }
+                .collect {
+                    _onTheAirTvShow.value = it
                     inProgress.value = false
                     isHitError.value = false
                 }
