@@ -40,8 +40,7 @@ fun DetailAdapter(resId: Int, text: String) {
             text = text,
             style = TextStyle(
                 color = mainFont,
-                fontSize = 12.sp,
-                fontFamily = FontFamily(Font(R.font.demoloviecloud))
+                fontSize = 12.sp
             )
         )
 
