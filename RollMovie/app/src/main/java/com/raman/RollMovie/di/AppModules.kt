@@ -9,6 +9,7 @@ import com.raman.RollMovie.model.db.FavoriteDao
 import com.raman.RollMovie.model.db.MovieDao
 import com.raman.RollMovie.model.db.RollMovieDatabase
 import com.raman.RollMovie.model.repo.movie.MovieRemoteDataSource
+import com.raman.RollMovie.model.repo.tv.TvShowRemoteDataSource
 import com.raman.RollMovie.utils.createApiService
 import dagger.Module
 import dagger.Provides
@@ -55,6 +56,12 @@ object AppModules {
     @Singleton
     fun provideRemoteMovieDataSource( apiService: ApiService ): MovieRemoteDataSource{
         return MovieRemoteDataSource(apiService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRemoteTvShowDataSource( apiService: ApiService ): TvShowRemoteDataSource{
+        return TvShowRemoteDataSource(apiService)
     }
 
     @Provides
