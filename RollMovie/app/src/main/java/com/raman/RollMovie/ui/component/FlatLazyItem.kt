@@ -1,5 +1,6 @@
 package com.raman.RollMovie.ui.component
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -29,6 +30,7 @@ import com.raman.RollMovie.R
 import com.raman.RollMovie.model.data.MovieModel
 import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.mainFont
+import com.raman.RollMovie.ui.theme.primaryColor
 import com.raman.RollMovie.utils.buildImageUrl
 
 @Composable
@@ -38,7 +40,7 @@ fun FlatLazyItem(data: MovieModel, onItemClicked: (id: Int) -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .height(88.dp)
-            .padding(top = 10.dp)
+            .padding(top = 10.dp, start = 16.dp, end = 16.dp)
             .clickable { onItemClicked.invoke(data.id) },
         elevation = CardDefaults.cardElevation(
             1.dp
@@ -46,7 +48,8 @@ fun FlatLazyItem(data: MovieModel, onItemClicked: (id: Int) -> Unit) {
         shape = Shapes.small,
         colors = CardDefaults.cardColors(
             Color.White
-        )
+        ),
+        border = BorderStroke(1.dp, primaryColor)
     ) {
 
         Row(
