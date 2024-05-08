@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Surface
@@ -51,10 +50,10 @@ import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.barFontMain
 import com.raman.RollMovie.ui.theme.primaryColor
 import com.raman.RollMovie.utils.AppScreens
-import com.raman.RollMovie.viewmodel.app.MovieViewModel
+import com.raman.RollMovie.viewmodel.app.AppViewModel
 
 @Composable
-fun HomeScreen(movieViewModel: MovieViewModel, navController: NavController) {
+fun HomeScreen(appViewModel: AppViewModel, navController: NavController) {
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -102,7 +101,7 @@ fun HomeScreen(movieViewModel: MovieViewModel, navController: NavController) {
 
             when (selectedTabIndex) {
                 0 -> {
-                    if (movieViewModel.inProgress.value) {
+                    if (appViewModel.inProgress.value) {
                         Column(
                             modifier = Modifier.fillMaxSize(),
                             verticalArrangement = Arrangement.SpaceAround,
@@ -116,7 +115,7 @@ fun HomeScreen(movieViewModel: MovieViewModel, navController: NavController) {
                                 modifier = Modifier.padding(100.dp)
                             )
                         }
-                    } else if (movieViewModel.isHitError.value) {
+                    } else if (appViewModel.isHitError.value) {
 
                         Column(
                             modifier = Modifier.fillMaxSize(),
@@ -133,7 +132,7 @@ fun HomeScreen(movieViewModel: MovieViewModel, navController: NavController) {
                             )
 
                             Button(
-                                onClick = { movieViewModel.getRemoteData() },
+                                onClick = { appViewModel.getRemoteDataMovie() },
                                 modifier = Modifier.fillMaxWidth(0.45f),
                                 colors = ButtonDefaults.buttonColors(containerColor = primaryColor)
                             ) {
@@ -150,81 +149,71 @@ fun HomeScreen(movieViewModel: MovieViewModel, navController: NavController) {
                         }
 
                     } else {
-                        MovieScreen(movieViewModel = movieViewModel) {
+                        MovieScreen(appViewModel = appViewModel) {
                             navController.navigate(AppScreens.DetailScreen.route)
                         }
                     }
                 }
 
                 1 -> {
-                    TvShowScreen()
-                }
-            }
-        }
-    }
-}
+                    appViewModel.getRemoteDataTvShow()
+                    if (appViewModel.inProgress.value) {
+                        Column(
+                            modifier = Modifier.fillMaxSize(),
+                            verticalArrangement = Arrangement.SpaceAround,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
 
-//----------------------------------------------------------------------------------------
-@Composable
-private fun MovieScreen(movieViewModel: MovieViewModel, onItemClicked: () -> Unit) {
+                            Spacer(modifier = Modifier.height(200.dp))
 
-    Column {
+                            CircularProgressIndicator(
+                                color = primaryColor,
+                                modifier = Modifier.padding(100.dp)
+                            )
+                        }
+                    } else if (appViewModel.isHitError.value) {
 
-        // get data from network
-        val dataPopular = movieViewModel.popularFlow.collectAsState()
-        val dataTopRated = movieViewModel.topRatedFlow.collectAsState()
-        val dataUpComing = movieViewModel.upComingFlow.collectAsState()
-        val dataTrending = movieViewModel.trendingFlow.collectAsState()
-        val dataDiscover = movieViewModel.discoverFlow.collectAsState()
-        val dataNowPlaying = movieViewModel.nowPlayingFlow.collectAsState()
+                        Column(
+                            modifier = Modifier.fillMaxSize(),
+                            verticalArrangement = Arrangement.SpaceEvenly,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
 
-        if (dataPopular.value!!.isNotEmpty()) {
-            if (dataDiscover.value!!.isNotEmpty()) {
-                if (dataNowPlaying.value!!.isNotEmpty()) {
-                    if (dataTrending.value!!.isNotEmpty()) {
-                        if (dataTopRated.value!!.isNotEmpty()) {
-                            if (dataUpComing.value!!.isNotEmpty()) {
-                                // set data and show them
-                                SliderImagesView(titleText = "Popular Movie", data = dataPopular.value!!) {
-                                    onItemClicked.invoke()
-                                }
+                            Spacer(modifier = Modifier.height(200.dp))
 
-                                MinimalLazyRow(titleText = "TopRated Movie", data = dataTopRated.value!!) {
-                                    onItemClicked.invoke()
-                                }
+                            LottieAnimation(
+                                composition = composition,
+                                iterations = LottieConstants.IterateForever,
+                                modifier = Modifier.size(240.dp)
+                            )
 
-                                MinimalLazyRow(titleText = "NowPlaying Movie", data = dataNowPlaying.value!!) {
-                                    onItemClicked.invoke()
-                                }
-
-                                MinimalLazyRow(titleText = "Discover Movie", data = dataDiscover.value!!) {
-                                    onItemClicked.invoke()
-                                }
-
-                                MinimalLazyRow(titleText = "Trending Movie", data = dataTrending.value!!) {
-                                    onItemClicked.invoke()
-                                }
-
-                                MinimalLazyRow(titleText = "UpComing Movie", data = dataUpComing.value!!) {
-                                    onItemClicked.invoke()
-                                }
+                            Button(
+                                onClick = { appViewModel.getRemoteDataTvShow() },
+                                modifier = Modifier.fillMaxWidth(0.45f),
+                                colors = ButtonDefaults.buttonColors(containerColor = primaryColor)
+                            ) {
+                                Text(
+                                    text = "Try Again",
+                                    style = TextStyle(
+                                        fontWeight = FontWeight.Bold,
+                                        fontSize = 17.sp
+                                    ),
+                                    color = Color.White
+                                )
                             }
+
+                        }
+
+                    } else {
+                        TvShowScreen(appViewModel) {
+                            navController.navigate(AppScreens.DetailScreen.route)
                         }
                     }
                 }
             }
         }
-
     }
-
 }
-
-//--------------------------------------------------------------------------------
-@Composable
-private fun TvShowScreen() {
-    Text(text = "Tv show part")
-}
-
 // App bar
 @Composable
 private fun RollMovieAppBar(onSearchClicked: () -> Unit, onFavoriteClicked: () -> Unit) {
