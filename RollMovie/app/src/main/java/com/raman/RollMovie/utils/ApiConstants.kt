@@ -6,6 +6,9 @@ internal object ApiConstants {
     internal const val BASE_URL = "https://api.themoviedb.org/3/"
     internal const val IMAGE_URL = "https://image.tmdb.org/t/p/w500"
 
+    internal const val MOVIE = "movie"
+    internal const val TV_SHOW = "tvShow"
+
     internal const val UPCOMING_MOVIE = "movie/upcoming"
     internal const val TOP_RATED_MOVIE = "movie/top_rated"
     internal const val POPULAR_MOVIE = "movie/popular"
@@ -32,6 +35,11 @@ internal object ApiConstants {
 
         internal const val IMAGE_URL_TEST = "https://upload.wikimedia.org/wikipedia/commons/3/36/Hopetoun_falls.jpg"
 
+    }
+
+    internal object AppScreen {
+        internal const val KEY_DETAIL_ARG = "detail_screen"
+        internal const val KEY_DETAIL_TYPE_ARG = "detail_screen_type"
     }
 
 }
