@@ -8,9 +8,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.raman.RollMovie.ui.features.detail.DetailScreen
 import com.raman.RollMovie.ui.features.favorite.FavoriteScreen
 import com.raman.RollMovie.ui.features.mainScreen.HomeScreen
@@ -23,8 +25,10 @@ import com.raman.RollMovie.ui.features.user.signUp.FirstRunScreen
 import com.raman.RollMovie.ui.features.user.signUp.SignUpScreen
 import com.raman.RollMovie.viewmodel.user.UserViewModel
 import com.raman.RollMovie.ui.theme.RollMovieTheme
+import com.raman.RollMovie.utils.ApiConstants
 import com.raman.RollMovie.utils.AppScreens
 import com.raman.RollMovie.viewmodel.app.AppViewModel
+import com.raman.RollMovie.viewmodel.app.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,6 +36,7 @@ class MainActivity : ComponentActivity() {
     // initialize ViewModels
     private val userViewModel: UserViewModel by viewModels()
     private val appViewModel: AppViewModel by viewModels()
+    private val detailViewModel: DetailViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +46,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     appViewModel.getRemoteDataMovie()
+                    appViewModel.getRemoteDataTvShow()
                     RollMovieUi()
                 }
             }
@@ -96,9 +102,18 @@ class MainActivity : ComponentActivity() {
             }
 
             composable(
-                route = AppScreens.DetailScreen.route
+                route = AppScreens.DetailScreen.route + "/" + "{${ApiConstants.AppScreen.KEY_DETAIL_ARG}}" + "/" + "{${ApiConstants.AppScreen.KEY_DETAIL_TYPE_ARG}}",
+                arguments = listOf(navArgument(ApiConstants.AppScreen.KEY_DETAIL_ARG) {
+                    type = NavType.IntType
+                }, navArgument(ApiConstants.AppScreen.KEY_DETAIL_TYPE_ARG) {
+                    type = NavType.StringType
+                })
             ) {
-                DetailScreen()
+                DetailScreen(
+                    detailViewModel,
+                    it.arguments!!.getInt(ApiConstants.AppScreen.KEY_DETAIL_ARG, 154826),
+                    it.arguments!!.getString(ApiConstants.AppScreen.KEY_DETAIL_TYPE_ARG, "null")
+                )
             }
 
             composable(
