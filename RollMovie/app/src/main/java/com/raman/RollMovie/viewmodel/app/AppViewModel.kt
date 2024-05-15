@@ -23,6 +23,9 @@ class AppViewModel @Inject constructor(
     val isHitError = mutableStateOf(false)
     val inProgress = mutableStateOf(false)
 
+    val isHitErrorTvShow = mutableStateOf(false)
+    val inProgressTvShow = mutableStateOf(false)
+
     // movies data flow ->
 
     private val _popularFlow = MutableStateFlow<List<MovieModel>?>(null)
@@ -157,13 +160,13 @@ class AppViewModel @Inject constructor(
     // receive TvShow data from repo ->
     fun getRemoteDataTvShow() {
         viewModelScope.launch {
-            inProgress.value = true
+            inProgressTvShow.value = true
 
             tvShowRepository.getPopularTvShow()
                 .catch {
                     Log.v("exception", it.message!!)
-                    inProgress.value = false
-                    isHitError.value = true
+                    inProgressTvShow.value = false
+                    isHitErrorTvShow.value = true
                 }
                 .collect {
                     _popularFlowTvShow.value = it
@@ -176,8 +179,8 @@ class AppViewModel @Inject constructor(
             tvShowRepository.getTopRatedTvShow()
                 .catch {
                     Log.v("exception", it.message!!)
-                    inProgress.value = false
-                    isHitError.value = true
+                    inProgressTvShow.value = false
+                    isHitErrorTvShow.value = true
                 }
                 .collect {
                     _topRatedFlowTvShow.value = it
@@ -190,8 +193,8 @@ class AppViewModel @Inject constructor(
             tvShowRepository.getDiscoverTvShow()
                 .catch {
                     Log.v("exception", it.message!!)
-                    inProgress.value = false
-                    isHitError.value = true
+                    inProgressTvShow.value = false
+                    isHitErrorTvShow.value = true
                 }
                 .collect {
                     _discoverFlowTvShow.value = it
@@ -204,8 +207,8 @@ class AppViewModel @Inject constructor(
             tvShowRepository.getTrendingTvShow()
                 .catch {
                     Log.v("exception", it.message!!)
-                    inProgress.value = false
-                    isHitError.value = true
+                    inProgressTvShow.value = false
+                    isHitErrorTvShow.value = true
                 }
                 .collect {
                     _trendingFlowTvShow.value = it
@@ -218,13 +221,13 @@ class AppViewModel @Inject constructor(
             tvShowRepository.getOnTheAirTvShow()
                 .catch {
                     Log.v("exception", it.message!!)
-                    inProgress.value = false
-                    isHitError.value = true
+                    inProgressTvShow.value = false
+                    isHitErrorTvShow.value = true
                 }
                 .collect {
                     _onTheAirTvShow.value = it
-                    inProgress.value = false
-                    isHitError.value = false
+                    inProgressTvShow.value = false
+                    isHitErrorTvShow.value = false
                 }
 
         }

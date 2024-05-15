@@ -49,7 +49,9 @@ import com.raman.RollMovie.ui.adapters.SliderImagesView
 import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.barFontMain
 import com.raman.RollMovie.ui.theme.primaryColor
+import com.raman.RollMovie.utils.ApiConstants
 import com.raman.RollMovie.utils.AppScreens
+import com.raman.RollMovie.utils.TabItems
 import com.raman.RollMovie.viewmodel.app.AppViewModel
 
 @Composable
@@ -149,15 +151,14 @@ fun HomeScreen(appViewModel: AppViewModel, navController: NavController) {
                         }
 
                     } else {
-                        MovieScreen(appViewModel = appViewModel) {
-                            navController.navigate(AppScreens.DetailScreen.route)
+                        MovieScreen(appViewModel = appViewModel) { id ->
+                            navController.navigate(AppScreens.DetailScreen.route + "/" + id + "/" + ApiConstants.MOVIE)
                         }
                     }
                 }
 
                 1 -> {
-                    appViewModel.getRemoteDataTvShow()
-                    if (appViewModel.inProgress.value) {
+                    if (appViewModel.inProgressTvShow.value) {
                         Column(
                             modifier = Modifier.fillMaxSize(),
                             verticalArrangement = Arrangement.SpaceAround,
@@ -171,7 +172,7 @@ fun HomeScreen(appViewModel: AppViewModel, navController: NavController) {
                                 modifier = Modifier.padding(100.dp)
                             )
                         }
-                    } else if (appViewModel.isHitError.value) {
+                    } else if (appViewModel.isHitErrorTvShow.value) {
 
                         Column(
                             modifier = Modifier.fillMaxSize(),
@@ -205,8 +206,8 @@ fun HomeScreen(appViewModel: AppViewModel, navController: NavController) {
                         }
 
                     } else {
-                        TvShowScreen(appViewModel) {
-                            navController.navigate(AppScreens.DetailScreen.route)
+                        TvShowScreen(appViewModel) { id ->
+                            navController.navigate(AppScreens.DetailScreen.route + "/" + id + "/" + ApiConstants.TV_SHOW)
                         }
                     }
                 }
@@ -214,6 +215,7 @@ fun HomeScreen(appViewModel: AppViewModel, navController: NavController) {
         }
     }
 }
+
 // App bar
 @Composable
 private fun RollMovieAppBar(onSearchClicked: () -> Unit, onFavoriteClicked: () -> Unit) {
@@ -287,7 +289,3 @@ private fun RollMovieAppBar(onSearchClicked: () -> Unit, onFavoriteClicked: () -
     }
 
 }
-
-data class TabItems(
-    val tabName: String
-)
