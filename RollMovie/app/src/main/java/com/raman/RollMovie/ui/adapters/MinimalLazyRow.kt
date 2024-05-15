@@ -52,7 +52,7 @@ fun MinimalLazyRow(titleText: String, data :List<MovieModel>, onItemClicked: (id
 
             Text(
                 text = titleText,
-                modifier = Modifier.padding(start = 12.dp),
+                modifier = Modifier.padding(start = 8.dp),
                 style = TextStyle(
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold,
@@ -63,7 +63,7 @@ fun MinimalLazyRow(titleText: String, data :List<MovieModel>, onItemClicked: (id
 
             Text(
                 text = "See all",
-                modifier = Modifier.padding(end = 12.dp),
+                modifier = Modifier.padding(end = 8.dp),
                 style = TextStyle(
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold,
@@ -79,7 +79,7 @@ fun MinimalLazyRow(titleText: String, data :List<MovieModel>, onItemClicked: (id
                 .padding(top = 10.dp)
                 .fillMaxWidth()
                 .height(240.dp),
-            contentPadding = PaddingValues(start = 12.dp)
+            contentPadding = PaddingValues(start = 8.dp)
         ) {
 
             items(10) {
