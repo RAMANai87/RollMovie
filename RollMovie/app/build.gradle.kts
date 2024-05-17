@@ -116,7 +116,7 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.7")
 
     // LiveData-State
-    implementation("androidx.compose.runtime:runtime-livedata:1.6.3")
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.4")
 
     // coil ->
     implementation("io.coil-kt:coil-compose:2.4.0")
