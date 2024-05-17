@@ -8,6 +8,7 @@ import com.raman.RollMovie.model.data.MovieModel
 import com.raman.RollMovie.model.repo.movie.MovieRepository
 import com.raman.RollMovie.model.repo.tv.TvShowRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
@@ -149,6 +150,7 @@ class AppViewModel @Inject constructor(
                 }
                 .collect {
                     _nowPlayingFlow.value = it
+                    delay(500)
                     inProgress.value = false
                     isHitError.value = false
                 }
@@ -226,6 +228,7 @@ class AppViewModel @Inject constructor(
                 }
                 .collect {
                     _onTheAirTvShow.value = it
+                    delay(500)
                     inProgressTvShow.value = false
                     isHitErrorTvShow.value = false
                 }
