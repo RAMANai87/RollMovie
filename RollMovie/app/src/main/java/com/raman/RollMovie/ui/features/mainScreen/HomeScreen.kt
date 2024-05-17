@@ -46,6 +46,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.raman.RollMovie.R
 import com.raman.RollMovie.ui.adapters.MinimalLazyRow
 import com.raman.RollMovie.ui.adapters.SliderImagesView
+import com.raman.RollMovie.ui.component.detail.UseFulButton
 import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.barFontMain
 import com.raman.RollMovie.ui.theme.primaryColor
@@ -240,12 +241,9 @@ private fun RollMovieAppBar(onSearchClicked: () -> Unit, onFavoriteClicked: () -
 
             Spacer(modifier = Modifier.width(16.dp))
 
-            Image(painter = painterResource(id = R.drawable.heart_ic),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(24.dp, 24.dp)
-                    .clickable { onFavoriteClicked.invoke() }
-            )
+            UseFulButton(image = R.drawable.heart_ic) {
+                onFavoriteClicked.invoke()
+            }
 
             Spacer(modifier = Modifier.width(20.dp))
 

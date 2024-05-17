@@ -10,5 +10,10 @@ val Shapes = Shapes(
     large = RoundedCornerShape(28.dp),
     small = RoundedCornerShape(12.dp),
     medium = RoundedCornerShape(14.dp),
-    extraLarge = RoundedCornerShape(bottomEnd = 30.dp, bottomStart = 30.dp)
+    extraLarge = RoundedCornerShape(bottomEnd = 300.dp, bottomStart = 300.dp),
+    extraSmall = RoundedCornerShape(8.dp)
+)
+
+val secondaryShapes = Shapes(
+    large = RoundedCornerShape(50)
 )

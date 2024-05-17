@@ -8,11 +8,13 @@ import com.raman.RollMovie.model.data.detail.movie.DetailResponse
 import com.raman.RollMovie.model.data.detail.tv.TvShowDetail
 import com.raman.RollMovie.model.repo.movie.MovieRepository
 import com.raman.RollMovie.model.repo.tv.TvShowRepository
+import com.raman.RollMovie.utils.fakeData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,7 +27,7 @@ class DetailViewModel @Inject constructor(
     val inProgress = mutableStateOf(false)
     val hitError = mutableStateOf(false)
 
-    private val _movieDetail = MutableStateFlow<DetailResponse?>(null)
+    private val _movieDetail = MutableStateFlow<DetailResponse?>(fakeData)
     val movieDetail: StateFlow<DetailResponse?> = _movieDetail
 
     private val _tvShowDetail = MutableStateFlow<TvShowDetail?>(null)
@@ -64,7 +66,8 @@ class DetailViewModel @Inject constructor(
                 }
                 .collect {
                     _tvShowDetail.value = it
-                    inProgress.value = false
+                    inProgress.value =false
+                    hitError.value = false
                 }
         }
 

@@ -4,7 +4,9 @@ import com.raman.RollMovie.model.data.MovieModel
 import com.raman.RollMovie.model.data.detail.movie.DetailResponse
 import com.raman.RollMovie.model.db.MovieDao
 import com.raman.RollMovie.utils.mapper.httpMapperMovie
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
@@ -20,6 +22,7 @@ class MovieRepositoryImpl @Inject constructor(
                     httpMapperMovie(it)
                 }
             }
+            .flowOn(Dispatchers.IO)
             .onEach {
                 movieDao.insertMovies(it)
             }
@@ -32,6 +35,7 @@ class MovieRepositoryImpl @Inject constructor(
                     httpMapperMovie(it)
                 }
             }
+            .flowOn(Dispatchers.IO)
             .onEach {
                 movieDao.insertMovies(it)
             }
@@ -44,6 +48,7 @@ class MovieRepositoryImpl @Inject constructor(
                     httpMapperMovie(it)
                 }
             }
+            .flowOn(Dispatchers.IO)
             .onEach {
                 movieDao.insertMovies(it)
             }
@@ -56,6 +61,7 @@ class MovieRepositoryImpl @Inject constructor(
                     httpMapperMovie(it)
                 }
             }
+            .flowOn(Dispatchers.IO)
             .onEach {
                 movieDao.insertMovies(it)
             }
@@ -68,6 +74,7 @@ class MovieRepositoryImpl @Inject constructor(
                     httpMapperMovie(it)
                 }
             }
+            .flowOn(Dispatchers.IO)
             .onEach {
                 movieDao.insertMovies(it)
             }
@@ -80,6 +87,7 @@ class MovieRepositoryImpl @Inject constructor(
                     httpMapperMovie(it)
                 }
             }
+            .flowOn(Dispatchers.IO)
             .onEach {
                 movieDao.insertMovies(it)
             }
@@ -87,6 +95,7 @@ class MovieRepositoryImpl @Inject constructor(
 
     override suspend fun getMovieDetail(id :Int): Flow<DetailResponse> {
         return movieRemoteDataSource.fetchMovieDetail(id)
+            .flowOn(Dispatchers.IO)
     }
 
     override suspend fun searchMovie(title :String): Flow<List<MovieModel>> {
@@ -96,6 +105,7 @@ class MovieRepositoryImpl @Inject constructor(
                     httpMapperMovie(it)
                 }
             }
+            .flowOn(Dispatchers.IO)
             .onEach {
                 movieDao.insertMovies(it)
             }

@@ -1,5 +1,6 @@
 package com.raman.RollMovie.ui.component.detail
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,9 +14,13 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -23,116 +28,83 @@ import androidx.compose.ui.unit.sp
 import com.raman.RollMovie.R
 import com.raman.RollMovie.model.data.detail.movie.DetailResponse
 import com.raman.RollMovie.ui.theme.Shapes
+import com.raman.RollMovie.ui.theme.backgroundBottomNav
 import com.raman.RollMovie.ui.theme.backgroundCard
 import com.raman.RollMovie.ui.theme.mainFont
+import com.raman.RollMovie.utils.genreEditor
 
 @Composable
 fun DetailBarMainMovie(data: DetailResponse) {
 
-    Card(
+
+    Column(
         modifier = Modifier
-            .fillMaxWidth(0.82f)
-            .height(160.dp)
-            .clip(Shapes.medium),
-        elevation = CardDefaults.cardElevation(6.dp),
-        colors = CardDefaults.cardColors(containerColor = backgroundCard)
+            .fillMaxSize()
+            .background(backgroundBottomNav)
+            .verticalScroll(rememberScrollState()),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        Column(
+        DetailImage(data.poster_path, data.original_title, data.vote_average)
+
+        Card(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(4.dp)
-                .verticalScroll(rememberScrollState())
+                .fillMaxWidth(0.9f)
+                .padding(top = 10.dp, bottom = 10.dp)
+                .clip(Shapes.medium),
+            colors = CardDefaults.cardColors(containerColor = Color.White)
         ) {
 
-            Text(
-                text = data.original_title,
+            Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 6.dp, end = 6.dp, top = 10.dp),
-                style = TextStyle(
-                    color = mainFont,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.ExtraBold,
-                    textAlign = TextAlign.Center
-                ),
-                maxLines = 1
-            )
-
-            Text(
-                text = "Summery :",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 6.dp, top = 10.dp),
-                style = TextStyle(
-                    color = mainFont,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.ExtraBold,
-                    textAlign = TextAlign.Start
-                )
-            )
-
-            Text(
-                text = data.overview,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 6.dp, end = 6.dp, top = 4.dp),
-                style = TextStyle(
-                    color = mainFont,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Start
-                )
-            )
-
-            Text(
-                text = "Genres :",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 6.dp, top = 10.dp),
-                style = TextStyle(
-                    color = mainFont,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.ExtraBold,
-                    textAlign = TextAlign.Start
-                )
-            )
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 6.dp, end = 6.dp, top = 4.dp)
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                DetailBarSecondaryMovie(data = data)
 
-                data.genres.forEach { genre ->
-                    DetailChip(title = genre.name)
-                }
-
-            }
-
-            Text(
-                text = "Spoken Languages :",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 6.dp, top = 10.dp),
-                style = TextStyle(
-                    color = mainFont,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.ExtraBold,
-                    textAlign = TextAlign.Start
+                Text(
+                    text = "Overview",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 6.dp, top = 12.dp),
+                    style = TextStyle(
+                        color = mainFont,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center,
+                        fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular))
+                    )
                 )
-            )
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 6.dp, end = 6.dp, top = 4.dp)
-            ) {
+                Text(
+                    text = data.overview,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 6.dp, end = 6.dp, top = 4.dp),
+                    style = TextStyle(
+                        color = mainFont,
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Normal,
+                        textAlign = TextAlign.Start,
+                        fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular))
+                    )
+                )
 
-                data.spoken_languages.forEach { language ->
-                    DetailChip(title = language.english_name)
-                }
+                Text(
+                    text = "Production Company",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 6.dp, top = 10.dp),
+                    style = TextStyle(
+                        color = mainFont,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center,
+                        fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular))
+                    )
+                )
 
+                DetailLazyRow(data = data.production_companies)
             }
 
         }
@@ -142,15 +114,14 @@ fun DetailBarMainMovie(data: DetailResponse) {
 }
 
 @Composable
-fun DetailBarSecondaryMovie(data :DetailResponse) {
+fun DetailBarSecondaryMovie(data: DetailResponse) {
 
     Card(
         modifier = Modifier
-            .fillMaxWidth(0.6f)
-            .height(50.dp)
-            .padding(bottom = 20.dp)
-            .clip(Shapes.medium),
-        elevation = CardDefaults.cardElevation(6.dp),
+            .fillMaxWidth(0.9f)
+            .height(70.dp)
+            .padding(top = 12.dp)
+            .clip(Shapes.small),
         colors = CardDefaults.cardColors(containerColor = backgroundCard)
     ) {
 
@@ -158,11 +129,15 @@ fun DetailBarSecondaryMovie(data :DetailResponse) {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(4.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            DetailSecondaryData(image = R.drawable.ic_alarm, title = data.runtime.toString() + "min")
+            DetailSecondaryData(
+                image = R.drawable.ic_alarm,
+                title = data.runtime.toString() + " min"
+            )
             DetailSecondaryData(image = R.drawable.ic_realizedate, title = data.release_date)
-            DetailSecondaryData(image = R.drawable.ic_star, title = data.vote_average.toString())
+            DetailSecondaryData(image = R.drawable.ic_genre, title = genreEditor(data.genres))
         }
 
     }
