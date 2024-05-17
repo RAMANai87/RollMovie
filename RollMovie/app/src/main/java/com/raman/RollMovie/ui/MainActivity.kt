@@ -29,6 +29,7 @@ import com.raman.RollMovie.utils.ApiConstants
 import com.raman.RollMovie.utils.AppScreens
 import com.raman.RollMovie.viewmodel.app.AppViewModel
 import com.raman.RollMovie.viewmodel.app.DetailViewModel
+import com.raman.RollMovie.viewmodel.favorite.FavoriteViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,6 +38,7 @@ class MainActivity : ComponentActivity() {
     private val userViewModel: UserViewModel by viewModels()
     private val appViewModel: AppViewModel by viewModels()
     private val detailViewModel: DetailViewModel by viewModels()
+    private val favoriteViewModel: FavoriteViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,7 +114,9 @@ class MainActivity : ComponentActivity() {
                 DetailScreen(
                     detailViewModel,
                     it.arguments!!.getInt(ApiConstants.AppScreen.KEY_DETAIL_ARG, 154826),
-                    it.arguments!!.getString(ApiConstants.AppScreen.KEY_DETAIL_TYPE_ARG, "null")
+                    it.arguments!!.getString(ApiConstants.AppScreen.KEY_DETAIL_TYPE_ARG, "null"),
+                    myNavController,
+                    favoriteViewModel
                 )
             }
 
