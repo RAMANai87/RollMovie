@@ -42,36 +42,38 @@ object AppModules {
 
     @Provides
     @Singleton
-    fun provideMovieDao( db :RollMovieDatabase ): MovieDao {
+    fun provideMovieDao(db: RollMovieDatabase): MovieDao {
         return db.movieDao()
     }
 
     @Provides
     @Singleton
-    fun provideFavoriteDao( db :RollMovieDatabase ): FavoriteDao {
+    fun provideFavoriteDao(db: RollMovieDatabase): FavoriteDao {
         return db.favoriteDao()
     }
 
     @Provides
     @Singleton
-    fun provideRemoteMovieDataSource( apiService: ApiService ): MovieRemoteDataSource{
+    fun provideRemoteMovieDataSource(apiService: ApiService): MovieRemoteDataSource {
         return MovieRemoteDataSource(apiService)
     }
 
     @Provides
     @Singleton
-    fun provideRemoteTvShowDataSource( apiService: ApiService ): TvShowRemoteDataSource{
+    fun provideRemoteTvShowDataSource(apiService: ApiService): TvShowRemoteDataSource {
         return TvShowRemoteDataSource(apiService)
     }
 
     @Provides
     @Singleton
-    fun provideAppDatabase( @ApplicationContext context: Context ) :RollMovieDatabase {
+    fun provideAppDatabase(@ApplicationContext context: Context): RollMovieDatabase {
         return Room.databaseBuilder(
             context,
             RollMovieDatabase::class.java,
             "app_database.db"
-        ).build()
+        )
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
 }

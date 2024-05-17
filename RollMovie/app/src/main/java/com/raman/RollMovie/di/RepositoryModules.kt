@@ -1,5 +1,7 @@
 package com.raman.RollMovie.di
 
+import com.raman.RollMovie.model.repo.favorite.FavoriteRepository
+import com.raman.RollMovie.model.repo.favorite.FavoriteRepositoryImpl
 import com.raman.RollMovie.model.repo.movie.MovieRepository
 import com.raman.RollMovie.model.repo.movie.MovieRepositoryImpl
 import com.raman.RollMovie.model.repo.tv.TvShowRepository
@@ -27,5 +29,9 @@ abstract class RepositoryModules {
     @Binds
     @Singleton
     abstract fun bindTvShowRepository(tvShowRepositoryImpl: TvShowRepositoryImpl) :TvShowRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindFavoriteRepository(favoriteRepositoryImpl: FavoriteRepositoryImpl) :FavoriteRepository
 
 }
