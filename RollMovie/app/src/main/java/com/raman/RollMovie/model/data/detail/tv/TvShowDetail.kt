@@ -1,12 +1,17 @@
 package com.raman.RollMovie.model.data.detail.tv
 
+import com.raman.RollMovie.model.data.detail.movie.Genre
+import com.raman.RollMovie.model.data.detail.movie.ProductionCompany
+import com.raman.RollMovie.model.data.detail.movie.ProductionCountry
+import com.raman.RollMovie.model.data.detail.movie.SpokenLanguage
+
 data class TvShowDetail(
     val adult: Boolean,
     val backdrop_path: String,
     val created_by: List<Any>,
     val episode_run_time: List<Int>,
     val first_air_date: String,
-    val genres: List<Genre>,
+    val genres: Array<Genre>,
     val homepage: String,
     val id: Int,
     val in_production: Boolean,
@@ -24,10 +29,10 @@ data class TvShowDetail(
     val overview: String,
     val popularity: Double,
     val poster_path: String,
-    val production_companies: List<ProductionCompany>,
+    val production_companies: Array<ProductionCompany>,
     val production_countries: List<ProductionCountry>,
     val seasons: List<Season>,
-    val spoken_languages: List<SpokenLanguage>,
+    val spoken_languages: Array<SpokenLanguage>,
     val status: String,
     val tagline: String,
     val type: String,
