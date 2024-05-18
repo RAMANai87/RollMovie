@@ -26,7 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.raman.RollMovie.R
-import com.raman.RollMovie.model.data.detail.movie.DetailResponse
+import com.raman.RollMovie.model.data.detail.DetailModel
 import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.backgroundBottomNav
 import com.raman.RollMovie.ui.theme.backgroundCard
@@ -34,8 +34,7 @@ import com.raman.RollMovie.ui.theme.mainFont
 import com.raman.RollMovie.utils.genreEditor
 
 @Composable
-fun DetailBarMainMovie(data: DetailResponse) {
-
+fun DetailBarMainMovie(data: DetailModel) {
 
     Column(
         modifier = Modifier
@@ -45,7 +44,7 @@ fun DetailBarMainMovie(data: DetailResponse) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        DetailImage(data.poster_path, data.original_title, data.vote_average)
+        DetailImage(data.image, data.title, data.vote)
 
         Card(
             modifier = Modifier
@@ -104,7 +103,7 @@ fun DetailBarMainMovie(data: DetailResponse) {
                     )
                 )
 
-                DetailLazyRow(data = data.production_companies)
+                DetailLazyRow(data = data.productionCompany)
             }
 
         }
@@ -114,7 +113,7 @@ fun DetailBarMainMovie(data: DetailResponse) {
 }
 
 @Composable
-fun DetailBarSecondaryMovie(data: DetailResponse) {
+fun DetailBarSecondaryMovie(data: DetailModel) {
 
     Card(
         modifier = Modifier
@@ -134,10 +133,10 @@ fun DetailBarSecondaryMovie(data: DetailResponse) {
         ) {
             DetailSecondaryData(
                 image = R.drawable.ic_alarm,
-                title = data.runtime.toString() + " min"
+                title = data.time.toString() + " min"
             )
-            DetailSecondaryData(image = R.drawable.ic_realizedate, title = data.release_date)
-            DetailSecondaryData(image = R.drawable.ic_genre, title = genreEditor(data.genres))
+            DetailSecondaryData(image = R.drawable.ic_realizedate, title = data.realizeDate)
+            DetailSecondaryData(image = R.drawable.ic_genre, title = genreEditor(data.genre))
         }
 
     }

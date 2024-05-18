@@ -37,7 +37,10 @@ import com.raman.RollMovie.ui.component.detail.FavoriteButton
 import com.raman.RollMovie.ui.theme.backgroundBottomNav
 import com.raman.RollMovie.ui.theme.primaryColor
 import com.raman.RollMovie.utils.ApiConstants
-import com.raman.RollMovie.utils.mapper.favoriteMapper
+import com.raman.RollMovie.utils.mapper.detailMapperMovie
+import com.raman.RollMovie.utils.mapper.detailMapperTvShow
+import com.raman.RollMovie.utils.mapper.favoriteMapperMovie
+import com.raman.RollMovie.utils.mapper.favoriteMapperTvShow
 import com.raman.RollMovie.viewmodel.app.DetailViewModel
 import com.raman.RollMovie.viewmodel.favorite.FavoriteViewModel
 
@@ -110,7 +113,7 @@ fun DetailScreen(detailViewModel: DetailViewModel, id: Int, type: String, navCon
                     .fillMaxSize()
             ) {
 
-                DetailBarMainMovie(detailData)
+                DetailBarMainMovie(detailMapperMovie(detailData))
 
                 Row(
                     modifier = Modifier
@@ -125,9 +128,9 @@ fun DetailScreen(detailViewModel: DetailViewModel, id: Int, type: String, navCon
 
                     FavoriteButton(color = Color.Red) {isFavorite ->
                         if (isFavorite) {
-                            favoriteViewModel.insertData(favoriteMapper(detailData))
+                            favoriteViewModel.insertData(favoriteMapperMovie(detailData))
                         } else {
-                            favoriteViewModel.deleteData(favoriteMapper(detailData))
+                            favoriteViewModel.deleteData(favoriteMapperMovie(detailData))
                         }
                     }
 
@@ -181,6 +184,37 @@ fun DetailScreen(detailViewModel: DetailViewModel, id: Int, type: String, navCon
 
             } else {
 
+                val detailData = detailViewModel.tvShowDetail.collectAsState().value!!
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                ) {
+
+                    DetailBarMainMovie(detailMapperTvShow(detailData))
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 8.dp, end = 8.dp, top = 10.dp)
+                            .align(Alignment.TopCenter),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        UseFulButton(R.drawable.ic_arrow_back){
+                            navController.popBackStack()
+                        }
+
+                        FavoriteButton(color = Color.Red) {isFavorite ->
+                            if (isFavorite) {
+                                favoriteViewModel.insertData(favoriteMapperTvShow(detailData))
+                            } else {
+                                favoriteViewModel.deleteData(favoriteMapperTvShow(detailData))
+                            }
+                        }
+
+                    }
+
+                }
 
             }
 
