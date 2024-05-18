@@ -28,7 +28,7 @@ fun RatingDetail(vote: Double) {
 
     Card(
         modifier = Modifier.size(56.dp, 28.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White)
+        colors = CardDefaults.cardColors(containerColor = Color.White.copy(0.75f))
     ) {
 
         Row(

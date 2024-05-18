@@ -32,7 +32,7 @@ fun MinimalLazyItem(data : MovieModel, onItemClicked: (id: Int) -> Unit) {
     Card(
         modifier = Modifier
             .size(170.dp, 230.dp)
-            .padding(end = 12.dp)
+            .padding(end = 8.dp, top = 3.dp)
             .clickable { onItemClicked.invoke(data.id) },
         elevation = CardDefaults.cardElevation(
             1.dp

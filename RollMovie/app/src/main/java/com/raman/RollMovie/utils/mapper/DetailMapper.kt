@@ -6,6 +6,7 @@ import com.raman.RollMovie.model.data.detail.tv.TvShowDetail
 
 fun detailMapperMovie(data :DetailResponse) :DetailModel{
     return DetailModel(
+        data.id,
         data.poster_path,
         data.original_title,
         data.vote_average,
@@ -20,6 +21,7 @@ fun detailMapperMovie(data :DetailResponse) :DetailModel{
 
 fun detailMapperTvShow(data :TvShowDetail) :DetailModel{
     return DetailModel(
+        data.id,
         data.poster_path,
         data.original_name,
         data.vote_average,

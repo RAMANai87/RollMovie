@@ -16,8 +16,8 @@ import androidx.compose.ui.unit.dp
 fun UseFulButton(image :Int, onBackPressed : () -> Unit) {
 
     Card(
-        modifier = Modifier.size(32.dp).clickable { onBackPressed() },
-        colors = CardDefaults.cardColors(containerColor = Color.White)
+        modifier = Modifier.size(36.dp).clickable { onBackPressed() },
+        colors = CardDefaults.cardColors(containerColor = Color.White.copy(0.75f))
     ) {
 
         Image(

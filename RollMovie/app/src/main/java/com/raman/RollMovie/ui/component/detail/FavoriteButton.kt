@@ -18,6 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
+import com.raman.RollMovie.ui.theme.Shapes
+import com.raman.RollMovie.ui.theme.secondaryShapes
 import com.raman.RollMovie.viewmodel.favorite.FavoriteViewModel
 
 @Composable
@@ -29,8 +31,8 @@ fun FavoriteButton(
     var isFavorite by remember { mutableStateOf(false) }
 
     Card(
-        modifier = Modifier.size(32.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White)
+        modifier = Modifier.size(36.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.White.copy(0.75f))
     ) {
         IconToggleButton(
             checked = isFavorite,

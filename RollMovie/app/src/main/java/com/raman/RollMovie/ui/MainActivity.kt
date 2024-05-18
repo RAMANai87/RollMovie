@@ -100,7 +100,7 @@ class MainActivity : ComponentActivity() {
             composable(
                 route = AppScreens.FavoriteScreen.route
             ) {
-                FavoriteScreen()
+                FavoriteScreen(favoriteViewModel, myNavController)
             }
 
             composable(

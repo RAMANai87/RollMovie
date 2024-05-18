@@ -34,7 +34,7 @@ fun DetailAdapter(resId: Int, text: String) {
                 .size(24.dp)
         )
 
-        Spacer(modifier = Modifier.width(12.dp))
+        Spacer(modifier = Modifier.width(6.dp))
 
         Text(
             text = text,

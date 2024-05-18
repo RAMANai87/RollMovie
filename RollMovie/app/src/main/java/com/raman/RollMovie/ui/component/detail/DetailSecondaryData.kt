@@ -28,7 +28,7 @@ import com.raman.RollMovie.ui.theme.mainFont
 fun DetailSecondaryData(image: Int, title: String) {
 
     Row(
-        modifier = Modifier.height(20.dp),
+        modifier = Modifier.height(24.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
 

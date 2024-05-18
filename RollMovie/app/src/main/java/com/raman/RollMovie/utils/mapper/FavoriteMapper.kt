@@ -1,6 +1,7 @@
 package com.raman.RollMovie.utils.mapper
 
 import com.raman.RollMovie.model.data.FavoriteModel
+import com.raman.RollMovie.model.data.MovieModel
 import com.raman.RollMovie.model.data.detail.movie.DetailResponse
 import com.raman.RollMovie.model.data.detail.tv.TvShowDetail
 
@@ -28,4 +29,18 @@ fun favoriteMapperTvShow(data :TvShowDetail) :FavoriteModel{
         data.adult,
         false
     )
+}
+
+fun favoriteMapper(data :List<FavoriteModel>) :List<MovieModel>{
+    return data.map {
+        MovieModel(
+            it.id,
+            it.title,
+            it.overview,
+            it.imageUrl,
+            it.vote,
+            it.realizeDate,
+            it.adult
+        )
+    }
 }
