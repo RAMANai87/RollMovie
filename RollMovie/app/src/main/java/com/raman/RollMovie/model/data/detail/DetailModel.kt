@@ -14,5 +14,6 @@ data class DetailModel(
     val genre :Array<Genre>,
     val overview :String,
     val realizeDate :String,
-    val productionCompany :Array<ProductionCompany>
+    val productionCompany :Array<ProductionCompany>,
+    val castCrews :NetworkCredits
 )

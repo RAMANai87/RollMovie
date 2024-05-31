@@ -12,8 +12,7 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
-    private val movieRemoteDataSource: MovieRemoteDataSource,
-    private val movieDao: MovieDao
+    private val movieRemoteDataSource: MovieRemoteDataSource
 ) :MovieRepository{
     override suspend fun getPopularMovie(): Flow<List<MovieModel>> {
         return movieRemoteDataSource.fetchPopularMovie
@@ -23,9 +22,6 @@ class MovieRepositoryImpl @Inject constructor(
                 }
             }
             .flowOn(Dispatchers.IO)
-            .onEach {
-                movieDao.insertMovies(it)
-            }
     }
 
     override suspend fun getTopRatedMovie(): Flow<List<MovieModel>> {
@@ -36,9 +32,6 @@ class MovieRepositoryImpl @Inject constructor(
                 }
             }
             .flowOn(Dispatchers.IO)
-            .onEach {
-                movieDao.insertMovies(it)
-            }
     }
 
     override suspend fun getTrendingMovie(): Flow<List<MovieModel>> {
@@ -49,9 +42,6 @@ class MovieRepositoryImpl @Inject constructor(
                 }
             }
             .flowOn(Dispatchers.IO)
-            .onEach {
-                movieDao.insertMovies(it)
-            }
     }
 
     override suspend fun getNowPlayingMovie(): Flow<List<MovieModel>> {
@@ -62,9 +52,6 @@ class MovieRepositoryImpl @Inject constructor(
                 }
             }
             .flowOn(Dispatchers.IO)
-            .onEach {
-                movieDao.insertMovies(it)
-            }
     }
 
     override suspend fun getUpcomingMovie(): Flow<List<MovieModel>> {
@@ -75,9 +62,6 @@ class MovieRepositoryImpl @Inject constructor(
                 }
             }
             .flowOn(Dispatchers.IO)
-            .onEach {
-                movieDao.insertMovies(it)
-            }
     }
 
     override suspend fun getDiscoverMovie(): Flow<List<MovieModel>> {
@@ -88,9 +72,6 @@ class MovieRepositoryImpl @Inject constructor(
                 }
             }
             .flowOn(Dispatchers.IO)
-            .onEach {
-                movieDao.insertMovies(it)
-            }
     }
 
     override suspend fun getMovieDetail(id :Int): Flow<DetailResponse> {
@@ -106,9 +87,6 @@ class MovieRepositoryImpl @Inject constructor(
                 }
             }
             .flowOn(Dispatchers.IO)
-            .onEach {
-                movieDao.insertMovies(it)
-            }
     }
 
 }

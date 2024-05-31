@@ -12,15 +12,19 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.raman.RollMovie.R
 import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.utils.buildImageUrl
 
@@ -37,11 +41,20 @@ fun DetailImage(image :String, title :String, voteAverage :Double) {
             modifier = Modifier.fillMaxSize()
         ) {
 
+            val isInError = remember {
+                mutableStateOf(false)
+            }
+
             AsyncImage(
                 model = buildImageUrl(image),
                 contentDescription = null,
                 modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
+                placeholder = painterResource(id = R.drawable.no_image),
+                error = painterResource(id = R.drawable.no_image),
+                onError = { isInError.value = true },
+                onSuccess = { isInError.value = false },
+                onLoading = { isInError.value = true }
             )
 
             Column(
@@ -54,7 +67,7 @@ fun DetailImage(image :String, title :String, voteAverage :Double) {
                 Text(
                     text = title,
                     style = TextStyle(
-                        color = Color.White,
+                        color = if (isInError.value) Color.Black else Color.White ,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.ExtraBold
                     ),

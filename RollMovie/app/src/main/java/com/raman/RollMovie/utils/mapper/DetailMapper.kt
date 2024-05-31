@@ -3,6 +3,7 @@ package com.raman.RollMovie.utils.mapper
 import com.raman.RollMovie.model.data.detail.DetailModel
 import com.raman.RollMovie.model.data.detail.movie.DetailResponse
 import com.raman.RollMovie.model.data.detail.tv.TvShowDetail
+import com.raman.RollMovie.model.data.tv.ResultTvShow
 
 fun detailMapperMovie(data :DetailResponse) :DetailModel{
     return DetailModel(
@@ -15,7 +16,8 @@ fun detailMapperMovie(data :DetailResponse) :DetailModel{
         data.genres,
         data.overview,
         data.release_date,
-        data.production_companies
+        data.production_companies,
+        data.credits
     )
 }
 
@@ -30,6 +32,7 @@ fun detailMapperTvShow(data :TvShowDetail) :DetailModel{
         data.genres,
         data.overview,
         data.last_air_date,
-        data.production_companies
+        data.production_companies,
+        data.credits
     )
 }

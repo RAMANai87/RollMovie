@@ -9,7 +9,7 @@ data class FavoriteModel(
     val id: Int,
     val title: String,
     val overview: String,
-    val imageUrl: String,
+    val imageUrl: String?,
     val vote: Double,
     val realizeDate: String,
     val adult: Boolean,

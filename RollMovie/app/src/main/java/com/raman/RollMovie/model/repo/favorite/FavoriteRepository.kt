@@ -7,5 +7,6 @@ interface FavoriteRepository {
     suspend fun getAllFavoriteMovies() :List<FavoriteModel>
     suspend fun insertFavoriteMovie(data :FavoriteModel)
     suspend fun deleteFavoriteMovie(data :FavoriteModel)
+    suspend fun searchFavoriteMovie(id :Int) :Boolean
 
 }

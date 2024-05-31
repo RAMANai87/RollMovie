@@ -10,8 +10,7 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 class TvShowRepositoryImpl @Inject constructor(
-    private val tvShowRemoteDataSource: TvShowRemoteDataSource,
-    private val movieDao: MovieDao
+    private val tvShowRemoteDataSource: TvShowRemoteDataSource
 ) : TvShowRepository {
     override suspend fun getPopularTvShow(): Flow<List<MovieModel>> {
         return tvShowRemoteDataSource.fetchPopularTvShow
@@ -19,9 +18,6 @@ class TvShowRepositoryImpl @Inject constructor(
                 tvResult.map {
                     httpMapperTvShow(it)
                 }
-            }
-            .onEach {
-                movieDao.insertMovies(it)
             }
     }
 
@@ -32,9 +28,6 @@ class TvShowRepositoryImpl @Inject constructor(
                     httpMapperTvShow(it)
                 }
             }
-            .onEach {
-                movieDao.insertMovies(it)
-            }
     }
 
     override suspend fun getTrendingTvShow(): Flow<List<MovieModel>> {
@@ -43,9 +36,6 @@ class TvShowRepositoryImpl @Inject constructor(
                 tvResult.map {
                     httpMapperTvShow(it)
                 }
-            }
-            .onEach {
-                movieDao.insertMovies(it)
             }
     }
 
@@ -56,9 +46,6 @@ class TvShowRepositoryImpl @Inject constructor(
                     httpMapperTvShow(it)
                 }
             }
-            .onEach {
-                movieDao.insertMovies(it)
-            }
     }
 
     override suspend fun getDiscoverTvShow(): Flow<List<MovieModel>> {
@@ -67,9 +54,6 @@ class TvShowRepositoryImpl @Inject constructor(
                 tvResult.map {
                     httpMapperTvShow(it)
                 }
-            }
-            .onEach {
-                movieDao.insertMovies(it)
             }
     }
 
@@ -83,9 +67,6 @@ class TvShowRepositoryImpl @Inject constructor(
                 movieResult.map {
                     httpMapperTvShow(it)
                 }
-            }
-            .onEach {
-                movieDao.insertMovies(it)
             }
     }
 }

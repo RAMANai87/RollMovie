@@ -15,9 +15,11 @@ import javax.inject.Inject
 @HiltViewModel
 class FavoriteViewModel @Inject constructor(
     private val favoriteRepository: FavoriteRepository
-) :ViewModel(){
+) : ViewModel() {
 
     val inProgress = mutableStateOf(false)
+
+    val isFavorite = mutableStateOf(false)
 
     private val _favoriteMovie = MutableStateFlow<List<FavoriteModel>?>(null)
     val favoriteMovie: StateFlow<List<FavoriteModel>?> = _favoriteMovie
@@ -35,15 +37,21 @@ class FavoriteViewModel @Inject constructor(
         }
     }
 
-    fun insertData(data :FavoriteModel) {
+    fun insertData(data: FavoriteModel) {
         viewModelScope.launch {
             favoriteRepository.insertFavoriteMovie(data)
         }
     }
 
-    fun deleteData(data :FavoriteModel) {
+    fun deleteData(data: FavoriteModel) {
         viewModelScope.launch {
             favoriteRepository.deleteFavoriteMovie(data)
+        }
+    }
+
+    fun searchFavoriteMovie(id: Int) {
+        viewModelScope.launch {
+            isFavorite.value = favoriteRepository.searchFavoriteMovie(id)
         }
     }
 

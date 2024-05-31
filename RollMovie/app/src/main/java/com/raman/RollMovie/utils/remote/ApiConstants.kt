@@ -1,4 +1,4 @@
-package com.raman.RollMovie.utils
+package com.raman.RollMovie.utils.remote
 
 internal object ApiConstants {
 
@@ -30,6 +30,15 @@ internal object ApiConstants {
     internal const val DEFAULT_PAGE = 1
     internal const val ID = "id"
     internal const val QUERY = "query"
+    private const val CREDITS = "credits"
+    internal const val APPEND_TO_RESPONSE = "append_to_response"
+
+    internal val DETAILS_APPEND_TO_RESPONSE = buildAppendToResponse(CREDITS)
+
+    private fun buildAppendToResponse(vararg fields: String) =
+        fields.joinToString(separator = APPEND_TO_RESPONSE_SEPARATOR)
+
+    private const val APPEND_TO_RESPONSE_SEPARATOR = ","
 
     internal object Utils {
 

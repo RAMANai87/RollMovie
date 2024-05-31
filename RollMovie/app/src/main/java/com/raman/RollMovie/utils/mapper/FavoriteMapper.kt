@@ -5,7 +5,7 @@ import com.raman.RollMovie.model.data.MovieModel
 import com.raman.RollMovie.model.data.detail.movie.DetailResponse
 import com.raman.RollMovie.model.data.detail.tv.TvShowDetail
 
-fun favoriteMapperMovie(data :DetailResponse) :FavoriteModel{
+fun favoriteMapperMovie(data: DetailResponse): FavoriteModel {
     return FavoriteModel(
         data.id,
         data.original_title,
@@ -18,7 +18,7 @@ fun favoriteMapperMovie(data :DetailResponse) :FavoriteModel{
     )
 }
 
-fun favoriteMapperTvShow(data :TvShowDetail) :FavoriteModel{
+fun favoriteMapperTvShow(data: TvShowDetail): FavoriteModel {
     return FavoriteModel(
         data.id,
         data.original_name,
@@ -31,7 +31,7 @@ fun favoriteMapperTvShow(data :TvShowDetail) :FavoriteModel{
     )
 }
 
-fun favoriteMapper(data :List<FavoriteModel>) :List<MovieModel>{
+fun favoriteMapper(data: List<FavoriteModel>): List<MovieModel> {
     return data.map {
         MovieModel(
             it.id,
@@ -43,4 +43,30 @@ fun favoriteMapper(data :List<FavoriteModel>) :List<MovieModel>{
             it.adult
         )
     }
+}
+
+fun favoriteMapperSearchMovie(data: MovieModel): FavoriteModel {
+    return FavoriteModel(
+        data.id,
+        data.title,
+        data.overview,
+        data.imageUrl,
+        data.vote,
+        data.realizeDate,
+        data.adult,
+        true
+    )
+}
+
+fun favoriteMapperSearchTvShow(data: MovieModel): FavoriteModel {
+    return FavoriteModel(
+        data.id,
+        data.title,
+        data.overview,
+        data.imageUrl,
+        data.vote,
+        data.realizeDate,
+        data.adult,
+        false
+    )
 }

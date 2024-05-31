@@ -11,19 +11,19 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.raman.RollMovie.R
 import com.raman.RollMovie.model.data.MovieModel
 import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.mainFont
 import com.raman.RollMovie.ui.theme.overviewColor
-import com.raman.RollMovie.utils.ApiConstants
 import com.raman.RollMovie.utils.buildImageUrl
 
 @Composable
@@ -51,7 +51,9 @@ fun MinimalLazyItem(data : MovieModel, onItemClicked: (id: Int) -> Unit) {
                     .fillMaxWidth()
                     .height(150.dp),
                 contentDescription = null,
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
+                placeholder = painterResource(id = R.drawable.no_image),
+                error = painterResource(id = R.drawable.no_image)
             )
 
             Spacer(modifier = Modifier.height(10.dp))

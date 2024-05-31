@@ -1,7 +1,7 @@
-package com.raman.RollMovie.utils
+package com.raman.RollMovie.utils.remote
 
 import com.raman.RollMovie.model.api.ApiService
-import com.raman.RollMovie.utils.ApiConstants.API_KEY
+import com.raman.RollMovie.utils.remote.ApiConstants.API_KEY
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

@@ -22,7 +22,6 @@ import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -44,13 +43,11 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.raman.RollMovie.R
-import com.raman.RollMovie.ui.adapters.MinimalLazyRow
-import com.raman.RollMovie.ui.adapters.SliderImagesView
 import com.raman.RollMovie.ui.component.detail.UseFulButton
 import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.barFontMain
 import com.raman.RollMovie.ui.theme.primaryColor
-import com.raman.RollMovie.utils.ApiConstants
+import com.raman.RollMovie.utils.remote.ApiConstants
 import com.raman.RollMovie.utils.AppScreens
 import com.raman.RollMovie.utils.TabItems
 import com.raman.RollMovie.viewmodel.app.AppViewModel

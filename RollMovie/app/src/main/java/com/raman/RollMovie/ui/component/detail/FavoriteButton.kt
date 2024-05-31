@@ -25,10 +25,14 @@ import com.raman.RollMovie.viewmodel.favorite.FavoriteViewModel
 @Composable
 fun FavoriteButton(
     color: Color,
+    id :Int,
+    favoriteViewModel: FavoriteViewModel,
     onFavoriteClicked :(Boolean) -> Unit
 ) {
 
-    var isFavorite by remember { mutableStateOf(false) }
+    favoriteViewModel.searchFavoriteMovie(id)
+
+    var isFavorite by remember { mutableStateOf(favoriteViewModel.isFavorite.value) }
 
     Card(
         modifier = Modifier.size(36.dp),

@@ -18,4 +18,9 @@ class FavoriteRepositoryImpl @Inject constructor(
     override suspend fun deleteFavoriteMovie(data: FavoriteModel) {
         favoriteDao.deleteFavoriteMovie(data)
     }
+
+    override suspend fun searchFavoriteMovie(id: Int): Boolean {
+        val result = favoriteDao.searchMovie(id)
+        return result != null
+    }
 }

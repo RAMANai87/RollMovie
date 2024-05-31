@@ -5,7 +5,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.raman.RollMovie.model.data.HttpResult
-import com.raman.RollMovie.utils.await
+import com.raman.RollMovie.utils.remote.await
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(

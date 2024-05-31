@@ -32,6 +32,8 @@ import com.raman.RollMovie.ui.theme.backgroundBottomNav
 import com.raman.RollMovie.ui.theme.backgroundCard
 import com.raman.RollMovie.ui.theme.mainFont
 import com.raman.RollMovie.utils.genreEditor
+import com.raman.RollMovie.utils.mapper.castMapper
+import com.raman.RollMovie.utils.mapper.crewMapper
 
 @Composable
 fun DetailBarMainMovie(data: DetailModel) {
@@ -104,6 +106,39 @@ fun DetailBarMainMovie(data: DetailModel) {
                 )
 
                 DetailLazyRow(data = data.productionCompany)
+
+                Text(
+                    text = "Cast",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 6.dp, top = 10.dp),
+                    style = TextStyle(
+                        color = mainFont,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center,
+                        fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular))
+                    )
+                )
+
+                DetailCreditsLazyRow(data = castMapper(data.castCrews.cast))
+
+                Text(
+                    text = "Crew",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 6.dp, top = 10.dp),
+                    style = TextStyle(
+                        color = mainFont,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center,
+                        fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular))
+                    )
+                )
+
+                DetailCreditsLazyRow(data = crewMapper(data.castCrews.crew))
+
             }
 
         }

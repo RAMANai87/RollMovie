@@ -10,7 +10,7 @@ import com.raman.RollMovie.model.db.MovieDao
 import com.raman.RollMovie.model.db.RollMovieDatabase
 import com.raman.RollMovie.model.repo.movie.MovieRemoteDataSource
 import com.raman.RollMovie.model.repo.tv.TvShowRemoteDataSource
-import com.raman.RollMovie.utils.createApiService
+import com.raman.RollMovie.utils.remote.createApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

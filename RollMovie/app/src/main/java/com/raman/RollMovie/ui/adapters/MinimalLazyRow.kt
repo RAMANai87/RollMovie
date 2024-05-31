@@ -22,6 +22,7 @@ import com.raman.RollMovie.R
 import com.raman.RollMovie.model.data.MovieModel
 import com.raman.RollMovie.ui.component.MinimalLazyItem
 import com.raman.RollMovie.ui.theme.mainFont
+import com.raman.RollMovie.ui.theme.primaryColor
 
 @Composable
 fun MinimalLazyRow(titleText: String, data :List<MovieModel>, onItemClicked: (id: Int) -> Unit) {
@@ -54,7 +55,7 @@ fun MinimalLazyRow(titleText: String, data :List<MovieModel>, onItemClicked: (id
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular)),
-                    color = mainFont
+                    color = primaryColor
                 )
             )
 

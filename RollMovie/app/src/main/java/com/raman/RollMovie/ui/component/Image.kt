@@ -29,12 +29,13 @@ import com.raman.RollMovie.utils.buildImageUrl
 import com.raman.RollMovie.utils.voteEditor
 
 @Composable
-fun MainImageItem(imageUrl: String, vote: Double) {
+fun MainImageItem(imageUrl: String?, vote: Double) {
 
     Card(
         modifier = Modifier
-            .size(120.dp, 240.dp)
+            .size(120.dp, 170.dp)
             .clip(Shapes.small)
+            .padding(start = 8.dp, top = 8.dp, bottom = 8.dp)
     ) {
 
         Box(
@@ -45,7 +46,9 @@ fun MainImageItem(imageUrl: String, vote: Double) {
                 model = buildImageUrl(imageUrl),
                 contentDescription = null,
                 modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
+                placeholder = painterResource(id = R.drawable.no_image),
+                error = painterResource(id = R.drawable.no_image)
             )
 
             Card(

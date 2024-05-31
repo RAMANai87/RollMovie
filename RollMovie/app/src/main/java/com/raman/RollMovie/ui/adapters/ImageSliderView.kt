@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -78,7 +79,7 @@ fun SliderImagesView(data: List<MovieModel>, titleText: String, onItemClicked: (
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold,
                     fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular)),
-                    color = Color.Black
+                    color = primaryColor
                 )
             )
 
@@ -93,18 +94,20 @@ fun SliderImagesView(data: List<MovieModel>, titleText: String, onItemClicked: (
 }
 
 @Composable
-private fun ImageItem(imageUrl: String, onItemClicked: () -> Unit) {
+private fun ImageItem(imageUrl: String?, onItemClicked: () -> Unit) {
 
     AsyncImage(
         contentDescription = null,
         model = buildImageUrl(imageUrl),
         modifier = Modifier
             .fillMaxWidth()
-            .height(190.dp)
+            .height(220.dp)
             .padding(top = 6.dp, start = 10.dp, end = 10.dp)
             .clip(Shapes.large)
             .clickable { onItemClicked.invoke() },
-        contentScale = ContentScale.Crop
+        contentScale = ContentScale.Crop,
+        placeholder = painterResource(id = R.drawable.no_image),
+        error = painterResource(id = R.drawable.no_image)
     )
 
 }

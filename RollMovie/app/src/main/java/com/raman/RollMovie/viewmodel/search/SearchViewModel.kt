@@ -1,11 +1,10 @@
-package com.raman.RollMovie.viewmodel.app
+package com.raman.RollMovie.viewmodel.search
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.raman.RollMovie.model.data.detail.movie.DetailResponse
-import com.raman.RollMovie.model.data.detail.tv.TvShowDetail
+import com.raman.RollMovie.model.data.MovieModel
 import com.raman.RollMovie.model.repo.movie.MovieRepository
 import com.raman.RollMovie.model.repo.tv.TvShowRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,31 +15,31 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailViewModel @Inject constructor(
-    private val tvShowRepository: TvShowRepository,
-    private val movieRepository: MovieRepository
+class SearchViewModel @Inject constructor(
+    private val movieRepository: MovieRepository,
+    private val tvShowRepository: TvShowRepository
 ) : ViewModel() {
 
-    val inProgress = mutableStateOf(true)
-    val hitError = mutableStateOf(true)
+    val inProgress = mutableStateOf(false)
+    val hitError = mutableStateOf(false)
 
-    private val _movieDetail = MutableStateFlow<DetailResponse?>(null)
-    val movieDetail: StateFlow<DetailResponse?> = _movieDetail
+    private val _dataSearch = MutableStateFlow<List<MovieModel>?>(null)
+    val dataSearch: StateFlow<List<MovieModel>?> = _dataSearch
 
-    private val _tvShowDetail = MutableStateFlow<TvShowDetail?>(null)
-    val tvShowDetail: StateFlow<TvShowDetail?> = _tvShowDetail
-
-    fun getMovieDetail(id: Int) {
+    fun getSearchMovie(text: String) {
         viewModelScope.launch {
-            inProgress.value = true
 
-            movieRepository.getMovieDetail(id)
+            inProgress.value = true
+            hitError.value = false
+
+            movieRepository.searchMovie(text)
                 .catch {
-                    inProgress.value = false
                     hitError.value = true
+                    inProgress.value = false
+                    Log.v("error", it.message!!)
                 }
                 .collect {
-                    _movieDetail.value = it
+                    _dataSearch.value = it
                     inProgress.value = false
                     hitError.value = false
                 }
@@ -48,21 +47,24 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    fun getTvShowDetail(id: Int) {
+    fun getSearchTvShow(text: String) {
 
         viewModelScope.launch {
-            inProgress.value = true
 
-            tvShowRepository.getTvShowDetail(id)
+            inProgress.value = true
+            hitError.value = false
+
+            tvShowRepository.searchTvShow(text)
                 .catch {
-                    inProgress.value = false
                     hitError.value = true
+                    inProgress.value = false
                 }
                 .collect {
-                    _tvShowDetail.value = it
-                    inProgress.value =false
+                    _dataSearch.value = it
+                    inProgress.value = false
                     hitError.value = false
                 }
+
         }
 
     }

@@ -1,5 +1,7 @@
 package com.raman.RollMovie.model.data.detail.movie
 
+import com.raman.RollMovie.model.data.detail.NetworkCredits
+
 data class DetailResponse(
     val adult: Boolean,
     val backdrop_path: String,
@@ -8,6 +10,7 @@ data class DetailResponse(
     val genres: Array<Genre>,
     val homepage: String,
     val id: Int,
+    val credits: NetworkCredits,
     val imdb_id: String,
     val original_language: String,
     val original_title: String,

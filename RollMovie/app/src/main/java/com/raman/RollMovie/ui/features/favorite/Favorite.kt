@@ -14,9 +14,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -38,9 +35,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.raman.RollMovie.R
 import com.raman.RollMovie.ui.component.MinimalLazyItem
 import com.raman.RollMovie.ui.component.detail.UseFulButton
-import com.raman.RollMovie.ui.theme.backgroundBottomNav
-import com.raman.RollMovie.ui.theme.primaryColor
-import com.raman.RollMovie.utils.ApiConstants
+import com.raman.RollMovie.utils.remote.ApiConstants
 import com.raman.RollMovie.utils.AppScreens
 import com.raman.RollMovie.utils.mapper.favoriteMapper
 import com.raman.RollMovie.viewmodel.favorite.FavoriteViewModel
@@ -57,6 +52,7 @@ fun FavoriteScreen(favoriteViewModel: FavoriteViewModel, navController: NavContr
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
+            .padding(10.dp)
     ) {
 
         val favoriteData = favoriteViewModel.favoriteMovie.collectAsState().value
@@ -64,7 +60,7 @@ fun FavoriteScreen(favoriteViewModel: FavoriteViewModel, navController: NavContr
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(56.dp)
+                .height(30.dp)
         ) {
 
             Spacer(modifier = Modifier.width(4.dp))
@@ -100,7 +96,7 @@ fun FavoriteScreen(favoriteViewModel: FavoriteViewModel, navController: NavContr
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
-                Spacer(modifier = Modifier.height(200.dp))
+                Spacer(modifier = Modifier.height(120.dp))
 
                 LottieAnimation(
                     composition = composition,
@@ -114,7 +110,7 @@ fun FavoriteScreen(favoriteViewModel: FavoriteViewModel, navController: NavContr
 
             LazyVerticalGrid(
                 columns = GridCells.Fixed(3),
-                modifier = Modifier.padding(8.dp),
+                modifier = Modifier.padding(10.dp),
                 contentPadding = PaddingValues(start = 8.dp)
             ) {
                 items(favoriteData.size) {

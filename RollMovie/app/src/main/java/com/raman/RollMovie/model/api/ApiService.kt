@@ -1,11 +1,10 @@
 package com.raman.RollMovie.model.api
 
-import com.raman.RollMovie.model.data.HttpResult
 import com.raman.RollMovie.model.data.detail.movie.DetailResponse
 import com.raman.RollMovie.model.data.detail.tv.TvShowDetail
 import com.raman.RollMovie.model.data.movie.MovieResult
 import com.raman.RollMovie.model.data.tv.TvResponse
-import com.raman.RollMovie.utils.ApiConstants
+import com.raman.RollMovie.utils.remote.ApiConstants
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -46,7 +45,9 @@ interface ApiService {
     @GET(ApiConstants.DETAILS_MOVIE)
     suspend fun getDetailsMovieById(
         @Path(ApiConstants.ID)
-        id: Int
+        id: Int,
+        @Query(ApiConstants.APPEND_TO_RESPONSE)
+        appendToResponse: String = ApiConstants.DETAILS_APPEND_TO_RESPONSE
     ): DetailResponse
 
     @GET(ApiConstants.SEARCH_MOVIE)
@@ -84,7 +85,9 @@ interface ApiService {
     @GET(ApiConstants.DETAILS_TV_SHOW)
     suspend fun getDetailsTvShowById(
         @Path(ApiConstants.ID)
-        id: Int
+        id: Int,
+        @Query(ApiConstants.APPEND_TO_RESPONSE)
+        appendToResponse: String = ApiConstants.DETAILS_APPEND_TO_RESPONSE
     ): TvShowDetail
 
     @GET(ApiConstants.SEARCH_TV_SHOW)

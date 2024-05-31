@@ -25,11 +25,12 @@ import com.raman.RollMovie.ui.features.user.signUp.FirstRunScreen
 import com.raman.RollMovie.ui.features.user.signUp.SignUpScreen
 import com.raman.RollMovie.viewmodel.user.UserViewModel
 import com.raman.RollMovie.ui.theme.RollMovieTheme
-import com.raman.RollMovie.utils.ApiConstants
+import com.raman.RollMovie.utils.remote.ApiConstants
 import com.raman.RollMovie.utils.AppScreens
 import com.raman.RollMovie.viewmodel.app.AppViewModel
 import com.raman.RollMovie.viewmodel.app.DetailViewModel
 import com.raman.RollMovie.viewmodel.favorite.FavoriteViewModel
+import com.raman.RollMovie.viewmodel.search.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,6 +40,7 @@ class MainActivity : ComponentActivity() {
     private val appViewModel: AppViewModel by viewModels()
     private val detailViewModel: DetailViewModel by viewModels()
     private val favoriteViewModel: FavoriteViewModel by viewModels()
+    private val searchViewModel: SearchViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,7 +84,7 @@ class MainActivity : ComponentActivity() {
             composable(
                 route = AppScreens.SearchScreen.route
             ) {
-                SearchScreen()
+                SearchScreen(searchViewModel, favoriteViewModel, myNavController)
             }
 
             composable(

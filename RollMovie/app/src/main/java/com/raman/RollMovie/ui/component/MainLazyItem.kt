@@ -1,15 +1,18 @@
 package com.raman.RollMovie.ui.component
 
-import android.widget.AdapterView.OnItemClickListener
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
@@ -26,11 +29,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.raman.RollMovie.R
+import com.raman.RollMovie.model.data.MovieModel
 import com.raman.RollMovie.model.data.detail.DetailModel
 import com.raman.RollMovie.ui.component.detail.DetailSecondaryData
 import com.raman.RollMovie.ui.theme.backGroundMain
@@ -40,50 +45,59 @@ import com.raman.RollMovie.utils.spokenLangEditor
 
 @Composable
 fun MainLazyItem(
-    data: DetailModel,
+    data: MovieModel,
     isFavoriteMovie: (Boolean) -> Unit,
-    onItemClick :(id :Int) -> Unit
+    onItemClick: (id: Int) -> Unit
 ) {
 
     Card(
         modifier = Modifier
-            .fillMaxWidth(0.9f)
-            .height(260.dp)
+            .fillMaxWidth()
+            .height(180.dp)
+            .padding(top = 6.dp, end = 8.dp)
             .clickable { onItemClick.invoke(data.id) },
-        colors = CardDefaults.cardColors(containerColor = backGroundMain),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
         elevation = CardDefaults.cardElevation(8.dp)
     ) {
 
-        Row(
-            modifier = Modifier.fillMaxSize(),
-            verticalAlignment = Alignment.CenterVertically
+        Box(
+            modifier = Modifier.fillMaxSize()
         ) {
 
-            MainImageItem(imageUrl = data.image, vote = data.vote)
-
-            Column(
-                modifier = Modifier
-                    .height(240.dp)
-                    .padding(top = 6.dp, bottom = 6.dp, start = 14.dp)
+            Row(
+                modifier = Modifier.fillMaxSize().align(Alignment.CenterStart),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = data.title,
-                    style = TextStyle(
-                        color = Color.Black,
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.ExtraBold
-                    ),
-                    maxLines = 1
-                )
+                MainImageItem(imageUrl = data.imageUrl, vote = data.vote)
 
-                DetailSecondaryData(image = R.drawable.ic_realizedate, title = data.realizeDate)
-                Spacer(modifier = Modifier.height(4.dp))
-                DetailSecondaryData(image = R.drawable.ic_genre, title = genreEditor(data.genre))
-                Spacer(modifier = Modifier.height(4.dp))
-                DetailSecondaryData(
-                    image = R.drawable.ic_person,
-                    title = spokenLangEditor(data.spokenLang)
-                )
+                Column(
+                    modifier = Modifier
+                        .height(240.dp)
+                        .padding(top = 6.dp, bottom = 6.dp, start = 14.dp)
+                ) {
+                    Text(
+                        text = data.title,
+                        style = TextStyle(
+                            color = Color.Black,
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.ExtraBold
+                        ),
+                        maxLines = 1
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    DetailSecondaryData(image = R.drawable.ic_realizedate, title = data.realizeDate)
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = data.overview,
+                        style = TextStyle(
+                            color = Color.Gray,
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.ExtraBold
+                        ),
+                        maxLines = 4
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                }
             }
 
             var isFavorite by remember { mutableStateOf(false) }
@@ -91,7 +105,8 @@ fun MainLazyItem(
             Card(
                 modifier = Modifier
                     .size(50.dp)
-                    .padding(bottom = 70.dp, start = 20.dp),
+                    .padding(bottom = 70.dp, start = 20.dp)
+                    .align(Alignment.TopEnd),
                 colors = CardDefaults.cardColors(containerColor = Color.White.copy(0.75f)),
                 shape = secondaryShapes.small
             ) {
@@ -113,6 +128,16 @@ fun MainLazyItem(
                         contentDescription = null
                     )
                 }
+            }
+
+            if (data.adult) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_18),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(28.dp)
+                        .align(Alignment.CenterEnd)
+                )
             }
 
         }

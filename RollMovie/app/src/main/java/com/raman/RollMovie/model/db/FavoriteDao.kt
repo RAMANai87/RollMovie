@@ -16,5 +16,7 @@ interface FavoriteDao {
     suspend fun insertFavoriteMovie(data :FavoriteModel)
     @Delete
     suspend fun deleteFavoriteMovie(data: FavoriteModel)
+    @Query("SELECT * FROM favorite_table WHERE id = :id")
+    suspend fun searchMovie(id :Int) :FavoriteModel?
 
 }
