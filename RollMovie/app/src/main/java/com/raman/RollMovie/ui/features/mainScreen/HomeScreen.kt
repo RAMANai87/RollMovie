@@ -51,9 +51,10 @@ import com.raman.RollMovie.utils.remote.ApiConstants
 import com.raman.RollMovie.utils.AppScreens
 import com.raman.RollMovie.utils.TabItems
 import com.raman.RollMovie.viewmodel.app.AppViewModel
+import com.raman.RollMovie.viewmodel.favorite.FavoriteViewModel
 
 @Composable
-fun HomeScreen(appViewModel: AppViewModel, navController: NavController) {
+fun HomeScreen(appViewModel: AppViewModel, navController: NavController, favoriteViewModel: FavoriteViewModel) {
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -151,6 +152,7 @@ fun HomeScreen(appViewModel: AppViewModel, navController: NavController) {
                     } else {
                         MovieScreen(appViewModel = appViewModel) { id ->
                             navController.navigate(AppScreens.DetailScreen.route + "/" + id + "/" + ApiConstants.MOVIE)
+                            favoriteViewModel.searchFavoriteMovie(id)
                         }
                     }
                 }
@@ -206,6 +208,7 @@ fun HomeScreen(appViewModel: AppViewModel, navController: NavController) {
                     } else {
                         TvShowScreen(appViewModel) { id ->
                             navController.navigate(AppScreens.DetailScreen.route + "/" + id + "/" + ApiConstants.TV_SHOW)
+                            favoriteViewModel.searchFavoriteMovie(id)
                         }
                     }
                 }

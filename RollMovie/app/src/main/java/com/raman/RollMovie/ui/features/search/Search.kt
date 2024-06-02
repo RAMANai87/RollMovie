@@ -171,6 +171,7 @@ fun SearchScreen(
                     isMovie = isMovieData
                 ) { id ->
                     navController.navigate(AppScreens.DetailScreen.route + "/" + id + "/" + if (isMovieData) ApiConstants.MOVIE else ApiConstants.TV_SHOW)
+                    favoriteViewModel.searchFavoriteMovie(id)
                 }
             }
         }

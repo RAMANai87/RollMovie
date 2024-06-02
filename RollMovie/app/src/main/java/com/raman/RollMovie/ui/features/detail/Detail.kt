@@ -44,8 +44,6 @@ fun DetailScreen(
     favoriteViewModel: FavoriteViewModel
 ) {
 
-    favoriteViewModel.searchFavoriteMovie(id)
-
     val systemUiController = rememberSystemUiController()
     systemUiController.setStatusBarColor(backgroundBottomNav)
 
@@ -113,9 +111,6 @@ fun DetailScreen(
                     verticalArrangement = Arrangement.SpaceAround,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-
-                    Spacer(modifier = Modifier.height(40.dp))
-
                     CircularProgressIndicator(
                         color = primaryColor,
                         modifier = Modifier.padding(100.dp)

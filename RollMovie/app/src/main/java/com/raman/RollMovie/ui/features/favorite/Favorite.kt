@@ -116,6 +116,7 @@ fun FavoriteScreen(favoriteViewModel: FavoriteViewModel, navController: NavContr
                 items(favoriteData.size) {
                     MinimalLazyItem(data = favoriteMapper(favoriteData)[it]) { id ->
                         navController.navigate(AppScreens.DetailScreen.route + "/" + id + "/" + if (favoriteData[it].isMovie) ApiConstants.MOVIE else ApiConstants.TV_SHOW)
+                        favoriteViewModel.searchFavoriteMovie(id)
                     }
                 }
             }

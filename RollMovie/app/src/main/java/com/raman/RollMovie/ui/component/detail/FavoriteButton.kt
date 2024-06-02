@@ -32,7 +32,7 @@ fun FavoriteButton(
 
     favoriteViewModel.searchFavoriteMovie(id)
 
-    var isFavorite by remember { mutableStateOf(favoriteViewModel.isFavorite.value) }
+    var isFavorite = favoriteViewModel.isFavorite.value
 
     Card(
         modifier = Modifier.size(36.dp),
