@@ -48,7 +48,7 @@ fun RatingDetail(vote: Double) {
                 style = TextStyle(
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold,
-                    color = mainFont
+                    color = primaryColor
                 ),
                 maxLines = 1
             )

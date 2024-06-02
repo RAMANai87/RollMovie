@@ -25,6 +25,7 @@ import coil.compose.AsyncImage
 import com.raman.RollMovie.R
 import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.mainFont
+import com.raman.RollMovie.ui.theme.primaryColor
 import com.raman.RollMovie.utils.buildImageUrl
 import com.raman.RollMovie.utils.voteEditor
 
@@ -76,7 +77,7 @@ fun MainImageItem(imageUrl: String?, vote: Double) {
                         style = TextStyle(
                             fontSize = 12.sp,
                             fontWeight = FontWeight.Bold,
-                            color = mainFont
+                            color = primaryColor
                         ),
                         maxLines = 1
                     )
