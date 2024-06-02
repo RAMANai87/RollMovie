@@ -1,5 +1,7 @@
 package com.raman.RollMovie.ui.features.detail
 
+import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,6 +15,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -39,6 +42,10 @@ fun DetailScreen(
     favoriteViewModel: FavoriteViewModel
 ) {
 
+    BackHandler {
+        navController.popBackStack()
+        detailViewModel.deleteDataForBackPressed()
+    }
     val systemUiController = rememberSystemUiController()
     systemUiController.setStatusBarColor(backgroundBottomNav)
 
@@ -78,6 +85,7 @@ fun DetailScreen(
                     ) {
                         UseFulButton(R.drawable.ic_arrow_back) {
                             navController.popBackStack()
+                            detailViewModel.deleteDataForBackPressed()
                         }
 
                         FavoriteButton(color = Color.Red, favoriteViewModel = favoriteViewModel, id = id) { isFavorite ->
@@ -128,6 +136,7 @@ fun DetailScreen(
                     ) {
                         UseFulButton(R.drawable.ic_arrow_back) {
                             navController.popBackStack()
+                            detailViewModel.deleteDataForBackPressed()
                         }
 
                         FavoriteButton(color = Color.Red, favoriteViewModel = favoriteViewModel, id = id) { isFavorite ->
