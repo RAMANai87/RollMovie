@@ -1,7 +1,6 @@
 package com.raman.RollMovie.ui.component.detail
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,7 +18,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.raman.RollMovie.R
-import com.raman.RollMovie.ui.theme.mainFont
 import com.raman.RollMovie.ui.theme.primaryColor
 import com.raman.RollMovie.utils.voteEditor
 

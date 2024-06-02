@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.raman.RollMovie.R
 import com.raman.RollMovie.ui.theme.Shapes
-import com.raman.RollMovie.ui.theme.mainFont
 import com.raman.RollMovie.ui.theme.primaryColor
 import com.raman.RollMovie.utils.buildImageUrl
 import com.raman.RollMovie.utils.voteEditor
