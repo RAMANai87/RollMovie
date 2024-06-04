@@ -16,17 +16,17 @@ import androidx.navigation.navArgument
 import com.raman.RollMovie.ui.features.detail.DetailScreen
 import com.raman.RollMovie.ui.features.favorite.FavoriteScreen
 import com.raman.RollMovie.ui.features.mainScreen.HomeScreen
-import com.raman.RollMovie.ui.features.profile.EditProfileScreen
-import com.raman.RollMovie.ui.features.profile.ProfileScreen
 import com.raman.RollMovie.ui.features.search.SearchScreen
+import com.raman.RollMovie.ui.features.see_all.SeeAllScreen
 import com.raman.RollMovie.ui.features.setting.SettingScreen
 import com.raman.RollMovie.ui.features.user.signIn.SignInScreen
 import com.raman.RollMovie.ui.features.user.signUp.FirstRunScreen
 import com.raman.RollMovie.ui.features.user.signUp.SignUpScreen
 import com.raman.RollMovie.viewmodel.user.UserViewModel
 import com.raman.RollMovie.ui.theme.RollMovieTheme
+import com.raman.RollMovie.utils.common.AppConstants
 import com.raman.RollMovie.utils.remote.ApiConstants
-import com.raman.RollMovie.utils.AppScreens
+import com.raman.RollMovie.utils.common.AppScreens
 import com.raman.RollMovie.viewmodel.app.AppViewModel
 import com.raman.RollMovie.viewmodel.app.DetailViewModel
 import com.raman.RollMovie.viewmodel.favorite.FavoriteViewModel
@@ -76,9 +76,12 @@ class MainActivity : ComponentActivity() {
             }
 
             composable(
-                route = AppScreens.ProfileScreen.route
+                route = AppScreens.SeeAllScreen.route + "/" + "{${AppConstants.KEY_SEE_ALL_ARG}}",
+                arguments = listOf(navArgument(AppConstants.KEY_SEE_ALL_ARG){
+                    type = NavType.StringType
+                })
             ) {
-                ProfileScreen()
+                SeeAllScreen(appViewModel, it.arguments!!.getString(AppConstants.KEY_SEE_ALL_ARG, null), favoriteViewModel, myNavController)
             }
 
             composable(
@@ -123,12 +126,6 @@ class MainActivity : ComponentActivity() {
             }
 
             composable(
-                route = AppScreens.EditProfileScreen.route
-            ) {
-                EditProfileScreen()
-            }
-
-            composable(
                 route = AppScreens.SignInScreen.route
             ) {
                 SignInScreen(userViewModel, myNavController)
@@ -144,11 +141,4 @@ class MainActivity : ComponentActivity() {
 
     }
 
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    RollMovieTheme {
-    }
 }

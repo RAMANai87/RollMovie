@@ -36,7 +36,7 @@ import com.raman.RollMovie.R
 import com.raman.RollMovie.ui.component.MinimalLazyItem
 import com.raman.RollMovie.ui.component.detail.UseFulButton
 import com.raman.RollMovie.utils.remote.ApiConstants
-import com.raman.RollMovie.utils.AppScreens
+import com.raman.RollMovie.utils.common.AppScreens
 import com.raman.RollMovie.utils.mapper.favoriteMapper
 import com.raman.RollMovie.viewmodel.favorite.FavoriteViewModel
 
@@ -52,7 +52,6 @@ fun FavoriteScreen(favoriteViewModel: FavoriteViewModel, navController: NavContr
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
-            .padding(10.dp)
     ) {
 
         val favoriteData = favoriteViewModel.favoriteMovie.collectAsState().value
@@ -110,8 +109,7 @@ fun FavoriteScreen(favoriteViewModel: FavoriteViewModel, navController: NavContr
 
             LazyVerticalGrid(
                 columns = GridCells.Fixed(3),
-                modifier = Modifier.padding(10.dp),
-                contentPadding = PaddingValues(start = 8.dp)
+                modifier = Modifier.padding(top = 10.dp, start = 4.dp, end = 4.dp, bottom = 10.dp)
             ) {
                 items(favoriteData.size) {
                     MinimalLazyItem(data = favoriteMapper(favoriteData)[it]) { id ->

@@ -52,7 +52,7 @@ import com.raman.RollMovie.R
 import com.raman.RollMovie.ui.adapters.MainLazyColumn
 import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.primaryColor
-import com.raman.RollMovie.utils.AppScreens
+import com.raman.RollMovie.utils.common.AppScreens
 import com.raman.RollMovie.utils.remote.ApiConstants
 import com.raman.RollMovie.viewmodel.favorite.FavoriteViewModel
 import com.raman.RollMovie.viewmodel.search.SearchViewModel

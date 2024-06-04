@@ -27,7 +27,7 @@ import coil.compose.AsyncImage
 import com.raman.RollMovie.R
 import com.raman.RollMovie.model.data.MovieModel
 import com.raman.RollMovie.ui.theme.Shapes
-import com.raman.RollMovie.utils.buildImageUrl
+import com.raman.RollMovie.utils.common.buildImageUrl
 
 @Composable
 fun BigImageItem(data: MovieModel, onItemClicked: (id: Int) -> Unit) {

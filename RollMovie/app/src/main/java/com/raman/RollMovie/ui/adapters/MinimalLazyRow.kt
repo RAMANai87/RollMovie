@@ -1,5 +1,6 @@
 package com.raman.RollMovie.ui.adapters
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,14 +27,21 @@ import com.raman.RollMovie.ui.theme.mainFont
 import com.raman.RollMovie.ui.theme.primaryColor
 
 @Composable
-fun MinimalLazyRow(titleText: String, data :List<MovieModel>, onItemClicked: (id: Int) -> Unit) {
+fun MinimalLazyRow(
+    titleText: String,
+    data: List<MovieModel>,
+    onSeeAllClicked: () -> Unit,
+    onItemClicked: (id: Int) -> Unit
+) {
 
     Column(
         modifier = Modifier.padding(8.dp)
     ) {
 
         Row(
-            modifier = Modifier.fillMaxWidth().height(14.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(30.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -48,16 +57,20 @@ fun MinimalLazyRow(titleText: String, data :List<MovieModel>, onItemClicked: (id
                 )
             )
 
-            Text(
-                text = "See all",
-                modifier = Modifier.padding(end = 8.dp),
-                style = TextStyle(
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold,
-                    fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular)),
-                    color = primaryColor
+            TextButton(
+                onClick = { onSeeAllClicked.invoke() },
+                modifier = Modifier.padding(end = 8.dp)
+            ) {
+                Text(
+                    text = "See all",
+                    style = TextStyle(
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular)),
+                        color = primaryColor
+                    )
                 )
-            )
+            }
 
         }
 

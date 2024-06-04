@@ -6,13 +6,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
@@ -36,12 +34,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.raman.RollMovie.R
 import com.raman.RollMovie.model.data.MovieModel
-import com.raman.RollMovie.model.data.detail.DetailModel
 import com.raman.RollMovie.ui.component.detail.DetailSecondaryData
-import com.raman.RollMovie.ui.theme.backGroundMain
 import com.raman.RollMovie.ui.theme.secondaryShapes
-import com.raman.RollMovie.utils.genreEditor
-import com.raman.RollMovie.utils.spokenLangEditor
 
 @Composable
 fun MainLazyItem(
@@ -57,7 +51,7 @@ fun MainLazyItem(
             .padding(top = 6.dp, end = 8.dp)
             .clickable { onItemClick.invoke(data.id) },
         colors = CardDefaults.cardColors(containerColor = Color.White),
-        elevation = CardDefaults.cardElevation(8.dp)
+        elevation = CardDefaults.cardElevation(2.dp)
     ) {
 
         Box(
@@ -79,7 +73,7 @@ fun MainLazyItem(
                         text = data.title,
                         style = TextStyle(
                             color = Color.Black,
-                            fontSize = 18.sp,
+                            fontSize = 16.sp,
                             fontWeight = FontWeight.ExtraBold
                         ),
                         maxLines = 1
@@ -91,7 +85,7 @@ fun MainLazyItem(
                         text = data.overview,
                         style = TextStyle(
                             color = Color.Gray,
-                            fontSize = 14.sp,
+                            fontSize = 12.sp,
                             fontWeight = FontWeight.ExtraBold
                         ),
                         maxLines = 4
@@ -105,7 +99,7 @@ fun MainLazyItem(
             Card(
                 modifier = Modifier
                     .size(50.dp)
-                    .padding(bottom = 70.dp, start = 20.dp)
+                    .padding(top = 4.dp, end = 4.dp)
                     .align(Alignment.TopEnd),
                 colors = CardDefaults.cardColors(containerColor = Color.White.copy(0.75f)),
                 shape = secondaryShapes.small
@@ -136,6 +130,7 @@ fun MainLazyItem(
                     contentDescription = null,
                     modifier = Modifier
                         .size(28.dp)
+                        .padding(end = 4.dp)
                         .align(Alignment.CenterEnd)
                 )
             }

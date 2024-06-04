@@ -1,4 +1,4 @@
-package com.raman.RollMovie.utils
+package com.raman.RollMovie.utils.common
 
 import com.raman.RollMovie.model.data.detail.movie.Genre
 import com.raman.RollMovie.model.data.detail.movie.SpokenLanguage

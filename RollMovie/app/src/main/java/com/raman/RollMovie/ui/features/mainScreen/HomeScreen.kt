@@ -48,8 +48,8 @@ import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.barFontMain
 import com.raman.RollMovie.ui.theme.primaryColor
 import com.raman.RollMovie.utils.remote.ApiConstants
-import com.raman.RollMovie.utils.AppScreens
-import com.raman.RollMovie.utils.TabItems
+import com.raman.RollMovie.utils.common.AppScreens
+import com.raman.RollMovie.utils.common.TabItems
 import com.raman.RollMovie.viewmodel.app.AppViewModel
 import com.raman.RollMovie.viewmodel.favorite.FavoriteViewModel
 
@@ -150,7 +150,7 @@ fun HomeScreen(appViewModel: AppViewModel, navController: NavController, favorit
                         }
 
                     } else {
-                        MovieScreen(appViewModel = appViewModel) { id ->
+                        MovieScreen(appViewModel = appViewModel, {navController.navigate(AppScreens.SeeAllScreen.route + "/" + it)}) { id ->
                             navController.navigate(AppScreens.DetailScreen.route + "/" + id + "/" + ApiConstants.MOVIE)
                             favoriteViewModel.searchFavoriteMovie(id)
                         }
@@ -206,7 +206,7 @@ fun HomeScreen(appViewModel: AppViewModel, navController: NavController, favorit
                         }
 
                     } else {
-                        TvShowScreen(appViewModel) { id ->
+                        TvShowScreen(appViewModel, {navController.navigate(AppScreens.SeeAllScreen.route + "/" + it)}) { id ->
                             navController.navigate(AppScreens.DetailScreen.route + "/" + id + "/" + ApiConstants.TV_SHOW)
                             favoriteViewModel.searchFavoriteMovie(id)
                         }

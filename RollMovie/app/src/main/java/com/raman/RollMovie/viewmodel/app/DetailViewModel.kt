@@ -1,6 +1,5 @@
 package com.raman.RollMovie.viewmodel.app
 
-import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -70,7 +69,7 @@ class DetailViewModel @Inject constructor(
 
     fun deleteDataForBackPressed() {
         viewModelScope.launch {
-            delay(400)
+            delay(100)
             _movieDetail.value = null
             _tvShowDetail.value = null
         }

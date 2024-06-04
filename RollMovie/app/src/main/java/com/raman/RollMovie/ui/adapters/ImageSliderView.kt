@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -24,14 +23,12 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -41,23 +38,21 @@ import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.mainFont
 import com.raman.RollMovie.ui.theme.primaryColor
 import com.raman.RollMovie.ui.theme.sliderColor
-import com.raman.RollMovie.utils.buildImageUrl
+import com.raman.RollMovie.utils.common.buildImageUrl
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
-fun SliderImagesView(data: List<MovieModel>, titleText: String, onItemClicked: (id :Int) -> Unit) {
+fun SliderImagesView(data: List<MovieModel>, titleText: String, onSeeAllClicked :() -> Unit, onItemClicked: (id :Int) -> Unit) {
 
     Column(
         verticalArrangement = Arrangement.SpaceBetween
     ) {
 
-        Spacer(modifier = Modifier.height(6.dp))
-
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(14.dp),
+                .height(30.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -72,16 +67,20 @@ fun SliderImagesView(data: List<MovieModel>, titleText: String, onItemClicked: (
                 )
             )
 
-            Text(
-                text = "See all",
-                modifier = Modifier.padding(end = 12.dp),
-                style = TextStyle(
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Bold,
-                    fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular)),
-                    color = primaryColor
+            TextButton(
+                onClick = { onSeeAllClicked.invoke() },
+                modifier = Modifier.padding(end = 12.dp)
+            ) {
+                Text(
+                    text = "See all",
+                    style = TextStyle(
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular)),
+                        color = primaryColor
+                    )
                 )
-            )
+            }
 
 
         }
@@ -133,7 +132,8 @@ private fun ImageSlider(data: List<MovieModel>, onItemClicked: (id :Int) -> Unit
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.padding(top = 4.dp)
     ) {
         HorizontalPager(
             state = pagerState

@@ -24,7 +24,7 @@ import com.raman.RollMovie.model.data.MovieModel
 import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.mainFont
 import com.raman.RollMovie.ui.theme.overviewColor
-import com.raman.RollMovie.utils.buildImageUrl
+import com.raman.RollMovie.utils.common.buildImageUrl
 
 @Composable
 fun MinimalLazyItem(data : MovieModel, onItemClicked: (id: Int) -> Unit) {
@@ -32,7 +32,7 @@ fun MinimalLazyItem(data : MovieModel, onItemClicked: (id: Int) -> Unit) {
     Card(
         modifier = Modifier
             .size(170.dp, 230.dp)
-            .padding(end = 8.dp, top = 3.dp)
+            .padding(end = 8.dp, top = 3.dp, start = 2.dp)
             .clickable { onItemClicked.invoke(data.id) },
         elevation = CardDefaults.cardElevation(
             1.dp

@@ -31,7 +31,7 @@ import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.backgroundBottomNav
 import com.raman.RollMovie.ui.theme.backgroundCard
 import com.raman.RollMovie.ui.theme.mainFont
-import com.raman.RollMovie.utils.genreEditor
+import com.raman.RollMovie.utils.common.genreEditor
 import com.raman.RollMovie.utils.mapper.castMapper
 import com.raman.RollMovie.utils.mapper.crewMapper
 

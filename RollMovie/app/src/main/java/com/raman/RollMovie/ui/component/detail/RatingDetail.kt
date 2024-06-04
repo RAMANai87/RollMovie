@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.raman.RollMovie.R
 import com.raman.RollMovie.ui.theme.primaryColor
-import com.raman.RollMovie.utils.voteEditor
+import com.raman.RollMovie.utils.common.voteEditor
 
 @Composable
 fun RatingDetail(vote: Double) {

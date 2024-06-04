@@ -1,4 +1,4 @@
-package com.raman.RollMovie.utils
+package com.raman.RollMovie.utils.common
 
 import java.math.RoundingMode
 import java.text.DecimalFormat

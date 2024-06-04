@@ -1,6 +1,5 @@
 package com.raman.RollMovie.ui.features.detail
 
-import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box

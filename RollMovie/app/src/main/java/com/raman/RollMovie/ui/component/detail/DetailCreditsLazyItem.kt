@@ -20,10 +20,8 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.raman.RollMovie.R
 import com.raman.RollMovie.model.data.CreditsModel
-import com.raman.RollMovie.model.data.detail.movie.ProductionCompany
-import com.raman.RollMovie.ui.theme.mainFont
 import com.raman.RollMovie.ui.theme.secondaryShapes
-import com.raman.RollMovie.utils.buildImageUrl
+import com.raman.RollMovie.utils.common.buildImageUrl
 
 @Composable
 fun DetailCreditsLazyRowItem(data: CreditsModel) {

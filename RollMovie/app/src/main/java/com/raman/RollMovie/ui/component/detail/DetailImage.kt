@@ -1,6 +1,5 @@
 package com.raman.RollMovie.ui.component.detail
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -9,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -25,8 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.raman.RollMovie.R
-import com.raman.RollMovie.ui.theme.Shapes
-import com.raman.RollMovie.utils.buildImageUrl
+import com.raman.RollMovie.utils.common.buildImageUrl
 
 @Composable
 fun DetailImage(image :String, title :String, voteAverage :Double) {
