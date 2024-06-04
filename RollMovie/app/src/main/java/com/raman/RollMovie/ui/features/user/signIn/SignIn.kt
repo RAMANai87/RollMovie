@@ -48,7 +48,7 @@ import com.raman.RollMovie.viewmodel.user.UserViewModel
 import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.mainFont
 import com.raman.RollMovie.ui.theme.primaryColor
-import com.raman.RollMovie.utils.AppScreens
+import com.raman.RollMovie.utils.common.AppScreens
 
 @Composable
 fun SignInScreen(useViewModel: UserViewModel?, navController: NavController) {
@@ -187,8 +187,10 @@ fun SignInPart(userViewModel: UserViewModel?, navController: NavController) {
                             fontSize = 14.sp,
                             fontWeight = FontWeight.Normal,
                             fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular)),
-                            color = primaryColor,
-                        )
+                            color = primaryColor
+                        ),
+                        maxLines = 1,
+                        modifier = Modifier.padding(end = 2.dp)
                     )
 
                 }

@@ -54,7 +54,7 @@ import com.raman.RollMovie.model.data.HttpResult
 import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.mainFont
 import com.raman.RollMovie.ui.theme.primaryColor
-import com.raman.RollMovie.utils.AppScreens
+import com.raman.RollMovie.utils.common.AppScreens
 import com.raman.RollMovie.viewmodel.user.UserViewModel
 
 @Composable
