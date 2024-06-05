@@ -32,6 +32,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -54,7 +56,11 @@ import com.raman.RollMovie.viewmodel.app.AppViewModel
 import com.raman.RollMovie.viewmodel.favorite.FavoriteViewModel
 
 @Composable
-fun HomeScreen(appViewModel: AppViewModel, navController: NavController, favoriteViewModel: FavoriteViewModel) {
+fun HomeScreen(
+    appViewModel: AppViewModel,
+    navController: NavController,
+    favoriteViewModel: FavoriteViewModel
+) {
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -150,7 +156,9 @@ fun HomeScreen(appViewModel: AppViewModel, navController: NavController, favorit
                         }
 
                     } else {
-                        MovieScreen(appViewModel = appViewModel, {navController.navigate(AppScreens.SeeAllScreen.route + "/" + it)}) { id ->
+                        MovieScreen(
+                            appViewModel = appViewModel,
+                            { navController.navigate(AppScreens.SeeAllScreen.route + "/" + it) }) { id ->
                             navController.navigate(AppScreens.DetailScreen.route + "/" + id + "/" + ApiConstants.MOVIE)
                             favoriteViewModel.searchFavoriteMovie(id)
                         }
@@ -206,7 +214,9 @@ fun HomeScreen(appViewModel: AppViewModel, navController: NavController, favorit
                         }
 
                     } else {
-                        TvShowScreen(appViewModel, {navController.navigate(AppScreens.SeeAllScreen.route + "/" + it)}) { id ->
+                        TvShowScreen(
+                            appViewModel,
+                            { navController.navigate(AppScreens.SeeAllScreen.route + "/" + it) }) { id ->
                             navController.navigate(AppScreens.DetailScreen.route + "/" + id + "/" + ApiConstants.TV_SHOW)
                             favoriteViewModel.searchFavoriteMovie(id)
                         }
@@ -275,7 +285,10 @@ private fun RollMovieAppBar(onSearchClicked: () -> Unit, onFavoriteClicked: () -
                         modifier = Modifier.padding(start = 10.dp),
                         textAlign = TextAlign.Center,
                         color = barFontMain,
-                        style = TextStyle(fontWeight = FontWeight.Bold)
+                        style = TextStyle(
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular))
+                        )
                     )
 
                 }
