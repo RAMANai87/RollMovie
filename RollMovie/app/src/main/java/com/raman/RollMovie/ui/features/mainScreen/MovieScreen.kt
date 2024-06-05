@@ -12,7 +12,6 @@ import com.raman.RollMovie.utils.common.AppConstants
 import com.raman.RollMovie.viewmodel.app.AppViewModel
 
 @Composable
-
 fun MovieScreen(appViewModel: AppViewModel, onSeeAllClicked :(String) -> Unit,onItemClicked: (id: Int) -> Unit) {
 
     Column {
