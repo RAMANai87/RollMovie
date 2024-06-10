@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.raman.RollMovie.model.data.CreditsModel
-import com.raman.RollMovie.model.data.detail.movie.ProductionCompany
 
 @Composable
 fun DetailCreditsLazyRow(data :List<CreditsModel>) {

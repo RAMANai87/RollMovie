@@ -1,9 +1,7 @@
 package com.raman.RollMovie.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Shapes
-import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.unit.dp
 
 val Shapes = Shapes(
