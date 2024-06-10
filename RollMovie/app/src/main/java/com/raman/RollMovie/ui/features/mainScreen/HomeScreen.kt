@@ -66,12 +66,12 @@ fun HomeScreen(
     favoriteViewModel: FavoriteViewModel
 ) {
 
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(Color.White)
+
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-
-        val systemUiController = rememberSystemUiController()
-        systemUiController.setStatusBarColor(Color.White)
 
         val composition by rememberLottieComposition(
             LottieCompositionSpec.RawRes(R.raw.no_internet_anim)
@@ -210,7 +210,8 @@ fun HomeScreen(
                                     text = "Try Again",
                                     style = TextStyle(
                                         fontWeight = FontWeight.Bold,
-                                        fontSize = 17.sp
+                                        fontSize = 17.sp,
+                                        fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular))
                                     ),
                                     color = Color.White
                                 )
@@ -328,7 +329,8 @@ fun HomeScreen(
                                     text = "Try Again",
                                     style = TextStyle(
                                         fontWeight = FontWeight.Bold,
-                                        fontSize = 17.sp
+                                        fontSize = 17.sp,
+                                        fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular))
                                     ),
                                     color = Color.White
                                 )

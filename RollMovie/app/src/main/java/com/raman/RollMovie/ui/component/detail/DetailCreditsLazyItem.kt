@@ -2,6 +2,7 @@ package com.raman.RollMovie.ui.component.detail
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
@@ -13,6 +14,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -26,19 +29,19 @@ import com.raman.RollMovie.utils.common.buildImageUrl
 @Composable
 fun DetailCreditsLazyRowItem(data: CreditsModel) {
 
-    Column(
+    Row(
         modifier = Modifier
-            .size(70.dp, 120.dp)
+            .size(120.dp, 60.dp)
             .padding(end = 6.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceEvenly
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceEvenly
     ) {
 
         AsyncImage(
             model = buildImageUrl(data.profile),
             contentDescription = null,
             modifier = Modifier
-                .size(66.dp)
+                .size(50.dp)
                 .padding(4.dp)
                 .clip(secondaryShapes.large),
             contentScale = ContentScale.Crop,
@@ -46,16 +49,33 @@ fun DetailCreditsLazyRowItem(data: CreditsModel) {
             error = painterResource(id = R.drawable.flame_sign_up)
         )
 
-        Text(
-            text = data.character ?: "No_Data",
-            style = TextStyle(
-                color = Color.Black,
-                fontSize = 10.sp,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
-            ),
-            maxLines = 1
-        )
+        Column {
+
+            Text(
+                text = data.name ?: "No_Data",
+                style = TextStyle(
+                    color = Color.Black,
+                    fontSize = 10.sp,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                    fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular))
+                ),
+                maxLines = 1
+            )
+
+            Text(
+                text = data.character ?: "No_Data",
+                style = TextStyle(
+                    color = Color.Gray,
+                    fontSize = 6.sp,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                    fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular))
+                ),
+                maxLines = 1
+            )
+
+        }
 
     }
 

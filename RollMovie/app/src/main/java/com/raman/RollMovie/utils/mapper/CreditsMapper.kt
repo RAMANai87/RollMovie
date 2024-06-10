@@ -8,7 +8,7 @@ fun crewMapper(data :List<NetworkCrew>) :List<CreditsModel>{
     return data.map {
         CreditsModel(
             it.profilePath,
-            it.knownForDepartment,
+            it.name,
             it.job
         )
     }
@@ -18,7 +18,7 @@ fun castMapper(data :List<NetworkCast>) :List<CreditsModel>{
     return data.map {
         CreditsModel(
             it.profilePath,
-            it.knownForDepartment,
+            it.name,
             it.character
         )
     }
