@@ -171,14 +171,3 @@ fun DetailBarSecondaryMovie(data: DetailModel) {
     }
 
 }
-
-@Composable
-fun DetailBarMainTvShow() {
-
-
-}
-
-@Composable
-fun DetailBarSecondaryTvShow() {
-
-}
