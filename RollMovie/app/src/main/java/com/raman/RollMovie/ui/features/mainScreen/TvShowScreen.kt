@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import com.raman.RollMovie.ui.adapters.MinimalLazyRow
 import com.raman.RollMovie.ui.adapters.SliderImagesView
-import com.raman.RollMovie.ui.component.BigImageItem
+import com.raman.RollMovie.ui.component.lazyItem.BigImageItem
 import com.raman.RollMovie.utils.common.AppConstants
 import com.raman.RollMovie.viewmodel.app.AppViewModel
 

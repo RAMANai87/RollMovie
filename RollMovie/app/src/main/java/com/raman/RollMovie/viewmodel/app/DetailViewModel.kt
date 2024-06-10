@@ -1,5 +1,6 @@
 package com.raman.RollMovie.viewmodel.app
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -43,6 +44,7 @@ class DetailViewModel @Inject constructor(
                     _movieDetail.value = it
                     inProgress.value = false
                     hitError.value = false
+                    Log.v("data3", it.toString())
                 }
 
         }

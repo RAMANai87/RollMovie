@@ -1,6 +1,5 @@
 package com.raman.RollMovie.ui.adapters
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -22,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.raman.RollMovie.R
 import com.raman.RollMovie.model.data.MovieModel
-import com.raman.RollMovie.ui.component.MinimalLazyItem
+import com.raman.RollMovie.ui.component.lazyItem.MinimalLazyItem
 import com.raman.RollMovie.ui.theme.mainFont
 import com.raman.RollMovie.ui.theme.primaryColor
 

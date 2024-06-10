@@ -1,4 +1,4 @@
-package com.raman.RollMovie.ui.component
+package com.raman.RollMovie.ui.component.lazyItem
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box

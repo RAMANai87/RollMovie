@@ -28,7 +28,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.raman.RollMovie.R
 import com.raman.RollMovie.ui.theme.primaryColor
 import com.raman.RollMovie.utils.common.AppScreens
-import com.raman.RollMovie.ui.component.SliderImages
+import com.raman.RollMovie.ui.component.lazyItem.SliderImages
 
 @Composable
 fun FirstRunScreen(navController: NavController) {

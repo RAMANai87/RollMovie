@@ -1,4 +1,4 @@
-package com.raman.RollMovie.ui.component
+package com.raman.RollMovie.ui.component.lazyItem
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.raman.RollMovie.R
 import com.raman.RollMovie.model.data.MovieModel
+import com.raman.RollMovie.ui.component.MainImageItem
 import com.raman.RollMovie.ui.component.detail.DetailSecondaryData
 import com.raman.RollMovie.ui.theme.secondaryShapes
 

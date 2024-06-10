@@ -1,15 +1,13 @@
 package com.raman.RollMovie.ui.adapters
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.raman.RollMovie.model.data.MovieModel
-import com.raman.RollMovie.model.data.detail.DetailModel
-import com.raman.RollMovie.ui.component.MainLazyItem
+import com.raman.RollMovie.ui.component.lazyItem.MainLazyItem
 import com.raman.RollMovie.utils.mapper.favoriteMapperSearchMovie
 import com.raman.RollMovie.utils.mapper.favoriteMapperSearchTvShow
 import com.raman.RollMovie.viewmodel.favorite.FavoriteViewModel

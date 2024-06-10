@@ -3,7 +3,6 @@ package com.raman.RollMovie.ui.features.favorite
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -33,7 +32,7 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.raman.RollMovie.R
-import com.raman.RollMovie.ui.component.MinimalLazyItem
+import com.raman.RollMovie.ui.component.lazyItem.MinimalLazyItem
 import com.raman.RollMovie.ui.component.detail.UseFulButton
 import com.raman.RollMovie.utils.remote.ApiConstants
 import com.raman.RollMovie.utils.common.AppScreens

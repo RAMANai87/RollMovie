@@ -1,4 +1,4 @@
-package com.raman.RollMovie.ui.component
+package com.raman.RollMovie.ui.component.lazyItem
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image

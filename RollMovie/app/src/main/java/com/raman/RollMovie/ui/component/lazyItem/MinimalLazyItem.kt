@@ -1,4 +1,4 @@
-package com.raman.RollMovie.ui.component
+package com.raman.RollMovie.ui.component.lazyItem
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Spacer
@@ -31,7 +31,7 @@ fun MinimalLazyItem(data : MovieModel, onItemClicked: (id: Int) -> Unit) {
 
     Card(
         modifier = Modifier
-            .size(170.dp, 230.dp)
+            .size(140.dp, 230.dp)
             .padding(end = 8.dp, top = 3.dp, start = 2.dp)
             .clickable { onItemClicked.invoke(data.id) },
         elevation = CardDefaults.cardElevation(

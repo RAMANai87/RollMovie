@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -45,6 +47,8 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.raman.RollMovie.R
+import com.raman.RollMovie.ui.component.ShimmerListItemBigImage
+import com.raman.RollMovie.ui.component.ShimmerListItemMinimal
 import com.raman.RollMovie.ui.component.detail.UseFulButton
 import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.barFontMain
@@ -110,17 +114,76 @@ fun HomeScreen(
                 0 -> {
                     if (appViewModel.inProgress.value) {
                         Column(
-                            modifier = Modifier.fillMaxSize(),
-                            verticalArrangement = Arrangement.SpaceAround,
-                            horizontalAlignment = Alignment.CenterHorizontally
+                            modifier = Modifier
+                                .fillMaxSize()
                         ) {
-
-                            Spacer(modifier = Modifier.height(200.dp))
-
-                            CircularProgressIndicator(
-                                color = primaryColor,
-                                modifier = Modifier.padding(100.dp)
+                            ShimmerListItemBigImage(
+                                isLoading = true,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(200.dp)
+                                    .padding(top = 14.dp, start = 10.dp, end = 10.dp)
                             )
+
+                            Spacer(modifier = Modifier.height(20.dp))
+
+                            LazyRow(
+                                contentPadding = PaddingValues(start = 8.dp)
+                            ) {
+                                items(10) {
+                                    ShimmerListItemMinimal(
+                                        isLoading = true,
+                                        modifier = Modifier
+                                            .size(140.dp, 200.dp)
+                                            .padding(end = 8.dp)
+                                    )
+                                }
+                            }
+
+                            Spacer(modifier = Modifier.height(20.dp))
+
+                            LazyRow(
+                                contentPadding = PaddingValues(start = 8.dp)
+                            ) {
+                                items(10) {
+                                    ShimmerListItemMinimal(
+                                        isLoading = true,
+                                        modifier = Modifier
+                                            .size(140.dp, 200.dp)
+                                            .padding(end = 8.dp)
+                                    )
+                                }
+                            }
+
+                            Spacer(modifier = Modifier.height(20.dp))
+
+                            LazyRow(
+                                contentPadding = PaddingValues(start = 8.dp)
+                            ) {
+                                items(10) {
+                                    ShimmerListItemMinimal(
+                                        isLoading = true,
+                                        modifier = Modifier
+                                            .size(140.dp, 200.dp)
+                                            .padding(end = 8.dp)
+                                    )
+                                }
+                            }
+
+                            Spacer(modifier = Modifier.height(20.dp))
+
+                            LazyRow(
+                                contentPadding = PaddingValues(start = 8.dp)
+                            ) {
+                                items(10) {
+                                    ShimmerListItemMinimal(
+                                        isLoading = true,
+                                        modifier = Modifier
+                                            .size(140.dp, 200.dp)
+                                            .padding(end = 8.dp)
+                                    )
+                                }
+                            }
                         }
                     } else if (appViewModel.isHitError.value) {
 
@@ -168,17 +231,77 @@ fun HomeScreen(
                 1 -> {
                     if (appViewModel.inProgressTvShow.value) {
                         Column(
-                            modifier = Modifier.fillMaxSize(),
-                            verticalArrangement = Arrangement.SpaceAround,
-                            horizontalAlignment = Alignment.CenterHorizontally
+                            modifier = Modifier
+                                .fillMaxSize()
                         ) {
 
-                            Spacer(modifier = Modifier.height(200.dp))
+                            LazyRow {
+                                items(1) {
+                                    ShimmerListItemBigImage(
+                                        isLoading = true
+                                    )
+                                }
+                            }
 
-                            CircularProgressIndicator(
-                                color = primaryColor,
-                                modifier = Modifier.padding(100.dp)
-                            )
+                            Spacer(modifier = Modifier.height(14.dp))
+
+                            LazyRow(
+                                contentPadding = PaddingValues(start = 8.dp)
+                            ) {
+                                items(10) {
+                                    ShimmerListItemMinimal(
+                                        isLoading = true,
+                                        modifier = Modifier
+                                            .size(140.dp, 200.dp)
+                                            .padding(end = 8.dp)
+                                    )
+                                }
+                            }
+
+                            Spacer(modifier = Modifier.height(14.dp))
+
+                            LazyRow(
+                                contentPadding = PaddingValues(start = 8.dp)
+                            ) {
+                                items(10) {
+                                    ShimmerListItemMinimal(
+                                        isLoading = true,
+                                        modifier = Modifier
+                                            .size(140.dp, 200.dp)
+                                            .padding(end = 8.dp)
+                                    )
+                                }
+                            }
+
+                            Spacer(modifier = Modifier.height(14.dp))
+
+                            LazyRow(
+                                contentPadding = PaddingValues(start = 8.dp)
+                            ) {
+                                items(10) {
+                                    ShimmerListItemMinimal(
+                                        isLoading = true,
+                                        modifier = Modifier
+                                            .size(140.dp, 200.dp)
+                                            .padding(end = 8.dp)
+                                    )
+                                }
+                            }
+
+                            Spacer(modifier = Modifier.height(14.dp))
+
+                            LazyRow(
+                                contentPadding = PaddingValues(start = 8.dp)
+                            ) {
+                                items(10) {
+                                    ShimmerListItemMinimal(
+                                        isLoading = true,
+                                        modifier = Modifier
+                                            .size(140.dp, 200.dp)
+                                            .padding(end = 8.dp)
+                                    )
+                                }
+                            }
                         }
                     } else if (appViewModel.isHitErrorTvShow.value) {
 

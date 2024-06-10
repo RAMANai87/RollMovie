@@ -36,7 +36,7 @@ fun DetailLazyRowItem(data: ProductionCompany) {
     ) {
 
         AsyncImage(
-            model = buildImageUrl(data.logo_path),
+            model = data.logo_path,
             contentDescription = null,
             modifier = Modifier
                 .size(66.dp)
