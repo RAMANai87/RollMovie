@@ -12,7 +12,7 @@ import com.raman.RollMovie.model.data.detail.movie.ProductionCompany
 fun DetailCreditsLazyRow(data :List<CreditsModel>) {
 
     LazyRow(
-        modifier = Modifier.padding(top = 8.dp, bottom = 12.dp)
+        modifier = Modifier.padding(top = 4.dp, bottom = 12.dp)
     ) {
         items(count = data.size) {
             DetailCreditsLazyRowItem(data = data[it])

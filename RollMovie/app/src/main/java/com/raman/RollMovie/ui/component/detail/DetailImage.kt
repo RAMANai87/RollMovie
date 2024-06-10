@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,12 +27,12 @@ import com.raman.RollMovie.R
 import com.raman.RollMovie.utils.common.buildImageUrl
 
 @Composable
-fun DetailImage(image :String, title :String, voteAverage :Double) {
+fun DetailImage(image: String, title: String, voteAverage: Double) {
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(400.dp)
+            .height(360.dp)
     ) {
 
         Box(
@@ -64,8 +65,8 @@ fun DetailImage(image :String, title :String, voteAverage :Double) {
                 Text(
                     text = title,
                     style = TextStyle(
-                        color = if (isInError.value) Color.Black else Color.White ,
-                        fontSize = 20.sp,
+                        color = if (isInError.value) Color.Black else Color.White,
+                        fontSize = 18.sp,
                         fontWeight = FontWeight.ExtraBold
                     ),
                     maxLines = 1

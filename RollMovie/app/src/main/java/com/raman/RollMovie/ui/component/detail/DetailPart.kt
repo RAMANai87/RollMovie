@@ -31,18 +31,16 @@ import com.raman.RollMovie.ui.theme.Shapes
 import com.raman.RollMovie.ui.theme.backgroundBottomNav
 import com.raman.RollMovie.ui.theme.backgroundCard
 import com.raman.RollMovie.ui.theme.mainFont
+import com.raman.RollMovie.ui.theme.secondaryShapes
 import com.raman.RollMovie.utils.common.genreEditor
 import com.raman.RollMovie.utils.mapper.castMapper
 import com.raman.RollMovie.utils.mapper.crewMapper
 
 @Composable
-fun DetailBarMainMovie(data: DetailModel) {
+fun DetailBarMainMovie(data: DetailModel, modifier: Modifier = Modifier) {
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(backgroundBottomNav)
-            .verticalScroll(rememberScrollState()),
+        modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
@@ -50,9 +48,9 @@ fun DetailBarMainMovie(data: DetailModel) {
 
         Card(
             modifier = Modifier
-                .fillMaxWidth(0.9f)
-                .padding(top = 10.dp, bottom = 10.dp)
-                .clip(Shapes.medium),
+                .fillMaxWidth()
+                .padding(top = 10.dp)
+                .clip(secondaryShapes.medium),
             colors = CardDefaults.cardColors(containerColor = Color.White)
         ) {
 

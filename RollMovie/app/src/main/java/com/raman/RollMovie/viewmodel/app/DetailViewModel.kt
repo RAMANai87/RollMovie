@@ -71,7 +71,6 @@ class DetailViewModel @Inject constructor(
 
     fun deleteDataForBackPressed() {
         viewModelScope.launch {
-            delay(100)
             _movieDetail.value = null
             _tvShowDetail.value = null
         }

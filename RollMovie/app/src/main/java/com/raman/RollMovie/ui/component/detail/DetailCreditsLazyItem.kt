@@ -31,7 +31,7 @@ fun DetailCreditsLazyRowItem(data: CreditsModel) {
 
     Row(
         modifier = Modifier
-            .size(120.dp, 60.dp)
+            .size(170.dp, 60.dp)
             .padding(end = 6.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly
@@ -45,8 +45,8 @@ fun DetailCreditsLazyRowItem(data: CreditsModel) {
                 .padding(4.dp)
                 .clip(secondaryShapes.large),
             contentScale = ContentScale.Crop,
-            placeholder = painterResource(id = R.drawable.flame_sign_up),
-            error = painterResource(id = R.drawable.flame_sign_up)
+            placeholder = painterResource(id = R.drawable.white_screen),
+            error = painterResource(id = R.drawable.white_screen)
         )
 
         Column {
@@ -55,9 +55,9 @@ fun DetailCreditsLazyRowItem(data: CreditsModel) {
                 text = data.name ?: "No_Data",
                 style = TextStyle(
                     color = Color.Black,
-                    fontSize = 10.sp,
+                    fontSize = 12.sp,
                     fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center,
+                    textAlign = TextAlign.Start,
                     fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular))
                 ),
                 maxLines = 1
@@ -67,9 +67,9 @@ fun DetailCreditsLazyRowItem(data: CreditsModel) {
                 text = data.character ?: "No_Data",
                 style = TextStyle(
                     color = Color.Gray,
-                    fontSize = 6.sp,
+                    fontSize = 10.sp,
                     fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center,
+                    textAlign = TextAlign.Start,
                     fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular))
                 ),
                 maxLines = 1
