@@ -86,7 +86,9 @@ fun HomeScreen(
             navController.navigate(AppScreens.SearchScreen.route)
         }, onFavoriteClicked = {
             navController.navigate(AppScreens.FavoriteScreen.route)
-        })
+        }) {
+            navController.navigate(AppScreens.SettingScreen.route)
+        }
 
         Column(
             modifier = Modifier
@@ -354,7 +356,11 @@ fun HomeScreen(
 
 // App bar
 @Composable
-private fun RollMovieAppBar(onSearchClicked: () -> Unit, onFavoriteClicked: () -> Unit) {
+private fun RollMovieAppBar(
+    onSearchClicked: () -> Unit,
+    onFavoriteClicked: () -> Unit,
+    onSettingClicked: () -> Unit
+) {
 
     Surface(
         modifier = Modifier
@@ -366,13 +372,11 @@ private fun RollMovieAppBar(onSearchClicked: () -> Unit, onFavoriteClicked: () -
             modifier = Modifier.fillMaxSize(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Spacer(modifier = Modifier.padding(start = 10.dp))
+            Spacer(modifier = Modifier.width(10.dp))
 
-            Image(
-                painter = painterResource(id = R.mipmap.app_icon),
-                contentDescription = null,
-                modifier = Modifier.size(24.dp, 24.dp)
-            )
+            UseFulButton(image = R.mipmap.app_icon) {
+                onSettingClicked.invoke()
+            }
 
             Spacer(modifier = Modifier.width(16.dp))
 

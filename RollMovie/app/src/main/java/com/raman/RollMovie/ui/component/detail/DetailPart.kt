@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
@@ -18,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -52,12 +55,16 @@ fun DetailBarMainMovie(data: DetailModel, modifier: Modifier = Modifier) {
                 .fillMaxWidth()
                 .fillMaxHeight(0.6f)
                 .align(Alignment.TopCenter),
-            error = painterResource(id = R.drawable.white_screen)
+            error = painterResource(id = R.drawable.white_screen),
+            contentScale = ContentScale.Crop
         )
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.background(Color.White.copy(0.5f))
+            modifier = Modifier
+                .padding(top = 200.dp)
+                .align(Alignment.Center)
+                .verticalScroll(rememberScrollState())
         ) {
 
             DetailImage(data.image, data.title, data.vote)
@@ -92,7 +99,7 @@ fun DetailBarMainMovie(data: DetailModel, modifier: Modifier = Modifier) {
                     )
 
                     Text(
-                        text = data.overview,
+                        text = data.overview.ifEmpty { "No Caption for this movie" },
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(start = 6.dp, end = 6.dp, top = 4.dp),
@@ -105,53 +112,60 @@ fun DetailBarMainMovie(data: DetailModel, modifier: Modifier = Modifier) {
                         )
                     )
 
-                    Text(
-                        text = "Production Company",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 6.dp, top = 10.dp),
-                        style = TextStyle(
-                            color = mainFont,
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold,
-                            textAlign = TextAlign.Center,
-                            fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular))
+                    if (data.productionCompany.isNotEmpty()) {
+                        Text(
+                            text = "Production Company",
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 6.dp, top = 10.dp),
+                            style = TextStyle(
+                                color = mainFont,
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold,
+                                textAlign = TextAlign.Center,
+                                fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular))
+                            )
                         )
-                    )
 
-                    DetailLazyRow(data = data.productionCompany)
+                        DetailLazyRow(data = data.productionCompany)
+                    }
 
-                    Text(
-                        text = "Cast",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 6.dp, top = 10.dp),
-                        style = TextStyle(
-                            color = mainFont,
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold,
-                            textAlign = TextAlign.Center,
-                            fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular))
+                    if (data.castCrews.cast.isNotEmpty()) {
+                        Text(
+                            text = "Cast",
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 6.dp, top = 10.dp),
+                            style = TextStyle(
+                                color = mainFont,
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold,
+                                textAlign = TextAlign.Center,
+                                fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular))
+                            )
                         )
-                    )
 
-                    DetailCreditsLazyRow(data = castMapper(data.castCrews.cast))
+                        DetailCreditsLazyRow(data = castMapper(data.castCrews.cast))
 
-                    Text(
-                        text = "Crew",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 6.dp, top = 10.dp),
-                        style = TextStyle(
-                            color = mainFont,
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold,
-                            textAlign = TextAlign.Center,
-                            fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular))
+                    }
+
+                    if (data.castCrews.crew.isNotEmpty()) {
+                        Text(
+                            text = "Crew",
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 6.dp, top = 10.dp),
+                            style = TextStyle(
+                                color = mainFont,
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold,
+                                textAlign = TextAlign.Center,
+                                fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular))
+                            )
                         )
-                    )
 
-                    DetailCreditsLazyRow(data = crewMapper(data.castCrews.crew))
+                        DetailCreditsLazyRow(data = crewMapper(data.castCrews.crew))
+                    }
 
                 }
 
@@ -186,7 +200,10 @@ fun DetailBarSecondaryMovie(data: DetailModel) {
                 title = if (data.time <= 0) "No runtime" else data.time.toString() + " min"
             )
             DetailSecondaryData(image = R.drawable.ic_realizedate, title = data.realizeDate)
-            DetailSecondaryData(image = R.drawable.ic_genre, title = if (data.genre.isEmpty()) "No genre" else genreEditor(data.genre))
+            DetailSecondaryData(
+                image = R.drawable.ic_genre,
+                title = if (data.genre.isEmpty()) "No genre" else genreEditor(data.genre)
+            )
         }
 
     }

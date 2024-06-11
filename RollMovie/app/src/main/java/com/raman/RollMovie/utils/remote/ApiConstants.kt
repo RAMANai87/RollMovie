@@ -42,7 +42,7 @@ internal object ApiConstants {
 
     internal object Utils {
 
-        internal const val IMAGE_URL_TEST = "https://upload.wikimedia.org/wikipedia/commons/3/36/Hopetoun_falls.jpg"
+        internal const val SOURCE_CODE_URL = "https://github.com/RAMANai87/RollMovie"
 
     }
 

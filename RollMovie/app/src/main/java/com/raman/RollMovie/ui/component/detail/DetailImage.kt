@@ -1,5 +1,6 @@
 package com.raman.RollMovie.ui.component.detail
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -24,13 +25,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.raman.RollMovie.R
+import com.raman.RollMovie.ui.theme.primaryColor
 import com.raman.RollMovie.utils.common.buildImageUrl
 
 @Composable
 fun DetailImage(image: String, title: String, voteAverage: Double) {
 
     Card(
-        modifier = Modifier.size(184.dp, 234.dp)
+        modifier = Modifier.size(184.dp, 234.dp),
+        border = BorderStroke(0.7.dp, primaryColor)
     ) {
 
         Box(
@@ -64,7 +67,7 @@ fun DetailImage(image: String, title: String, voteAverage: Double) {
                     text = title,
                     style = TextStyle(
                         color = if (isInError.value) Color.Black else Color.White,
-                        fontSize = 18.sp,
+                        fontSize = 14.sp,
                         fontWeight = FontWeight.ExtraBold
                     ),
                     maxLines = 1

@@ -7,7 +7,6 @@ import androidx.activity.viewModels
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -69,7 +68,11 @@ class MainActivity : ComponentActivity() {
                 route = AppScreens.MainScreen.route
             ) {
                 if (userViewModel.currentUser != null) {
-                    HomeScreen(appViewModel, myNavController, favoriteViewModel)
+                    HomeScreen(
+                        appViewModel = appViewModel,
+                        navController = myNavController,
+                        favoriteViewModel = favoriteViewModel
+                    )
                 } else {
                     FirstRunScreen(navController = myNavController)
                 }
@@ -93,7 +96,7 @@ class MainActivity : ComponentActivity() {
             composable(
                 route = AppScreens.SettingScreen.route
             ) {
-                SettingScreen()
+                SettingScreen(navController = myNavController)
             }
 
             composable(

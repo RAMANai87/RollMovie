@@ -131,6 +131,7 @@ fun SeeAllScreen(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
+                .height(50.dp)
         ) {
 
             Spacer(modifier = Modifier.width(4.dp))
@@ -143,7 +144,7 @@ fun SeeAllScreen(
                 text = appBarTitle,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(end = 30.dp),
+                    .padding(end = 22.dp),
                 style = TextStyle(
                     fontSize = 22.sp,
                     fontWeight = FontWeight.ExtraBold,

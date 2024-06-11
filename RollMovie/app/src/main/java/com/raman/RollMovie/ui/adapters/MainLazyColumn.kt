@@ -21,7 +21,7 @@ fun MainLazyColumn(
 ) {
 
     LazyColumn(
-        modifier = Modifier.padding(top = 62.dp, start = 8.dp),
+        modifier = Modifier.padding(top = 2.dp, start = 8.dp),
         contentPadding = PaddingValues(bottom = 6.dp)
     ) {
 

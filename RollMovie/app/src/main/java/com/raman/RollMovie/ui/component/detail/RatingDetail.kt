@@ -25,7 +25,7 @@ import com.raman.RollMovie.utils.common.voteEditor
 fun RatingDetail(vote: Double) {
 
     Card(
-        modifier = Modifier.size(56.dp, 28.dp),
+        modifier = Modifier.size(50.dp, 22.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White.copy(0.82f))
     ) {
 
@@ -38,13 +38,13 @@ fun RatingDetail(vote: Double) {
             Image(
                 painter = painterResource(id = R.drawable.ic_star),
                 contentDescription = null,
-                modifier = Modifier.size(24.dp)
+                modifier = Modifier.size(20.dp)
             )
 
             Text(
                 text = if (vote == 0.0) "NR" else voteEditor(vote),
                 style = TextStyle(
-                    fontSize = 12.sp,
+                    fontSize = 10.sp,
                     fontWeight = FontWeight.Bold,
                     color = primaryColor
                 ),

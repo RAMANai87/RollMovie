@@ -58,7 +58,8 @@ fun FavoriteScreen(favoriteViewModel: FavoriteViewModel, navController: NavContr
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(30.dp)
+                .height(56.dp)
+                .padding(top = 10.dp)
         ) {
 
             Spacer(modifier = Modifier.width(4.dp))
