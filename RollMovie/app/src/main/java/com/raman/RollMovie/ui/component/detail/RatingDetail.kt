@@ -26,7 +26,7 @@ fun RatingDetail(vote: Double) {
 
     Card(
         modifier = Modifier.size(56.dp, 28.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White.copy(0.75f))
+        colors = CardDefaults.cardColors(containerColor = Color.White.copy(0.82f))
     ) {
 
         Row(
@@ -42,7 +42,7 @@ fun RatingDetail(vote: Double) {
             )
 
             Text(
-                text = voteEditor(vote),
+                text = if (vote == 0.0) "NR" else voteEditor(vote),
                 style = TextStyle(
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold,

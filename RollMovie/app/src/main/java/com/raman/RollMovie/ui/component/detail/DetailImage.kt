@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,9 +30,7 @@ import com.raman.RollMovie.utils.common.buildImageUrl
 fun DetailImage(image: String, title: String, voteAverage: Double) {
 
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(360.dp)
+        modifier = Modifier.size(184.dp, 234.dp)
     ) {
 
         Box(

@@ -72,7 +72,7 @@ fun MainImageItem(imageUrl: String?, vote: Double) {
                     )
 
                     Text(
-                        text = voteEditor(vote),
+                        text = if (vote == 0.0) "NR" else voteEditor(vote),
                         style = TextStyle(
                             fontSize = 12.sp,
                             fontWeight = FontWeight.Bold,

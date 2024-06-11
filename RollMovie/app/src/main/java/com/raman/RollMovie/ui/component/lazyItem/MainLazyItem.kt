@@ -52,7 +52,7 @@ fun MainLazyItem(
             .padding(top = 6.dp, end = 8.dp)
             .clickable { onItemClick.invoke(data.id) },
         colors = CardDefaults.cardColors(containerColor = Color.White),
-        elevation = CardDefaults.cardElevation(2.dp)
+        elevation = CardDefaults.cardElevation(0.dp)
     ) {
 
         Box(
@@ -80,8 +80,6 @@ fun MainLazyItem(
                         maxLines = 1
                     )
                     Spacer(modifier = Modifier.height(4.dp))
-                    DetailSecondaryData(image = R.drawable.ic_realizedate, title = data.realizeDate)
-                    Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = data.overview,
                         style = TextStyle(
@@ -91,6 +89,7 @@ fun MainLazyItem(
                         ),
                         maxLines = 4
                     )
+                    DetailSecondaryData(image = R.drawable.ic_realizedate, title = data.realizeDate)
                     Spacer(modifier = Modifier.height(4.dp))
                 }
             }

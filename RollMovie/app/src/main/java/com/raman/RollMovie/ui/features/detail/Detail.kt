@@ -79,8 +79,6 @@ fun DetailScreen(
                         detailMapperMovie(detailData),
                         Modifier
                             .fillMaxSize()
-                            .background(backgroundBottomNav)
-                            .verticalScroll(rememberScrollState())
                     )
 
                     Row(
@@ -136,7 +134,10 @@ fun DetailScreen(
                         .fillMaxSize()
                 ) {
 
-                    DetailBarMainMovie(detailMapperTvShow(detailData))
+                    DetailBarMainMovie(
+                        detailMapperTvShow(detailData),
+                        modifier = Modifier.fillMaxSize()
+                    )
 
                     Row(
                         modifier = Modifier
