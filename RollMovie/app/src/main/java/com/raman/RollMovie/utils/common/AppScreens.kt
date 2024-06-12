@@ -10,6 +10,6 @@ sealed class AppScreens(val route :String) {
     data object DetailScreen : AppScreens("DetailScreen")
     data object FavoriteScreen : AppScreens("FavoriteScreen")
     data object SettingScreen : AppScreens("SettingScreen")
-    data object HomeScreen : AppScreens("SettingScreen")
+    data object HomeScreen : AppScreens("HomeScreen")
 
 }
