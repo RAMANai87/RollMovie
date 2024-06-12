@@ -106,9 +106,8 @@ fun DetailBarMainMovie(data: DetailModel, modifier: Modifier = Modifier) {
                         style = TextStyle(
                             color = mainFont,
                             fontSize = 14.sp,
-                            fontWeight = FontWeight.Normal,
-                            textAlign = TextAlign.Start,
-                            fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular))
+                            fontWeight = FontWeight.ExtraBold,
+                            textAlign = TextAlign.Start
                         )
                     )
 

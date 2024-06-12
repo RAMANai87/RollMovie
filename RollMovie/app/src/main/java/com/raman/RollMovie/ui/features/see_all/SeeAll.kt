@@ -146,7 +146,7 @@ fun SeeAllScreen(
                     .fillMaxWidth()
                     .padding(end = 22.dp),
                 style = TextStyle(
-                    fontSize = 22.sp,
+                    fontSize = 18.sp,
                     fontWeight = FontWeight.ExtraBold,
                     textAlign = TextAlign.Center,
                     color = Color.Black
@@ -155,9 +155,12 @@ fun SeeAllScreen(
 
         }
 
-        MainLazyColumn(data = data,
+        MainLazyColumn(
+            data = data,
             favoriteViewModel = favoriteViewModel,
-            isMovie = isMovie) { id ->
+            modifier = Modifier.padding(top = 2.dp, start = 8.dp),
+            isMovie = isMovie
+        ) { id ->
             navController.navigate(AppScreens.DetailScreen.route + "/" + id + "/" + if (isMovie) ApiConstants.MOVIE else ApiConstants.TV_SHOW)
         }
 

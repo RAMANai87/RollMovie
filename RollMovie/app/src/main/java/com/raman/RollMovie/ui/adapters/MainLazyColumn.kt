@@ -17,11 +17,12 @@ fun MainLazyColumn(
     data: List<MovieModel>,
     favoriteViewModel: FavoriteViewModel,
     isMovie: Boolean,
+    modifier: Modifier = Modifier,
     onItemClicked: (id: Int) -> Unit
 ) {
 
     LazyColumn(
-        modifier = Modifier.padding(top = 2.dp, start = 8.dp),
+        modifier = modifier,
         contentPadding = PaddingValues(bottom = 6.dp)
     ) {
 

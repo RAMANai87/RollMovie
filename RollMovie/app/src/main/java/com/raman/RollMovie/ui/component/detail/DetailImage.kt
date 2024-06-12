@@ -67,7 +67,7 @@ fun DetailImage(image: String, title: String, voteAverage: Double) {
                     text = title,
                     style = TextStyle(
                         color = if (isInError.value) Color.Black else Color.White,
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                         fontWeight = FontWeight.ExtraBold
                     ),
                     maxLines = 1

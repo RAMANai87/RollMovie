@@ -57,8 +57,7 @@ fun DetailCreditsLazyRowItem(data: CreditsModel) {
                     color = Color.Black,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Start,
-                    fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular))
+                    textAlign = TextAlign.Start
                 ),
                 maxLines = 1
             )
@@ -69,8 +68,7 @@ fun DetailCreditsLazyRowItem(data: CreditsModel) {
                     color = Color.Gray,
                     fontSize = 10.sp,
                     fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Start,
-                    fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular))
+                    textAlign = TextAlign.Start
                 ),
                 maxLines = 1
             )
