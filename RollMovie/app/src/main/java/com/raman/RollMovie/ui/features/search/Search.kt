@@ -162,7 +162,8 @@ fun SearchScreen(
                 MainLazyColumn(
                     data = searchData,
                     favoriteViewModel = favoriteViewModel,
-                    isMovie = isMovieData
+                    isMovie = isMovieData,
+                    Modifier.padding(top = 62.dp, start = 8.dp)
                 ) { id ->
                     navController.navigate(AppScreens.DetailScreen.route + "/" + id + "/" + if (isMovieData) ApiConstants.MOVIE else ApiConstants.TV_SHOW)
                     favoriteViewModel.searchFavoriteMovie(id)
