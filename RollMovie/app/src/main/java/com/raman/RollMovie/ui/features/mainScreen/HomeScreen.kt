@@ -18,7 +18,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
@@ -86,9 +85,7 @@ fun HomeScreen(
             navController.navigate(AppScreens.SearchScreen.route)
         }, onFavoriteClicked = {
             navController.navigate(AppScreens.FavoriteScreen.route)
-        }) {
-            navController.navigate(AppScreens.SettingScreen.route)
-        }
+        })
 
         Column(
             modifier = Modifier
@@ -186,6 +183,7 @@ fun HomeScreen(
                                     )
                                 }
                             }
+                            Spacer(modifier = Modifier.height(20.dp))
                         }
                     } else if (appViewModel.isHitError.value) {
 
@@ -305,6 +303,7 @@ fun HomeScreen(
                                     )
                                 }
                             }
+                            Spacer(modifier = Modifier.height(20.dp))
                         }
                     } else if (appViewModel.isHitErrorTvShow.value) {
 
@@ -358,8 +357,7 @@ fun HomeScreen(
 @Composable
 private fun RollMovieAppBar(
     onSearchClicked: () -> Unit,
-    onFavoriteClicked: () -> Unit,
-    onSettingClicked: () -> Unit
+    onFavoriteClicked: () -> Unit
 ) {
 
     Surface(
@@ -374,9 +372,13 @@ private fun RollMovieAppBar(
         ) {
             Spacer(modifier = Modifier.width(10.dp))
 
-            UseFulButton(image = R.mipmap.app_icon) {
-                onSettingClicked.invoke()
-            }
+            Image(
+                painter = painterResource(id = R.mipmap.app_icon),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(36.dp)
+                    .padding(5.dp)
+            )
 
             Spacer(modifier = Modifier.width(16.dp))
 
