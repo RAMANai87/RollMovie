@@ -53,7 +53,7 @@ fun FavoriteScreen(favoriteViewModel: FavoriteViewModel, navController: NavContr
             .background(Color.White)
     ) {
 
-        val favoriteData = favoriteViewModel.favoriteMovie.collectAsState().value
+        val favoriteData = favoriteViewModel.favoriteMovie.collectAsState().value ?: listOf()
 
         Row(
             modifier = Modifier
@@ -83,7 +83,7 @@ fun FavoriteScreen(favoriteViewModel: FavoriteViewModel, navController: NavContr
 
         }
 
-        if (favoriteData == null) {
+        if (favoriteData.isEmpty()) {
 
             val composition by rememberLottieComposition(
                 LottieCompositionSpec.RawRes(R.raw.no_data)
@@ -94,8 +94,6 @@ fun FavoriteScreen(favoriteViewModel: FavoriteViewModel, navController: NavContr
                 verticalArrangement = Arrangement.SpaceEvenly,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-
-                Spacer(modifier = Modifier.height(120.dp))
 
                 LottieAnimation(
                     composition = composition,
