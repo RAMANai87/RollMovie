@@ -67,6 +67,7 @@
 
 # With R8 full mode generic signatures are stripped for classes that are not kept.
 -keep,allowobfuscation,allowshrinking class retrofit2.Response
+-keep,allowobfuscation,allowshrinking interface retrofit2.Call
 # When editing this file, update the following files as well:
 # - META-INF/com.android.tools/proguard/coroutines.pro
 # - META-INF/com.android.tools/r8/coroutines.pro
@@ -131,3 +132,61 @@
 # since the annotation is referenced from the code.
 -keepattributes RuntimeVisibleAnnotations
 -keep,allowobfuscation,allowshrinking class * extends androidx.navigation.Navigator
+# Basic ProGuard rules for Firebase Android SDK 2.0.0+
+-keep class com.firebase.** { *; }
+-keep class org.apache.** { *; }
+-keepnames class com.fasterxml.jackson.** { *; }
+-keepnames class javax.servlet.** { *; }
+-keepnames class org.ietf.jgss.** { *; }
+-dontwarn org.apache.**
+-dontwarn org.w3c.dom.**
+-keep class **.R
+-keep class **.R$* {*;}
+-keep class **.BuildConfig {*;}
+-keep class **.Manifest {*;}
+# Keep Dependency Injection Framework related classes and methods
+-keep class dagger.hilt.** { *; }
+-keep class javax.inject.** { *; }
+-keep class javax.annotation.** { *; }
+
+# Keep Model and Repository Classes
+-keep class com.example.core.data.model.** { *; }
+-keep class com.example.core.data.repo.** { *; }
+
+# Keep ViewModels
+-keep class * extends androidx.lifecycle.ViewModel
+
+# Keep Parcelable Classes
+-keep class * implements android.os.Parcelable {
+    public static final android.os.Parcelable$Creator *;
+}
+
+# Keep UI-related classes
+-keep class com.example.ui.activity.** { *; }
+-keep class com.example.ui.fragment.** { *; }
+-keep class com.example.service.** { *; }
+
+# Menjaga semua kelas dalam paket tertentu
+-keep class com.example.package.** { *; }
+
+# Menjaga semua kelas yang disebutkan dalam file tertentu
+#-keep @com.example.rules.txt
+
+
+# Menjaga kelas model
+-keep class com.example.model.** { *; }
+
+# Menjaga kelas service
+-keep class com.example.service.** { *; }
+
+# Menjaga kelas-kelas yang diperlukan untuk penanganan SSL/TLS
+-keep class okhttp3.internal.platform.ConscryptPlatform {*;}
+-keep class okhttp3.internal.platform.OpenJSSEPlatform {*;}
+-keep class org.bouncycastle.** {*;}
+-keep class org.conscrypt.** {*;}
+-keep class org.openjsse.** {*;}
+
+
+# Keep classes required by OpenJSSE
+-keep class sun.security.x509.** { *; }
+-keep class sun.util.logging.** { *; }
