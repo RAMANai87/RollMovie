@@ -162,7 +162,7 @@ fun SignInPart(userViewModel: UserViewModel?, navController: NavController) {
             ) {
 
                 Text(
-                    text = "I do not have an account, already !",
+                    text = "I do not have an account !",
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Normal,
@@ -189,8 +189,7 @@ fun SignInPart(userViewModel: UserViewModel?, navController: NavController) {
                             fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular)),
                             color = primaryColor
                         ),
-                        maxLines = 1,
-                        modifier = Modifier.padding(end = 2.dp)
+                        maxLines = 1
                     )
 
                 }

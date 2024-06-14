@@ -190,7 +190,7 @@ fun SignUpPart(userViewModel: UserViewModel?, navControl: NavController) {
             ) {
 
                 Text(
-                    text = "Did you have an account, already ?",
+                    text = "Did you have an account ?",
                     style = TextStyle(
                         fontSize = 14.sp,
                         fontWeight = FontWeight.Normal,
