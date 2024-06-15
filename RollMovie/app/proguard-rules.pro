@@ -115,6 +115,9 @@
 -dontwarn org.bouncycastle.**
 -dontwarn org.openjsse.**
 -keep class * extends androidx.room.RoomDatabase
+-keep @androidx.room.Entity class *
+-dontwarn android.arch.util.paging.CountedDataSource
+-dontwarn android.arch.persistence.room.paging.LimitOffsetDataSource
 -dontwarn androidx.room.paging.**
 -dontwarn com.airbnb.lottie.**
 -keep class com.airbnb.lottie.** {*;}
