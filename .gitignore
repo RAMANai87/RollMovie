@@ -7,6 +7,8 @@ local.properties
 
 # Log/OS Files
 *.log
+#hide api key
+ApiKeyProvider.kt
 
 # Android Studio generated files and folders
 captures/
