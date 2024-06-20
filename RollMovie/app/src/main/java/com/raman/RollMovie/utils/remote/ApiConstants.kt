@@ -42,6 +42,7 @@ internal object ApiConstants {
     internal object Utils {
 
         internal const val SOURCE_CODE_URL = "https://github.com/RAMANai87/RollMovie"
+        internal const val SOURCE_URL = "https://www.themoviedb.org/"
 
     }
 

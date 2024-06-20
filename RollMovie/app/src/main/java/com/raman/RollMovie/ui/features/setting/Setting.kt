@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -99,12 +100,12 @@ fun SettingScreen(navController: NavController) {
                 context.startActivities(arrayOf(intent))
             }
 
-            Divider(
-                thickness = 1.2.dp,
-                color = Color.Gray,
+            HorizontalDivider(
                 modifier = Modifier
                     .fillMaxWidth(0.7f)
-                    .padding(start = 116.dp)
+                    .padding(start = 116.dp),
+                thickness = 1.2.dp,
+                color = Color.Gray
             )
 
             SettingBar(title = "Version : 1.0.0", image = R.drawable.ic_attention) {}
