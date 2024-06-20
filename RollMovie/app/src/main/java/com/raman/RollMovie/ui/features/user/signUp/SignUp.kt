@@ -18,6 +18,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
@@ -116,7 +117,7 @@ fun SignUpScreen(userViewModel: UserViewModel?, navControl: NavController) {
 }
 
 @Composable
-fun SignUpPart(userViewModel: UserViewModel?, navControl: NavController) {
+fun SignUpPart(userViewModel: UserViewModel?, navController: NavController) {
 
     val context = LocalContext.current
 
@@ -124,6 +125,9 @@ fun SignUpPart(userViewModel: UserViewModel?, navControl: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
+    var checked by remember {
+        mutableStateOf(false)
+    }
 
     val signUpFlow = userViewModel?.signUpFlow?.collectAsState()
 
@@ -184,7 +188,7 @@ fun SignUpPart(userViewModel: UserViewModel?, navControl: NavController) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
-                    .padding(top = 10.dp),
+                    .padding(top = 8.dp),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -202,7 +206,7 @@ fun SignUpPart(userViewModel: UserViewModel?, navControl: NavController) {
                 )
 
                 TextButton(onClick = {
-                    navControl.navigate(AppScreens.SignInScreen.route) {
+                    navController.navigate(AppScreens.SignInScreen.route) {
                         popUpTo(AppScreens.SignUpScreen.route) {
                             inclusive = true
                         }
@@ -223,61 +227,107 @@ fun SignUpPart(userViewModel: UserViewModel?, navControl: NavController) {
 
             }
 
-            Button(
-                onClick = {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(0.9f)
+                    .padding(top = 8.dp),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
 
-                    if (name.isNotEmpty()) {
-                        if (email.isNotEmpty()) {
-                            if (email.contains("@gmail.com")) {
-                                if (password.length >= 8) {
-                                    if (password == confirmPassword) {
+                Text(
+                    text = "I accept the",
+                    style = TextStyle(
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Normal,
+                        fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular)),
+                        color = mainFont,
+                    ),
+                    modifier = Modifier
+                        .padding(end = 1.dp)
+                )
 
-                                        // sign up user
-                                        userViewModel?.signUp(name, email, password)
+                TextButton(onClick = {
+                    navController.navigate(AppScreens.RulesScreen.route)
+                }) {
 
+                    Text(
+                        text = "Rules",
+                        style = TextStyle(
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Normal,
+                            fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular)),
+                            color = primaryColor,
+                        )
+                    )
+
+                }
+                
+                Checkbox(
+                    checked = checked,
+                    onCheckedChange = { checked = it },
+                    modifier = Modifier.padding(start = 2.dp)
+                )
+
+            }
+
+            if (checked) {
+                Button(
+                    onClick = {
+
+                        if (name.isNotEmpty()) {
+                            if (email.isNotEmpty()) {
+                                if (email.contains("@gmail.com")) {
+                                    if (password.length >= 8) {
+                                        if (password == confirmPassword) {
+
+                                            // sign up user
+                                            userViewModel?.signUp(name, email, password)
+
+                                        } else {
+                                            Toast.makeText(
+                                                context,
+                                                "your password not equal with confirm password",
+                                                Toast.LENGTH_SHORT
+                                            )
+                                                .show()
+                                        }
                                     } else {
                                         Toast.makeText(
                                             context,
-                                            "your password not equal with confirm password",
+                                            "should your password more than 8 parameter",
                                             Toast.LENGTH_SHORT
-                                        )
-                                            .show()
+                                        ).show()
                                     }
                                 } else {
                                     Toast.makeText(
                                         context,
-                                        "should your password more than 8 parameter",
+                                        "your email is not valid",
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
                             } else {
-                                Toast.makeText(
-                                    context,
-                                    "your email is not valid",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                Toast.makeText(context, "please insert your email", Toast.LENGTH_SHORT)
+                                    .show()
                             }
                         } else {
-                            Toast.makeText(context, "please insert your email", Toast.LENGTH_SHORT)
+                            Toast.makeText(context, "please insert your name", Toast.LENGTH_SHORT)
                                 .show()
                         }
-                    } else {
-                        Toast.makeText(context, "please insert your name", Toast.LENGTH_SHORT)
-                            .show()
-                    }
 
-                },
-                modifier = Modifier
-                    .fillMaxWidth(0.8f)
-                    .padding(top = 6.dp)
-            ) {
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth(0.8f)
+                        .padding(top = 2.dp)
+                ) {
 
-                Text(
-                    text = "Sign Up",
-                    color = Color.White,
-                    modifier = Modifier.padding(8.dp)
-                )
+                    Text(
+                        text = "Sign Up",
+                        color = Color.White,
+                        modifier = Modifier.padding(8.dp)
+                    )
 
+                }
             }
 
         }
@@ -286,7 +336,7 @@ fun SignUpPart(userViewModel: UserViewModel?, navControl: NavController) {
 
     signUpFlow?.value?.let {
 
-        when(it) {
+        when (it) {
             is HttpResult.Failure -> Toast.makeText(
                 context,
                 "Sign up you hit an error ",
@@ -296,8 +346,8 @@ fun SignUpPart(userViewModel: UserViewModel?, navControl: NavController) {
             HttpResult.Loading -> {}
 
             is HttpResult.Success -> {
-                navControl.navigate(AppScreens.HomeScreen.route) {
-                popUpTo(AppScreens.HomeScreen.route) { inclusive = true }
+                navController.navigate(AppScreens.HomeScreen.route) {
+                    popUpTo(AppScreens.HomeScreen.route) { inclusive = true }
                 }
                 Toast.makeText(context, "Sign up was successful", Toast.LENGTH_LONG).show()
             }

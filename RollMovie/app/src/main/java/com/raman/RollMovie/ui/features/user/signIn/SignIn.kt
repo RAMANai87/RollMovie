@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -114,6 +115,9 @@ fun SignInPart(userViewModel: UserViewModel?, navController: NavController) {
 
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var checked by remember {
+        mutableStateOf(false)
+    }
 
     val loginFlow = userViewModel?.signInFlow?.collectAsState()
 
@@ -156,7 +160,7 @@ fun SignInPart(userViewModel: UserViewModel?, navController: NavController) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
-                    .padding(top = 10.dp),
+                    .padding(top = 8.dp),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -196,45 +200,91 @@ fun SignInPart(userViewModel: UserViewModel?, navController: NavController) {
 
             }
 
-            Button(
-                onClick = {
-                    if (email.isNotEmpty()) {
-                        if (email.contains("@gmail.com")) {
-                            if (password.length >= 8) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(0.9f)
+                    .padding(top = 8.dp),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
 
-                                // sign in user
-                                userViewModel?.signIn(email, password)
+                Text(
+                    text = "I accept the",
+                    style = TextStyle(
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Normal,
+                        fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular)),
+                        color = mainFont,
+                    ),
+                    modifier = Modifier
+                        .padding(end = 1.dp)
+                )
 
+                TextButton(onClick = {
+                    navController.navigate(AppScreens.RulesScreen.route)
+                }) {
+
+                    Text(
+                        text = "Rules",
+                        style = TextStyle(
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Normal,
+                            fontFamily = FontFamily(Font(R.font.mouldy_cheese_regular)),
+                            color = primaryColor,
+                        )
+                    )
+
+                }
+
+                Checkbox(
+                    checked = checked,
+                    onCheckedChange = { checked = it },
+                    modifier = Modifier.padding(start = 2.dp)
+                )
+
+            }
+
+            if (checked) {
+                Button(
+                    onClick = {
+                        if (email.isNotEmpty()) {
+                            if (email.contains("@gmail.com")) {
+                                if (password.length >= 8) {
+
+                                    // sign in user
+                                    userViewModel?.signIn(email, password)
+
+                                } else {
+                                    Toast.makeText(
+                                        context,
+                                        "your password has more than 7 parameter",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
                             } else {
                                 Toast.makeText(
                                     context,
-                                    "your password has more than 7 parameter",
+                                    "your email is not valid",
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
                         } else {
-                            Toast.makeText(
-                                context,
-                                "your email is not valid",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            Toast.makeText(context, "please insert your email", Toast.LENGTH_SHORT)
+                                .show()
                         }
-                    } else {
-                        Toast.makeText(context, "please insert your email", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                },
-                modifier = Modifier
-                    .fillMaxWidth(0.8f)
-                    .padding(top = 6.dp)
-            ) {
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth(0.8f)
+                        .padding(top = 2.dp)
+                ) {
 
-                Text(
-                    text = "Log In",
-                    color = Color.White,
-                    modifier = Modifier.padding(8.dp)
-                )
+                    Text(
+                        text = "Log In",
+                        color = Color.White,
+                        modifier = Modifier.padding(8.dp)
+                    )
 
+                }
             }
 
         }

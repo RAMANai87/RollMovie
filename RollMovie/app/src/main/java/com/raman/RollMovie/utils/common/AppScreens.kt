@@ -11,5 +11,6 @@ sealed class AppScreens(val route :String) {
     data object FavoriteScreen : AppScreens("FavoriteScreen")
     data object SettingScreen : AppScreens("SettingScreen")
     data object HomeScreen : AppScreens("HomeScreen")
+    data object RulesScreen : AppScreens("RulesScreen")
 
 }

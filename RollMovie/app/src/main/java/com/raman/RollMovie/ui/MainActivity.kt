@@ -18,6 +18,7 @@ import com.raman.RollMovie.ui.features.mainScreen.HomeScreen
 import com.raman.RollMovie.ui.features.search.SearchScreen
 import com.raman.RollMovie.ui.features.see_all.SeeAllScreen
 import com.raman.RollMovie.ui.features.setting.SettingScreen
+import com.raman.RollMovie.ui.features.user.RulesScreen
 import com.raman.RollMovie.ui.features.user.signIn.SignInScreen
 import com.raman.RollMovie.ui.features.user.signUp.FirstRunScreen
 import com.raman.RollMovie.ui.features.user.signUp.SignUpScreen
@@ -132,6 +133,12 @@ class MainActivity : ComponentActivity() {
                 route = AppScreens.SignInScreen.route
             ) {
                 SignInScreen(userViewModel, myNavController)
+            }
+
+            composable(
+                route = AppScreens.RulesScreen.route
+            ) {
+                RulesScreen(myNavController)
             }
 
             composable(
