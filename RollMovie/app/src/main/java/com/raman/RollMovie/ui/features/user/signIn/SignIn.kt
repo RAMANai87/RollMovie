@@ -123,7 +123,6 @@ fun SignInPart(userViewModel: UserViewModel?, navController: NavController) {
 
     Card(
         modifier = Modifier
-            .height(540.dp)
             .fillMaxWidth(0.85f)
             .padding(top = 20.dp)
             .clip(Shapes.large),
@@ -133,8 +132,7 @@ fun SignInPart(userViewModel: UserViewModel?, navController: NavController) {
 
         Column(
             verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxSize()
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
             SignUpIcon(R.drawable.techny_signing_in_to_user_account)
@@ -203,7 +201,7 @@ fun SignInPart(userViewModel: UserViewModel?, navController: NavController) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
-                    .padding(top = 8.dp),
+                    .padding(top = 2.dp),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -275,7 +273,7 @@ fun SignInPart(userViewModel: UserViewModel?, navController: NavController) {
                     },
                     modifier = Modifier
                         .fillMaxWidth(0.8f)
-                        .padding(top = 2.dp)
+                        .padding(top = 2.dp, bottom = 8.dp)
                 ) {
 
                     Text(

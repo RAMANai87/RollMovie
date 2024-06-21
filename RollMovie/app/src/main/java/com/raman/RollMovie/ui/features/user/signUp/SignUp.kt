@@ -133,7 +133,6 @@ fun SignUpPart(userViewModel: UserViewModel?, navController: NavController) {
 
     Card(
         modifier = Modifier
-            .height(720.dp)
             .fillMaxWidth(0.85f)
             .padding(top = 20.dp)
             .clip(Shapes.large),
@@ -143,8 +142,7 @@ fun SignUpPart(userViewModel: UserViewModel?, navController: NavController) {
 
         Column(
             verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxSize()
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
             SignUpIcon(R.drawable.flame_sign_up)
@@ -230,7 +228,7 @@ fun SignUpPart(userViewModel: UserViewModel?, navController: NavController) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
-                    .padding(top = 8.dp),
+                    .padding(top = 2.dp),
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -318,7 +316,7 @@ fun SignUpPart(userViewModel: UserViewModel?, navController: NavController) {
                     },
                     modifier = Modifier
                         .fillMaxWidth(0.8f)
-                        .padding(top = 2.dp)
+                        .padding(top = 2.dp, bottom = 8.dp)
                 ) {
 
                     Text(

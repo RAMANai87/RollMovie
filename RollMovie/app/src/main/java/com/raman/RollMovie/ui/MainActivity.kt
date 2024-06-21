@@ -68,24 +68,25 @@ class MainActivity : ComponentActivity() {
             composable(
                 route = AppScreens.MainScreen.route
             ) {
-                if (userViewModel.currentUser != null) {
-                    HomeScreen(
-                        appViewModel = appViewModel,
-                        navController = myNavController,
-                        favoriteViewModel = favoriteViewModel
-                    )
-                } else {
-                    FirstRunScreen(navController = myNavController)
-                }
+                HomeScreen(
+                    appViewModel = appViewModel,
+                    navController = myNavController,
+                    favoriteViewModel = favoriteViewModel
+                )
             }
 
             composable(
                 route = AppScreens.SeeAllScreen.route + "/" + "{${AppConstants.KEY_SEE_ALL_ARG}}",
-                arguments = listOf(navArgument(AppConstants.KEY_SEE_ALL_ARG){
+                arguments = listOf(navArgument(AppConstants.KEY_SEE_ALL_ARG) {
                     type = NavType.StringType
                 })
             ) {
-                SeeAllScreen(appViewModel, it.arguments!!.getString(AppConstants.KEY_SEE_ALL_ARG, null), favoriteViewModel, myNavController)
+                SeeAllScreen(
+                    appViewModel,
+                    it.arguments!!.getString(AppConstants.KEY_SEE_ALL_ARG, null),
+                    favoriteViewModel,
+                    myNavController
+                )
             }
 
             composable(
