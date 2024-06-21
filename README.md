@@ -19,6 +19,8 @@ The RollMovie app only has one theme (light theme)
 
 # Algorithm
 
+<img src="RollMovie/docs/35216052-1fa7-4896-b3da-e5ad0e49cf1a.jpg" width="100%">
+
 # License
 ```
 MIT License
