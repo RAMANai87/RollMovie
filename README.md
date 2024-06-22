@@ -20,14 +20,23 @@ The RollMovie app only has one theme (light theme)
 # Feature
 
 1.Jetpack Compose
+
 2.Room
+
 3.Retrofit
+
 4.Dagger hilt (for dependency injection)
+
 5.Kotlin Coroutines
+
 6.Kotlin flow
+
 7.Coil
+
 8.Lottie animation
+
 9.navigation
+
 10.MVVM architecture
 
 # Algorithm
