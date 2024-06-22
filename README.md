@@ -17,6 +17,19 @@ I used jetpack compose for this project and all component are sorted very well
 
 The RollMovie app only has one theme (light theme)
 
+# Feature
+
+1.Jetpack Compose
+2.Room
+3.Retrofit
+4.Dagger hilt (for dependency injection)
+5.Kotlin Coroutines
+6.Kotlin flow
+7.Coil
+8.Lottie animation
+9.navigation
+10.MVVM architecture
+
 # Algorithm
 
 <img src="RollMovie/docs/35216052-1fa7-4896-b3da-e5ad0e49cf1a.jpg" width="100%">
