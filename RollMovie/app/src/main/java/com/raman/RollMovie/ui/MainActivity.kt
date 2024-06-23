@@ -68,11 +68,15 @@ class MainActivity : ComponentActivity() {
             composable(
                 route = AppScreens.MainScreen.route
             ) {
-                HomeScreen(
-                    appViewModel = appViewModel,
-                    navController = myNavController,
-                    favoriteViewModel = favoriteViewModel
-                )
+                if (userViewModel.currentUser != null) {
+                    HomeScreen(
+                        appViewModel = appViewModel,
+                        navController = myNavController,
+                        favoriteViewModel = favoriteViewModel
+                    )
+                } else {
+                    FirstRunScreen(navController = myNavController)
+                }
             }
 
             composable(
